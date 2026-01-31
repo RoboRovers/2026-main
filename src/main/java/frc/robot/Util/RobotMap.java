@@ -1,4 +1,4 @@
-package frc.robot.Utils;
+package frc.robot.Util;
 
 //TODO Confirm that all these numbers have been set and are correct
 
@@ -41,19 +41,19 @@ public class RobotMap
         public static final int ELEVATOR_ABS_ENCODER_PWM_PORT = 9;
         // public static final int ElEVATOR_CLEANER_SPARKMAX = 14;
     }
-    public static final class MAP_ALGAE
+    /*public static final class MAP_ALGAE
     {
         public static final int ALGAE_ROLLERS = 20;
         public static final int ALGAE_CANRANGE = 21;
         public static final int ALGAE_ABS_ENCODER_PWM_PORT = 0;
 
-    }
+    } */
     public static final class MAP_CLIMBER
     {
         public static final int CLIMB_SPARKMAX = 30;
     }
     public static final class MAP_APRIL_TAGS //[id num, height in inches, co=ordinate x, coordinate y, heading] inches to meters; use field manual image for id reference==
-    {
+    {   /* 
         public static final double[] RED_CS_X = {1, 1.4859, 16.6992, 0.6553, 126};
         public static final double[] RED_CS_Y = {2, 1.4859, 16.6992, 7.4048, 234};
         public static final double[] RED_PROCESSOR = {3, 1.3017, 11.6087, 8.0641, 270};
@@ -75,7 +75,8 @@ public class RobotMap
         public static final double[] BLUE_REEF_KL = {19, 0.3081, 4.0734, 4.7449, 120};
         public static final double[] BLUE_REEF_IJ = {20, 0.3081, 4.9068, 4.7449, 180};
         public static final double[] BLUE_REEF_GH = {21, 0.3081, 5.3246, 5.3246, 0};
-        public static final double[] BLUE_REEF_EF = {22, 0.3081, 4.9068, 3.3074, 300};
+        public static final double[] BLUE_REEF_EF = {22, 0.3081, 4.9068, 3.3074, 300}; 
+        */
     }
     public static final class MAP_PWM_LIGHTS
     {   // coral = blue; algae = green; color 2 = blue; color 1 = green

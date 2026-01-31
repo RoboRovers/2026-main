@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.Utils.RobotMap.MAP_CONTROLLER;
+import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;

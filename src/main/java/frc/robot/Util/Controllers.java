@@ -1,11 +1,10 @@
-package frc.robot.Utils;
+package frc.robot.Util;
 
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Utils.RobotMap.MAP_CONTROLLER;
-
+import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 
 public class Controllers {

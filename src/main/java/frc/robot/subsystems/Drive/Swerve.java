@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Utils.Constants.constants_Drive;
-import frc.robot.Utils.RobotMap.MAP_DRIVETRAIN;
+import frc.robot.Util.Constants.constants_Drive;
+import frc.robot.Util.RobotMap.MAP_DRIVETRAIN;
 
 public class Swerve extends SubsystemBase{
     public boolean fieldOriented = false;
