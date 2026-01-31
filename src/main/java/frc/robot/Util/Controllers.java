@@ -15,11 +15,12 @@ public class Controllers {
     {
         leftStick = new CommandJoystick(MAP_CONTROLLER.LEFT_JOYSTICK);
         rightStick = new CommandJoystick(MAP_CONTROLLER.RIGHT_JOYSTICK);
+        xbox = new CommandXboxController(MAP_CONTROLLER.XBOX_CONTROLLER);
+
     }
 
     public void initialize_Xbox_Controls()
     {
-
         
     }
 }
