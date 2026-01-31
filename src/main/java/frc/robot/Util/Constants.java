@@ -56,7 +56,7 @@ public final class Constants {
     public static final Measure<DistanceUnit> WHEEL_RADIUS = edu.wpi.first.units.Units.Inches.of(1.5);
     public static final double COF = 1.2;
     //TODO Measure from the center of each wheel to get these, Front to back for "WHEEL_BASE", Left to right for "TRACK_WIDTH"
-    public static final double TRACK_WIDTH = Units.inchesToMeters(29);
+    public static final double TRACK_WIDTH = Units.inchesToMeters(29);  //TODO Update values to what they are for the new robo
       // Distance between left and right wheels
     public static final double WHEEL_BASE = Units.inchesToMeters(29);
       // Distance between front and back wheels
