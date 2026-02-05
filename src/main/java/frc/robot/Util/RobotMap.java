@@ -13,6 +13,12 @@ public class RobotMap
         //BUTTON BOARD
     }    
 
+    public static final class map_intake
+    {
+        public static final int intakeSparkmax = 9;
+        public static final int intakeCanrange = 6;
+        public static final int intakeAbsEncoderPwmPort = 8;
+    }
     public static final class MAP_DRIVETRAIN
     {
         //Front Left - Module 0

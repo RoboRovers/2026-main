@@ -100,7 +100,11 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC = MAX_SPEED_METERS_PER_SEC/1.50;
     public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(TRACK_WIDTH/2);
   }
-
+    public static final class constants_intake
+    {
+        public static final boolean intakeMotorInverted = false;
+        public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
+    }
   /*public static final class constants_Elevator
   {
     public static final double ELEVATOR_GEAR_RATIO = 0.2;
