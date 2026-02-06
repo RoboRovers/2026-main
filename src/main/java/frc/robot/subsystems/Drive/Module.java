@@ -138,7 +138,6 @@ public class Module extends SubsystemBase
     steerPIDController = steerMotor.getClosedLoopController();
     steerMotor.configure(steerGains, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     
-    
     resetEncoders();
   }
   

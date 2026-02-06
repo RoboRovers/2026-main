@@ -5,8 +5,6 @@
 package frc.robot.Util;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -102,8 +100,14 @@ public final class Constants {
   }
     public static final class constants_intake
     {
-        public static final boolean intakeMotorInverted = false;
-        public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
+      public static final double rollerSpeed = 0.05;
+
+      
+      public static final boolean leftIntakeMotorInverted = constants_intake.intakeMotorInverted;
+      public static final boolean rightIntakeMotorInverted = constants_intake.intakeMotorInverted;
+      public static final boolean rollerIntakeMotorInverted = constants_intake.intakeMotorInverted;
+      public static final boolean intakeMotorInverted = false;
+      public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
     }
   /*public static final class constants_Elevator
   {
@@ -147,17 +151,6 @@ public final class Constants {
     public static final ElevatorPositionGroup SCORE_L1 = new ElevatorPositionGroup(-1, 0.15);
   }*/
 
-  /*public static class ElevatorPositionGroup
-  {
-    public double elevatorPositionInches; //Inches from ground to scoring or to the substation for that one
-    public double elevatorRollersRPM;
-
-    public ElevatorPositionGroup(double elevatorPositionInches, double elevatorRollersRPM)
-    {
-      this.elevatorPositionInches = elevatorPositionInches;
-      this.elevatorRollersRPM = elevatorRollersRPM;
-    }
-  }
 
   public static final class constants_Climber 
   {
@@ -178,7 +171,7 @@ public final class Constants {
     }
   }
 
-  public static final class constants_Rollers
+  /*public static final class constants_Rollers
   {
     public static final double ROLLER_GEAR_RATIO = 1/3.0;
     public static final double ANGLE_TO_DEGREES = 360.0 * ROLLER_GEAR_RATIO;
@@ -198,46 +191,20 @@ public final class Constants {
     public static final double ROLLER_D = 0;
     public static final double ROLLER_FF = 0;//Dont worry about this value, keep it 0
 
-  }
-
-  public static final class AlgaePositionGroup
-  {
-    public double intakeAngle;
-    public double rollersRPM;
-
-    public AlgaePositionGroup(double intakeAngle, double rollersRPM)
-    {
-      this.intakeAngle = intakeAngle;
-      this.rollersRPM = rollersRPM;
-    }
-  }
-*/
- 
+  }*/
 
   public static final class constants_AprilTags{ //[id num, height in inches, coordinate x, coordinate y, heading] inches to meters; use field manual image for id reference
-    /*public static final double[]
-    public static final double[] RED_CS_Y = {2, 1.4859, 16.6992, 7.4048, 234};
-    public static final double[] RED_PROCESSOR = {3, 1.3017, 11.6087, 8.0641, 270};
-    public static final double[] RED_SIDE_BLUE_BARGE = {4, 1.8678, 9.2800, 6.1340, 0};
-    public static final double[] RED_SIDE_RED_BARGE = {5, 1.8678, 9.2800, 1.9148, 0};
-    public static final double[] RED_REEF_6 = {6, 0.3081, 13.4742, 3.3074, -60};
-    public static final double[] RED_REEF_7 = {7, 0.3081, 13.8934, 4.0262, 0};
-    public static final double[] RED_REEF_8 = {8, 0.3081, 13.4742, 4.7449, 60};
-    public static final double[] RED_REEF_9 = {9, 0.3081, 12.6464, 4.7449, 120};
-    public static final double[] RED_REEF_10 = {10, 0.3081, 12.2194, 4.0262, 180};
-    public static final double[] RED_REEF_11 = {11, 0.3081, 12.6464, 3.3074, 240};
-    public static final double[] BLUE_CS_Y = {12, 1.4859, 0.8507, 0.6553, 54};
-    public static final double[] BLUE_CS_X = {13, 1.4859, 0.8507, 7.4048, 306};
-    public static final double[] BLUE_PROCESSOR = {14, 1.8678, 8.2744, 6.1340, 0};
-    public static final double[] BLUE_SIDE_BLUE_BARGE = {15, 1.8678, 8.2744, 1.9148, 180};
-    public static final double[] BLUE_SIDE_RED_BARGE = {16, 1.3017, 5.9915, -0.0004, 90};
-    public static final double[] BLUE_REEF_19 = {19, 0.3081, 4.0734, 4.7449, -60};
-    public static final double[] BLUE_REEF_18 = {18, 0.3081, 3.6571, 4.0262, 0};
-    public static final double[] BLUE_REEF_17 = {17, 0.3081, 4.0734, 3.3074, 60};
-    public static final double[] BLUE_REEF_22 = {22, 0.3081, 4.9068, 3.3074, 120};
-    public static final double[] BLUE_REEF_21 = {21, 0.3081, 5.3246, 5.3246, 180};
-    public static final double[] BLUE_REEF_20 = {20, 0.3081, 4.9068, 4.7449, 240};
-    */
+    /*public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];
+    public static final double[];*/
   }
 
   public static final class constants_Limelight{ //TODO check if accurate

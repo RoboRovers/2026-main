@@ -15,7 +15,9 @@ public class RobotMap
 
     public static final class map_intake
     {
-        public static final int intakeSparkmax = 9;
+        public static final int leftIntakeSparkmax = 9;
+        public static final int rightIntakeSparkmax = 10;
+        public static final int rollerIntakeSparkmax = 11;
         public static final int intakeCanrange = 6;
         public static final int intakeAbsEncoderPwmPort = 8;
     }
