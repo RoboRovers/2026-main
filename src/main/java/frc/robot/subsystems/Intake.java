@@ -7,14 +7,16 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import frc.robot.Util.RobotMap;
 
-public class Intake {
+public class Intake extends SubsystemBase {
     public SparkMax leftIntakeMotor;
     public RelativeEncoder leftIntakeEncoder;
     public SparkClosedLoopController leftIntakePID;
@@ -115,6 +117,9 @@ public class Intake {
             rightIntakeMotor.set(0);
         });
     }
-
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Intake Position", getPosition());
+    }
 
 }
