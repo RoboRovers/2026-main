@@ -344,4 +344,18 @@ public final class Constants {
  
     }
   } */
+
+  public static final class FuelConstants {
+    // Motor controller IDs for Fuel Mechanism motors
+    public static final int SHOOTER_MOTOR_ID = 5;
+
+    // Current limit and nominal voltage for fuel mechanism motors.
+    public static final int SHOOTER_MOTOR_CURRENT_LIMIT = 60;
+
+    // Voltage values for various fuel operations. These values may need to be tuned
+    // based on exact robot construction.
+    // See the Software Guide for tuning information
+    public static final double SHOOTER_LAUNCH_VOLTAGE = 10.6;
+    public static final double SPIN_UP_SECONDS = 1;
+  }
 }
