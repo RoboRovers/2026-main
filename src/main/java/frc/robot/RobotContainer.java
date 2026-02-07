@@ -5,12 +5,18 @@
 package frc.robot;
 
 import frc.robot.Subsystems.Drive.Swerve;
+import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Commands.Drive;
+import frc.robot.Util.Constants;
 import frc.robot.Util.Controllers;
 import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,14 +29,16 @@ public class RobotContainer {
   public Controllers u_Controllers;
   public Swerve s_Swerve;
   public Drive c_Drive;
-  // public Climber s_Climber;
+  public Intake s_Intake;
+  public Shooter s_Shooter;
+  
   // public Auto c_Auto;
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(MAP_CONTROLLER.XBOX_CONTROLLER);
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
+    // Configure the trigger bindings 
+    robotFiles();
     configureBindings();
   }
 
@@ -43,8 +51,24 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
+  private void robotFiles() {
+    u_Controllers = new Controllers();
+    s_Swerve = new Swerve();
+    c_Drive = new Drive(s_Swerve, u_Controllers.leftStick, u_Controllers.rightStick);
+  }
   private void configureBindings() {
+    //Intake Bindings
+    u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
+    u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
+    u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
+    u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
+    
+    //Drive Bindings
+    u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
+    u_Controllers.rightStick.button(3).toggleOnTrue(s_Swerve.fieldOrientedToggle());
+    u_Controllers.rightStick.button(4).onTrue(s_Swerve.resetWheels()); //window looking button
     // No-op example bindings removed. Add controller bindings here.
+
   }
 
   /**

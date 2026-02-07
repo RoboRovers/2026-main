@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 public class Controllers {
     public CommandJoystick leftStick, rightStick;
     public CommandXboxController xbox;
+    public Trigger intakeOut, intakeIn, spinRollers, shootFuel, leftBumper, rightBumper, leftTrigger, rightTrigger;
 
     public Controllers() 
     {
@@ -21,7 +22,15 @@ public class Controllers {
 
     public void initialize_Xbox_Controls()
     {
-        
+        spinRollers = xbox.leftTrigger();
+        shootFuel = xbox.rightTrigger();
+        intakeOut = xbox.x();
+        intakeIn = xbox.y();
+        leftBumper = xbox.leftBumper();
+        rightBumper = xbox.rightBumper();
+        leftTrigger = xbox.leftTrigger();
+        rightTrigger = xbox.rightTrigger();
+
     }
 }
 

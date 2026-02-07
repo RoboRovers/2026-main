@@ -98,15 +98,23 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC = MAX_SPEED_METERS_PER_SEC/1.50;
     public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(TRACK_WIDTH/2);
   }
+
+    public static final class constants_Shooter 
+    {
+      public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
+
+    }
     public static final class constants_intake
     {
       public static final double rollerSpeed = 0.05;
+      public static final double retractLimit = 2;
+      public static final double extendLimit = 50;
 
-      
-      public static final boolean leftIntakeMotorInverted = constants_intake.intakeMotorInverted;
-      public static final boolean rightIntakeMotorInverted = constants_intake.intakeMotorInverted;
-      public static final boolean rollerIntakeMotorInverted = constants_intake.intakeMotorInverted;
       public static final boolean intakeMotorInverted = false;
+      public static final boolean leftIntakeMotorInverted = constants_intake.intakeMotorInverted;
+      public static final boolean rightIntakeMotorInverted = !constants_intake.intakeMotorInverted;
+      public static final boolean rollerIntakeMotorInverted = constants_intake.intakeMotorInverted;
+  
       public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
     }
   /*public static final class constants_Elevator

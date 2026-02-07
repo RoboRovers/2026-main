@@ -77,9 +77,11 @@ public class Intake extends SubsystemBase {
         return leftIntakeEncoder.getPosition();
     }
 
-    public void spinRollers(double rollerSpeed)
+    public Command spinRollers()
     {
-        rollerIntakeMotor.set(rollerSpeed);
+        return Commands.run(() -> {
+        rollerIntakeMotor.set(constants_intake.rollerSpeed);
+        }, this);
     }
     public void zeroPosition()
     {
@@ -89,34 +91,34 @@ public class Intake extends SubsystemBase {
     
      public Command intakeIn()
     {
-        if (getPosition() < 2) { // TODO: set the correct position limit
-            return Commands.runOnce(() -> {
+        if (getPosition() < constants_intake.retractLimit) { // TODO: set the correct position limit
+            return Commands.run(() -> {
                 leftIntakeMotor.set(-.05); // between -1 and 1
                 rightIntakeMotor.set(-.05);
-            });
+            }, this); // note `this` makes it require the Intake subsystem
         }
         return Commands.none();
     }
 
      public Command intakeOut()
     {
-        if (getPosition() > 50) { // TODO: set the correct position limit
-            return Commands.runOnce(() -> {
+        if (getPosition() > constants_intake.extendLimit) { // TODO: set the correct position limit
+            return Commands.run(() -> {
                 leftIntakeMotor.set(.05);
                 rightIntakeMotor.set(.05);
-            });
+            }, this); // note `this` makes it require the Intake subsystem
         }
         return Commands.none();
     }
 
-     public Command stopIntake()
-    {
-        return Commands.runOnce(()->
-        {
-            leftIntakeMotor.set(0);
-            rightIntakeMotor.set(0);
-        });
-    }
+    //  public Command stopIntake()
+    // {
+    //     return Commands.runOnce(()->
+    //     {
+    //         leftIntakeMotor.set(0);
+    //         rightIntakeMotor.set(0);
+    //     });
+    // }
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Position", getPosition());
