@@ -55,6 +55,7 @@ public class RobotContainer {
     u_Controllers = new Controllers();
     s_Swerve = new Swerve();
     c_Drive = new Drive(s_Swerve, u_Controllers.leftStick, u_Controllers.rightStick);
+    s_Shooter = new Shooter();
   }
   private void configureBindings() {
     //Intake Bindings
@@ -68,6 +69,10 @@ public class RobotContainer {
     u_Controllers.rightStick.button(3).toggleOnTrue(s_Swerve.fieldOrientedToggle());
     u_Controllers.rightStick.button(4).onTrue(s_Swerve.resetWheels()); //window looking button
     // No-op example bindings removed. Add controller bindings here.
+
+    //Shooter Bindings
+    u_Controllers.shootFuel.whileTrue(s_Shooter.shootFuel());
+    u_Controllers.shootFuel.whileFalse(s_Shooter.stop());
 
   }
 

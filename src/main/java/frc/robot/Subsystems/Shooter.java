@@ -4,7 +4,7 @@
 
 package frc.robot.Subsystems;
 
-import frc.robot.Util.Constants.constants_Shooter;
+import frc.robot.Util.Constants.Constants_Shooter;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -47,13 +47,16 @@ public class Shooter extends SubsystemBase {
   }
 
   // A method to stop the rollers
-  public void stop() {
-    shooterRoller.set(0);
+  public Command stop() {
+    return Commands.run(() -> {
+      shooterRoller.set(0);     
+    }, this);
+   
   }
   
   public Command shootFuel() {
     return Commands.run(() -> {
-      shooterRoller.set(constants_Shooter.shooterSpeed);
+      shooterRoller.set(Constants_Shooter.shooterSpeed);
     }, this);
   }
 

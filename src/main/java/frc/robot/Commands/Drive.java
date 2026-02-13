@@ -5,7 +5,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import frc.robot.Util.Constants.constants_Drive;
+import frc.robot.Util.Constants.Constants_Drive;
 import frc.robot.Subsystems.Drive.Swerve;
 
 
@@ -29,9 +29,9 @@ public class Drive extends Command{
     public Drive(Swerve s_Swerve, CommandJoystick left, CommandJoystick right) {
 
         this.s_Swerve = s_Swerve;
-        this.xLimiter = new SlewRateLimiter(constants_Drive.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC);
-        this.yLimiter = new SlewRateLimiter(constants_Drive.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC);
-        this.turningLimiter = new SlewRateLimiter(constants_Drive.TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC);
+        this.xLimiter = new SlewRateLimiter(Constants_Drive.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC);
+        this.yLimiter = new SlewRateLimiter(Constants_Drive.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC);
+        this.turningLimiter = new SlewRateLimiter(Constants_Drive.TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC);
         this.left = left;
         this.right = right;
         addRequirements(s_Swerve);
@@ -58,9 +58,9 @@ public class Drive extends Command{
         ySpeed = Math.abs(ySpeed) > DEADBAND ? ySpeed : 0.0;
         turningSpeed = Math.abs(turningSpeed) > DEADBAND ? turningSpeed : 0.0;
 
-        xSpeed = xLimiter.calculate(xSpeed) * constants_Drive.TELEDRIVE_MAX_SPEED_METERS_PER_SEC;
-        ySpeed = yLimiter.calculate(ySpeed) * constants_Drive.TELEDRIVE_MAX_SPEED_METERS_PER_SEC;
-        turningSpeed = turningLimiter.calculate(turningSpeed) * constants_Drive.TELEDRIVE_MAX_ANGULAR_SPEED_RPS;
+        xSpeed = xLimiter.calculate(xSpeed) * Constants_Drive.TELEDRIVE_MAX_SPEED_METERS_PER_SEC;
+        ySpeed = yLimiter.calculate(ySpeed) * Constants_Drive.TELEDRIVE_MAX_SPEED_METERS_PER_SEC;
+        turningSpeed = turningLimiter.calculate(turningSpeed) * Constants_Drive.TELEDRIVE_MAX_ANGULAR_SPEED_RPS;
 
         drive();
 

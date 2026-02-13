@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Util.Constants.constants_Drive;
+import frc.robot.Util.Constants.Constants_Drive;
 import frc.robot.Util.RobotMap.MAP_DRIVETRAIN;
 
 public class Swerve extends SubsystemBase{
@@ -29,11 +29,10 @@ public class Swerve extends SubsystemBase{
     Optional<Alliance> alliance;
   
     
-    public static Module frontLeftModule = new Module(MAP_DRIVETRAIN.FRONT_LEFT_ABS_ENCODER, MAP_DRIVETRAIN.FRONT_LEFT_DRIVE_KRAKEN, constants_Drive.FL_DRIVE_ENCODER_REVERSED, constants_Drive.FL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.FRONT_LEFT_ABS_ENCODER, constants_Drive.FL_OFFSET, constants_Drive.FL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    public static Module frontRightModule = new Module(MAP_DRIVETRAIN.FRONT_RIGHT_ABS_ENCODER, MAP_DRIVETRAIN.FRONT_RIGHT_DRIVE_KRAKEN, constants_Drive.FR_DRIVE_ENCODER_REVERSED, constants_Drive.FR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.FRONT_RIGHT_ABS_ENCODER, constants_Drive.FR_OFFSET, constants_Drive.FR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    public static Module backLeftModule = new Module(MAP_DRIVETRAIN.BACK_LEFT_ABS_ENCODER, MAP_DRIVETRAIN.BACK_LEFT_DRIVE_KRAKEN, constants_Drive.BL_DRIVE_ENCODER_REVERSED, constants_Drive.BL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.BACK_LEFT_ABS_ENCODER, constants_Drive.BL_OFFSET, constants_Drive.BL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    public static Module backRightModule = new Module(MAP_DRIVETRAIN.BACK_RIGHT_ABS_ENCODER, MAP_DRIVETRAIN.BACK_RIGHT_DRIVE_KRAKEN, constants_Drive.BR_DRIVE_ENCODER_REVERSED, constants_Drive.BR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.BACK_RIGHT_ABS_ENCODER, constants_Drive.BR_OFFSET, constants_Drive.BR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    
+    public static Module frontLeftModule = new Module(MAP_DRIVETRAIN.frontLeftAbsEncoder, MAP_DRIVETRAIN.frontLeftDriveKraken, Constants_Drive.FL_DRIVE_ENCODER_REVERSED, Constants_Drive.FL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.frontLeftAbsEncoder, Constants_Drive.FL_OFFSET, Constants_Drive.FL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    public static Module frontRightModule = new Module(MAP_DRIVETRAIN.frontRightAbsEncoder, MAP_DRIVETRAIN.frontRightDriveKraken, Constants_Drive.FR_DRIVE_ENCODER_REVERSED, Constants_Drive.FR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.frontRightAbsEncoder, Constants_Drive.FR_OFFSET, Constants_Drive.FR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    public static Module backLeftModule = new Module(MAP_DRIVETRAIN.backLeftAbsEncoder, MAP_DRIVETRAIN.backLeftDriveKraken, Constants_Drive.BL_DRIVE_ENCODER_REVERSED, Constants_Drive.BL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.backLeftAbsEncoder, Constants_Drive.BL_OFFSET, Constants_Drive.BL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    public static Module backRightModule = new Module(MAP_DRIVETRAIN.backRightAbsEncoder, MAP_DRIVETRAIN.backRightDriveKraken, Constants_Drive.BR_DRIVE_ENCODER_REVERSED, Constants_Drive.BR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.backRightAbsEncoder, Constants_Drive.BR_OFFSET, Constants_Drive.BR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
     
     public Swerve() 
     {
@@ -83,7 +82,7 @@ public class Swerve extends SubsystemBase{
     //Odometer code
     public final SwerveDriveOdometry odometer = new SwerveDriveOdometry
     (
-        constants_Drive.kDriveKinematics,
+        Constants_Drive.kDriveKinematics,
         getRotation2d(),
         getModulePositions()
     );
@@ -110,7 +109,7 @@ public class Swerve extends SubsystemBase{
     
     public ChassisSpeeds getRobotRelativeSpeeds()
     {
-        return constants_Drive.kDriveKinematics.toChassisSpeeds(
+        return Constants_Drive.kDriveKinematics.toChassisSpeeds(
             frontLeftModule.getModuleState(),
             frontRightModule.getModuleState(),
             backLeftModule.getModuleState(),
@@ -118,8 +117,8 @@ public class Swerve extends SubsystemBase{
     }
 
     public void setModuleStates(ChassisSpeeds speeds){
-        SwerveModuleState[] moduleStates = constants_Drive.kDriveKinematics.toSwerveModuleStates(speeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, constants_Drive.MAX_SPEED_METERS_PER_SEC);
+        SwerveModuleState[] moduleStates = Constants_Drive.kDriveKinematics.toSwerveModuleStates(speeds);
+        SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, Constants_Drive.MAX_SPEED_METERS_PER_SEC);
         frontLeftModule.setDesiredState(moduleStates[0]);
         frontRightModule.setDesiredState(moduleStates[1]);
         backLeftModule.setDesiredState(moduleStates[2]);

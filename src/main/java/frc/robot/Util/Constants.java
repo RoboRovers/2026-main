@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public final class Constants {
 
     
-  public static final class constants_Module {
+  public static final class Constants_Module {
     public static final double WHEEL_RADIUS_METERS = 0.1016/2; //Inches
     public static final double WHEEL_CIRCUMFRENCE_METERS = 2*Math.PI*WHEEL_RADIUS_METERS;
     public static final double DRIVE_GEAR_RATIO = 4.59; //4.59 for Swerve X, 6.75 for sds
@@ -49,7 +49,7 @@ public final class Constants {
   }
 
 
-  public static final class constants_Drive {
+  public static final class Constants_Drive {
 
     public static final Measure<DistanceUnit> WHEEL_RADIUS = edu.wpi.first.units.Units.Inches.of(1.5);
     public static final double COF = 1.2;
@@ -64,7 +64,7 @@ public final class Constants {
         new Translation2d(-WHEEL_BASE / 2,  TRACK_WIDTH / 2), //back left
         new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)); //back right
 
-    public static final double MODULE_RADIUS = Units.inchesToMeters(Constants.constants_Drive.TRACK_WIDTH/2); //measured from center of robot to furthest module.
+    public static final double MODULE_RADIUS = Units.inchesToMeters(Constants.Constants_Drive.TRACK_WIDTH/2); //measured from center of robot to furthest module.
 
     
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
@@ -99,7 +99,7 @@ public final class Constants {
     public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(TRACK_WIDTH/2);
   }
 
-    public static final class constants_Shooter 
+    public static final class Constants_Shooter 
     {
       public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
 
@@ -160,7 +160,7 @@ public final class Constants {
   }*/
 
 
-  public static final class constants_Climber 
+  public static final class Constants_Climber 
   {
     public static final double CLIMBER_GEAR_RATIO = 1.0/125.0;
     public static final boolean CLIMBER_INVERTED = false;
@@ -201,7 +201,7 @@ public final class Constants {
 
   }*/
 
-  public static final class constants_AprilTags{ //[id num, height in inches, coordinate x, coordinate y, heading] inches to meters; use field manual image for id reference
+  public static final class Constants_AprilTags{ //[id num, height in inches, coordinate x, coordinate y, heading] inches to meters; use field manual image for id reference
     /*public static final double[];
     public static final double[];
     public static final double[];
@@ -215,7 +215,7 @@ public final class Constants {
     public static final double[];*/
   }
 
-  public static final class constants_Limelight{ //TODO check if accurate
+  public static final class Constants_Limelight{ //TODO check if accurate
     public static final double THETA_P = 4;
     public static final double THETA_I = 0.0002;
     public static final double THETA_D = 0;
@@ -290,11 +290,11 @@ public final class Constants {
   }
 
 
-  public static final class constants_Auto {
-    public static final double MAX_SPEED_METERS_PER_SEC = constants_Drive.MAX_SPEED_METERS_PER_SEC;//0.5;
-    public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQRD = constants_Drive.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC;//0.25;
-    public static final double MAX_ANGULAR_SPEED_RPS =  constants_Drive.TELEDRIVE_MAX_ANGULAR_SPEED_RPS;
-    public static final double MAX_ANGULAR_ACCEL_UNITS_PER_SEC = constants_Drive.TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC;
+  public static final class Constants_Auto {
+    public static final double MAX_SPEED_METERS_PER_SEC = Constants_Drive.MAX_SPEED_METERS_PER_SEC;//0.5;
+    public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQRD = Constants_Drive.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC;//0.25;
+    public static final double MAX_ANGULAR_SPEED_RPS =  Constants_Drive.TELEDRIVE_MAX_ANGULAR_SPEED_RPS;
+    public static final double MAX_ANGULAR_ACCEL_UNITS_PER_SEC = Constants_Drive.TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC;
 
     public static  double P_TRANSLATION = 5.925; //TODO redo PID loop
     public static  double I_TRANSLATION = 0.00;

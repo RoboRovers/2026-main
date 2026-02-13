@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase {
     leftIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
     leftIntakeConfig.inverted(constants_intake.leftIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
         
-    leftIntakeMotor = new SparkMax(RobotMap.map_intake.leftIntakeSparkmax, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    leftIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.leftIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     leftIntakeEncoder = leftIntakeMotor.getEncoder();
     leftIntakePID = leftIntakeMotor.getClosedLoopController();
     leftIntakeMotor.configure(leftIntakeConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -53,7 +53,7 @@ public class Intake extends SubsystemBase {
     rightIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
     rightIntakeConfig.inverted(constants_intake.rightIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
         
-    rightIntakeMotor = new SparkMax(RobotMap.map_intake.rightIntakeSparkmax, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    rightIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.rightIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rightIntakeEncoder = rightIntakeMotor.getEncoder();
     rightIntakePID = rightIntakeMotor.getClosedLoopController();
     rightIntakeMotor.configure(rightIntakeConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -65,7 +65,7 @@ public class Intake extends SubsystemBase {
     rollerIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
     rollerIntakeConfig.inverted(constants_intake.rollerIntakeMotorInverted);
         
-    rollerIntakeMotor = new SparkMax(RobotMap.map_intake.rollerIntakeSparkmax, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    rollerIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.rollerIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rollerIntakeEncoder = rollerIntakeMotor.getEncoder();
     rollerIntakePID = rollerIntakeMotor.getClosedLoopController();
     rollerIntakeMotor.configure(rollerIntakeConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

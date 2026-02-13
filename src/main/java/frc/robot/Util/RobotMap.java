@@ -13,42 +13,35 @@ public class RobotMap
         //BUTTON BOARD
     }    
 
-    public static final class map_intake
+    public static final class MAP_INTAKE
     {
-        public static final int leftIntakeSparkmax = 9;
-        public static final int rightIntakeSparkmax = 10;
-        public static final int rollerIntakeSparkmax = 11;
+        public static final int leftIntakeSparkMAX = 9;
+        public static final int rightIntakeSparkMAX = 10;
+        public static final int rollerIntakeSparkMAX = 11;
         public static final int intakeCanrange = 6;
         public static final int intakeAbsEncoderPwmPort = 8;
     }
     public static final class MAP_DRIVETRAIN
     {
         //Front Left - Module 0
-        public static final int FRONT_LEFT_DRIVE_KRAKEN = 1;
-        public static final int FRONT_LEFT_STEER_SPARKMAX = 1;
-        public static final int FRONT_LEFT_ABS_ENCODER = 1;
+        public static final int frontLeftDriveKraken = 1;
+        public static final int frontLeftSteerSparkMAX = 1;
+        public static final int frontLeftAbsEncoder = 1;
         //Front Right - Module 1
-        public static final int FRONT_RIGHT_DRIVE_KRAKEN = 2;
-        public static final int FRONT_RIGHT_STEER_SPARKMAX = 2;
-        public static final int FRONT_RIGHT_ABS_ENCODER = 2;
+        public static final int frontRightDriveKraken = 2;
+        public static final int frontRightSteerSparkMAX = 2;
+        public static final int frontRightAbsEncoder = 2;
         //Back Right - Module 3
-        public static final int BACK_RIGHT_DRIVE_KRAKEN = 3;
-        public static final int BACK_RIGHT_STEER_SPARKMAX = 3;
-        public static final int BACK_RIGHT_ABS_ENCODER = 3;
+        public static final int backRightDriveKraken = 3;
+        public static final int backRightSteerSparkMAX = 3;
+        public static final int backRightAbsEncoder = 3;
         //Back Left - Module 2
-        public static final int BACK_LEFT_DRIVE_KRAKEN = 4;
-        public static final int BACK_LEFT_STEER_SPARKMAX = 4;
-        public static final int BACK_LEFT_ABS_ENCODER = 4;
+        public static final int backLeftDriveKraken = 4;
+        public static final int backLeftSteerSparkMAX = 4;
+        public static final int backLeftAbsEncoder = 4;
     }
-    public static final class MAP_ELEVATOR
-    {
-        public static final int ELEVATOR_LEFT_SPARKMAX = 10;
-        public static final int ELEVATOR_RIGHT_SPARKMAX = 11;
-        public static final int ELEVATOR_ROLLERS_SPARKMAX = 12;
-        public static final int ELEVATOR_CANRANGE = 13;
-        public static final int ELEVATOR_ABS_ENCODER_PWM_PORT = 9;
-        // public static final int ElEVATOR_CLEANER_SPARKMAX = 14;
-    }
+
+    
     /*public static final class MAP_ALGAE
     {
         public static final int ALGAE_ROLLERS = 20;
@@ -56,10 +49,10 @@ public class RobotMap
         public static final int ALGAE_ABS_ENCODER_PWM_PORT = 0;
 
     } */
-    public static final class MAP_CLIMBER
+    /*public static final class MAP_CLIMBER
     {
         public static final int CLIMB_SPARKMAX = 30;
-    }
+    }*/
     public static final class MAP_APRIL_TAGS //[id num, height in inches, co=ordinate x, coordinate y, heading] inches to meters; use field manual image for id reference==
     {   /* 
         public static final double[] RED_CS_X = {1, 1.4859, 16.6992, 0.6553, 126};

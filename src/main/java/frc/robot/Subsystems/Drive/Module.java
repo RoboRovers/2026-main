@@ -40,7 +40,7 @@ import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Util.Constants;
-import frc.robot.Util.Constants.constants_Module;
+import frc.robot.Util.Constants.Constants_Module;
 
 public class Module extends SubsystemBase
 {
@@ -109,7 +109,7 @@ public class Module extends SubsystemBase
     driveMotor = new TalonFX(driveNum);
     driveGains = new Slot0Configs().withKP(0.1).withKI(0).withKD(0.1).withKS(0.4).withKV(0.124);
     // driveGains hold the PID gains (values) for the drive motor
-    driveFeedbackConfigs = new FeedbackConfigs().withSensorToMechanismRatio(constants_Module.DRIVE_GEAR_RATIO);
+    driveFeedbackConfigs = new FeedbackConfigs().withSensorToMechanismRatio(Constants_Module.DRIVE_GEAR_RATIO);
     neutralModeValue = NeutralModeValue.Brake;
     driveMotor.getConfigurator().apply(driveGains);
     // sets up gains to the drive motor
@@ -127,8 +127,8 @@ public class Module extends SubsystemBase
     
     steerGains = new SparkMaxConfig()
     .apply(new ClosedLoopConfig().pidf(0.0225, 0.000001, 0.0, 0.0, ClosedLoopSlot.kSlot0).positionWrappingEnabled(true).positionWrappingInputRange(-179.9999999, 180));
-    steerGains.encoder.positionConversionFactor(Constants.constants_Module.STEER_TO_DEGREES);
-    steerGains.encoder.velocityConversionFactor(constants_Module.STEER__RPM_2_DEG_PER_SEC);
+    steerGains.encoder.positionConversionFactor(Constants.Constants_Module.STEER_TO_DEGREES);
+    steerGains.encoder.velocityConversionFactor(Constants.Constants_Module.STEER__RPM_2_DEG_PER_SEC);
     steerGains.inverted(invertSteer);
     steerGains.idleMode(IdleMode.kBrake);
     steerGains.smartCurrentLimit(65);
@@ -156,7 +156,7 @@ public class Module extends SubsystemBase
 //Drive Methods
   public double getDrivePosition()
   {
-      return driveMotor.getPosition().getValueAsDouble() * constants_Module.DRIVE_ROT_2_METER;
+      return driveMotor.getPosition().getValueAsDouble() * Constants_Module.DRIVE_ROT_2_METER;
   }
   public double getDriveVelocity()
   {
@@ -164,7 +164,7 @@ public class Module extends SubsystemBase
   }
   public void getUpToSpeed(double velocityMPS)
   {
-    double rps = velocityMPS * constants_Module.DRIVE_MPS_2_RPS;
+    double rps = velocityMPS * Constants_Module.DRIVE_MPS_2_RPS;
     driveMotor.setControl(new MotionMagicVelocityVoltage(rps));
   }
   
@@ -198,7 +198,7 @@ public class Module extends SubsystemBase
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
     state.optimize(getModulePosition().angle);
     state.cosineScale(getModulePosition().angle);
-    driveMotor.set(state.speedMetersPerSecond / Constants.constants_Drive.MAX_SPEED_METERS_PER_SEC);
+    driveMotor.set(state.speedMetersPerSecond / Constants.Constants_Drive.MAX_SPEED_METERS_PER_SEC);
     // getUpToSpeed(state.speedMetersPerSecond);
     steerPIDController.setReference(state.angle.getDegrees(), ControlType.kPosition);
   }
