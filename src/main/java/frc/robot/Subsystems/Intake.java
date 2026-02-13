@@ -4,6 +4,8 @@ import frc.robot.Util.Constants.constants_intake;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
@@ -27,10 +29,10 @@ public class Intake extends SubsystemBase {
     public SparkClosedLoopController rightIntakePID;
     public SparkMaxConfig rightIntakeConfig;
 
-    public SparkMax rollerIntakeMotor;
+    public SparkFlex rollerIntakeMotor;
     public RelativeEncoder rollerIntakeEncoder;
     public SparkClosedLoopController rollerIntakePID;
-    public SparkMaxConfig rollerIntakeConfig;
+    public SparkFlexConfig rollerIntakeConfig;
     
     
     public Intake() {
@@ -59,13 +61,13 @@ public class Intake extends SubsystemBase {
     rightIntakeMotor.configure(rightIntakeConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     // Roller intake motor setup
-    rollerIntakeConfig = new SparkMaxConfig();
+    rollerIntakeConfig = new SparkFlexConfig();
     rollerIntakeConfig.idleMode(IdleMode.kBrake);
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
     rollerIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
     rollerIntakeConfig.inverted(constants_intake.rollerIntakeMotorInverted);
         
-    rollerIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.rollerIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    rollerIntakeMotor = new SparkFlex(RobotMap.MAP_INTAKE.rollerIntakeSparkFLEX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rollerIntakeEncoder = rollerIntakeMotor.getEncoder();
     rollerIntakePID = rollerIntakeMotor.getClosedLoopController();
     rollerIntakeMotor.configure(rollerIntakeConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

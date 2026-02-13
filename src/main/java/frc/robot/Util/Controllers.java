@@ -32,6 +32,18 @@ public class Controllers {
         rightTrigger = xbox.rightTrigger();
 
     }
+
+    public void initialize_left_Joystick_Controls() {
+        leftBumper = leftStick.button(1);
+        leftTrigger = leftStick.button(2);
+        /*
+        spinRollers = leftStick.button(3);
+        shootFuel = leftStick.button(4);   
+        intakeOut = leftStick.button(5);
+        intakeIn = leftStick.button(6);
+        */
+    }
+    
 }
 
 

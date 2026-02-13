@@ -5,9 +5,10 @@
 package frc.robot;
 
 import frc.robot.Subsystems.Drive.Swerve;
-import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.Shooter;
 import frc.robot.Commands.Drive;
+import frc.robot.Subsystems.Intake;
+//import frc.robot.Subsystems.Shooter;
+//import frc.robot.Commands.Drive;
 import frc.robot.Util.Constants;
 import frc.robot.Util.Controllers;
 import frc.robot.Util.RobotMap.MAP_CONTROLLER;
@@ -30,7 +31,7 @@ public class RobotContainer {
   public Swerve s_Swerve;
   public Drive c_Drive;
   public Intake s_Intake;
-  public Shooter s_Shooter;
+  //public Shooter s_Shooter;
   
   // public Auto c_Auto;
   
@@ -56,10 +57,11 @@ public class RobotContainer {
     s_Swerve = new Swerve();
     c_Drive = new Drive(s_Swerve, u_Controllers.leftStick, u_Controllers.rightStick);
     s_Shooter = new Shooter();
+    s_Intake = new Intake();
   }
   private void configureBindings() {
     //Intake Bindings
-    u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
+    u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
     u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
