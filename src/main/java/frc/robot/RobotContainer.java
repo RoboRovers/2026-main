@@ -7,9 +7,7 @@ package frc.robot;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
 import frc.robot.Subsystems.Intake;
-//import frc.robot.Subsystems.Shooter;
-//import frc.robot.Commands.Drive;
-import frc.robot.Util.Constants;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.Controllers;
 import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -31,7 +29,7 @@ public class RobotContainer {
   public Swerve s_Swerve;
   public Drive c_Drive;
   public Intake s_Intake;
-  //public Shooter s_Shooter;
+  public Shooter s_Shooter;
   
   // public Auto c_Auto;
   
