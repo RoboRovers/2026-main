@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
+import frc.robot.Commands.Shoot;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.Controllers;
@@ -59,10 +60,11 @@ public class RobotContainer {
   }
   private void configureBindings() {
     //Intake Bindings
+    // this may not work because it doesn't make a new command
     u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
-    u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
+    u_Controllers.rightStick.button(0).whileTrue(new Shoot(s_Shooter)); // doesn't work when not 0
     
     //Drive Bindings
     u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
@@ -71,7 +73,6 @@ public class RobotContainer {
     // No-op example bindings removed. Add controller bindings here.
 
     //Shooter Bindings
-    u_Controllers.shootFuel.whileTrue(s_Shooter.shootFuel());
     u_Controllers.shootFuel.whileFalse(s_Shooter.stop());
 
   }

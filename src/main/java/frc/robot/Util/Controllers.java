@@ -22,10 +22,10 @@ public class Controllers {
 
     public void initialize_Xbox_Controls()
     {
-        spinRollers = xbox.leftTrigger();
-        shootFuel = xbox.rightTrigger();
-        intakeOut = xbox.x();
-        intakeIn = xbox.y();
+        // spinRollers = xbox.leftTrigger();
+        // shootFuel = xbox.rightTrigger();
+        // intakeOut = xbox.x();
+        // intakeIn = xbox.y();
         leftBumper = xbox.leftBumper();
         rightBumper = xbox.rightBumper();
         leftTrigger = xbox.leftTrigger();
@@ -34,14 +34,19 @@ public class Controllers {
     }
 
     public void initialize_left_Joystick_Controls() {
-        leftBumper = leftStick.button(1);
-        leftTrigger = leftStick.button(2);
-        /*
-        spinRollers = leftStick.button(3);
+        // leftBumper = leftStick.button(1);
+        // leftTrigger = leftStick.button(2);
+        
+        spinRollers = leftStick.button(0); // doesn't work when not 0
         shootFuel = leftStick.button(4);   
         intakeOut = leftStick.button(5);
         intakeIn = leftStick.button(6);
-        */
+        
+    }
+
+    public void intitalize_right_Joystick_Controls() {
+
+
     }
     
 }
