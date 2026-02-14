@@ -1,6 +1,6 @@
 package frc.robot.Subsystems;
 
-import frc.robot.Util.Constants.constants_intake;
+import frc.robot.Util.Constants.Constants_Intake;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
@@ -40,8 +40,8 @@ public class Intake extends SubsystemBase {
     leftIntakeConfig = new SparkMaxConfig();
     leftIntakeConfig.idleMode(IdleMode.kBrake);
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
-    leftIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
-    leftIntakeConfig.inverted(constants_intake.leftIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
+    leftIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
+    leftIntakeConfig.inverted(Constants_Intake.leftIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
         
     leftIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.leftIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     leftIntakeEncoder = leftIntakeMotor.getEncoder();
@@ -52,8 +52,8 @@ public class Intake extends SubsystemBase {
     rightIntakeConfig = new SparkMaxConfig();
     rightIntakeConfig.idleMode(IdleMode.kBrake);
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
-    rightIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
-    rightIntakeConfig.inverted(constants_intake.rightIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
+    rightIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
+    rightIntakeConfig.inverted(Constants_Intake.rightIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
         
     rightIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.rightIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rightIntakeEncoder = rightIntakeMotor.getEncoder();
@@ -64,8 +64,8 @@ public class Intake extends SubsystemBase {
     rollerIntakeConfig = new SparkFlexConfig();
     rollerIntakeConfig.idleMode(IdleMode.kBrake);
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
-    rollerIntakeConfig.encoder.positionConversionFactor(constants_intake.intakePositionConversionFactor);
-    rollerIntakeConfig.inverted(constants_intake.rollerIntakeMotorInverted);
+    rollerIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
+    rollerIntakeConfig.inverted(Constants_Intake.rollerIntakeMotorInverted);
         
     rollerIntakeMotor = new SparkFlex(RobotMap.MAP_INTAKE.rollerIntakeSparkFLEX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rollerIntakeEncoder = rollerIntakeMotor.getEncoder();
@@ -82,7 +82,7 @@ public class Intake extends SubsystemBase {
     public Command spinRollers()
     {
         return Commands.run(() -> {
-        rollerIntakeMotor.set(constants_intake.rollerSpeed);
+        rollerIntakeMotor.set(Constants_Intake.rollerSpeed);
         }, this);
     }
     public void zeroPosition()
@@ -93,7 +93,7 @@ public class Intake extends SubsystemBase {
     
      public Command intakeIn()
     {
-        if (getPosition() < constants_intake.retractLimit) { // TODO: set the correct position limit
+        if (getPosition() < Constants_Intake.retractLimit) { // TODO: set the correct position limit
             return Commands.run(() -> {
                 leftIntakeMotor.set(-.05); // between -1 and 1
                 rightIntakeMotor.set(-.05);
@@ -104,7 +104,7 @@ public class Intake extends SubsystemBase {
 
      public Command intakeOut()
     {
-        if (getPosition() > constants_intake.extendLimit) { // TODO: set the correct position limit
+        if (getPosition() > Constants_Intake.extendLimit) { // TODO: set the correct position limit
             return Commands.run(() -> {
                 leftIntakeMotor.set(.05);
                 rightIntakeMotor.set(.05);
