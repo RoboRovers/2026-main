@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Commands.IntakeDelayedSpin;
 
 
 /**
@@ -59,6 +60,8 @@ public class RobotContainer {
   }
   private void configureBindings() {
     //Intake Bindings
+    // Left joystick button 1: while held, run intake out; after 2s start rollers
+    u_Controllers.leftStick.button(0).whileTrue(new IntakeDelayedSpin(s_Intake));
     u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
     u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
