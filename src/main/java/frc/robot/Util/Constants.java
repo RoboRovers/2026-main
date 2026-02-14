@@ -119,44 +119,7 @@ public final class Constants {
     }
   /*public static final class constants_Elevator
   {
-    public static final double ELEVATOR_GEAR_RATIO = 0.2;
-    public static final double ELEVATOR_BASE_HEIGHT = 25.0625;
-    public static final int ELEVATOR_SPROCKET_TEETH = 22;
-    public static final double ELEVATOR_CHAIN_PITCH = 0.25;
-    public static final boolean ELEVATOR_CASCADING = true;
-    public static final double ELEVATOR_SPROCKET_CIRCUMFRENCE = ELEVATOR_CHAIN_PITCH * ELEVATOR_SPROCKET_TEETH * (ELEVATOR_CASCADING? 2: 1);
-    public static final double ELEVATOR_TOLERANCE = 1.5; //inches
-    public static final double ROLLER_SENSOR_TOLERANCE = 4; //Inches
-    public static final boolean LEFT_INVERTED = false;
-    public static final boolean RIGHT_INVERTED = true;
-    public static final boolean ROLLER_INVERTED = true;
-    // public static final boolean CLEANER_INVERTED = false;
 
-    public static final double ELEVATOR_P = 0.04; //a = -vi^2 / 2 (current-wanted distance)
-    public static final double ELEVATOR_I = 0.0;
-    public static final double ELEVATOR_D = 0;
-    public static final double ELEVATOR_FF = 0;//Dont worry about this value, keep it 0
-
-    public static final double ROLLER_P = 0.1;
-    public static final double ROLLER_I = 0;
-    public static final double ROLLER_D = 0;
-    public static final double ROLLER_FF = 0;//Dont worry about this value, keep it 0
-
-    // public static final double CLEANER_P = 0;
-    // public static final double CLEANER_I = 0;
-    // public static final double CLEANER_D = 0;
-    // public static final double CLEANER_FF = 0;
-
-    public static final ElevatorPositionGroup SOURCE = new ElevatorPositionGroup(ELEVATOR_BASE_HEIGHT, 0.15);
-    public static final ElevatorPositionGroup PREP_NONE = new ElevatorPositionGroup(30, 0);
-    public static final ElevatorPositionGroup PREP_L1 = new ElevatorPositionGroup(35.5, -1);
-    public static final ElevatorPositionGroup PREP_L2 = new ElevatorPositionGroup(35.5, -1);
-    public static final ElevatorPositionGroup PREP_L3 = new ElevatorPositionGroup(51, -1);
-    public static final ElevatorPositionGroup CLEAN_L2 = new ElevatorPositionGroup(30, -1);
-    public static final ElevatorPositionGroup CLEAN_L3 = new ElevatorPositionGroup(45, -1);
-    public static final ElevatorPositionGroup CORAL = new ElevatorPositionGroup(30, 0);
-    public static final ElevatorPositionGroup SCORE = new ElevatorPositionGroup(-1, 0.35);
-    public static final ElevatorPositionGroup SCORE_L1 = new ElevatorPositionGroup(-1, 0.15);
   }*/
 
 
@@ -178,28 +141,6 @@ public final class Constants {
       this.angle = angle;
     }
   }
-
-  /*public static final class constants_Rollers
-  {
-    public static final double ROLLER_GEAR_RATIO = 1/3.0;
-    public static final double ANGLE_TO_DEGREES = 360.0 * ROLLER_GEAR_RATIO;
-
-    public static final boolean ABS_INVERTED = false; //TODO follow the steps in the elvator subsytem to get this number
-    public static final double ABS_OFFSET = 315; //TODO follow the steps in the elvator subsytem to get this number
-
-    public static final boolean ROLLER_INVERTED = false;
-    public static final boolean ANGLE_INVERTED = false;
-
-    public static final double ROLLER_ANGLE_TOLERANCE = 1.25;
-    public static final double CANRANGE_ROLLERS_DISTANCE_LIMIT = 7; //Inches TODO Change this value to be what we want it to be
-    public static final double ROLLER_RPM_TOLERANCE = 5;
-
-    public static final double ROLLER_P = 0;
-    public static final double ROLLER_I = 0;
-    public static final double ROLLER_D = 0;
-    public static final double ROLLER_FF = 0;//Dont worry about this value, keep it 0
-
-  }*/
 
   public static final class Constants_AprilTags{ //[id num, height in inches, coordinate x, coordinate y, heading] inches to meters; use field manual image for id reference
     /*public static final double[];
