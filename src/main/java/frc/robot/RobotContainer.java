@@ -59,10 +59,12 @@ public class RobotContainer {
     s_Intake = new Intake();
   }
   private void configureBindings() {
-    //Intake Bindings
-    // Left joystick button 1: while held, run intake out; after 2s start rollers
-    u_Controllers.leftStick.button(0).whileTrue(new IntakeDelayedSpin(s_Intake));
-    u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
+    // Intake Bindings
+    // Left joystick button 1: while held, run intake out; when complete start rollers
+    u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
+    
+    // Use inline factory triggers for clarity
+    u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
     u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
@@ -74,8 +76,8 @@ public class RobotContainer {
     // No-op example bindings removed. Add controller bindings here.
 
     //Shooter Bindings
-    u_Controllers.shootFuel.whileTrue(s_Shooter.shootFuel());
-    u_Controllers.shootFuel.whileFalse(s_Shooter.stop());
+    u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
+    u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
 
   }
 
