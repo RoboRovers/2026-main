@@ -1,4 +1,4 @@
-package frc.robot.Commands;
+ package frc.robot.Commands;
 
 // Using the intake encoder position instead of a Timer
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,31 +22,44 @@ public class IntakeDelayedSpin extends Command {
   @Override
   public void initialize() {
     rollersStarted = false;
-    // start the intake out motors immediately
-    intake.leftIntakeMotor.set(.05);
-    intake.rightIntakeMotor.set(.05);
+    // Start extending the intake immediately on trigger press.
+    // Check the intake position, don't try to extend if we're 
+    // already at or beyond the threshold position.
+    if (intake.getPosition() < positionThreshold) {
+        intake.leftIntakeMotor.set(.05);
+        intake.rightIntakeMotor.set(.05);
+    }
   }
 
   @Override
   public void execute() {
-    // keep intake out running while held
-    intake.leftIntakeMotor.set(.05);
-    intake.rightIntakeMotor.set(.05);
-
-    if (!rollersStarted && intake.getPosition() > positionThreshold) {
-      rollersStarted = true;
-      // start rollers
-      intake.rollerIntakeMotor.set(Constants_Intake.rollerSpeed);
+    // While rollers haven't started yet, extend the intake until position threshold
+    if (!rollersStarted) {
+      if (intake.getPosition() < positionThreshold) {
+        // keep extending
+        intake.leftIntakeMotor.set(.05);
+        intake.rightIntakeMotor.set(.05);
+      } else {
+        // reached threshold: stop intake motors and start rollers
+        intake.leftIntakeMotor.set(0);
+        intake.rightIntakeMotor.set(0);
+        intake.rollerIntakeMotor.set(Constants_Intake.rollerSpeed);
+        rollersStarted = true;
+      }
     }
   }
 
   @Override
   public void end(boolean interrupted) {
-    // stop all intake motors on release/interruption
+    // stop the roller spinner immediately on release/interruption
+    intake.rollerIntakeMotor.set(0);
+    // stop the intake extension motors before starting retract
     intake.leftIntakeMotor.set(0);
     intake.rightIntakeMotor.set(0);
-    intake.rollerIntakeMotor.set(0);
-    // nothing additional to stop; encoder doesn't need stopping
+
+    // Schedule the retract command to run intake motors in reverse until
+    // the encoder reports the retracted position (IntakeReturn will stop them)
+    new IntakeReturn(intake).schedule();
   }
 
   @Override
