@@ -102,8 +102,14 @@ public final class Constants {
     public static final class Constants_Shooter 
     {
       public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
-
+      public static final double fuelAgitatorSpeed = 0.05; //TODO Tune this value, it is just a placeholder
+      public static final int shooterMotorID = 7;
+      public static final int fuelAgitatorMotorID = 20; // TODO set actual value
+      public static final int shooterMotorCurrentLimit = 60;
+      public static final double shooterLaunchVoltage = 10.6;
+     public static final double spinUpSeconds = 1;
     }
+    
     public static final class Constants_Intake
     {
       public static final double rollerSpeed = 0.05;
@@ -295,16 +301,6 @@ public final class Constants {
   } */
 
   public static final class FuelConstants {
-    // Motor controller IDs for Fuel Mechanism motors
-    public static final int SHOOTER_MOTOR_ID = 5;
-
-    // Current limit and nominal voltage for fuel mechanism motors.
-    public static final int SHOOTER_MOTOR_CURRENT_LIMIT = 60;
-
-    // Voltage values for various fuel operations. These values may need to be tuned
-    // based on exact robot construction.
-    // See the Software Guide for tuning information
-    public static final double SHOOTER_LAUNCH_VOLTAGE = 10.6;
-    public static final double SPIN_UP_SECONDS = 1;
-  }
+    
+}
 }

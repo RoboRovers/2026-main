@@ -20,11 +20,13 @@ import static frc.robot.Util.Constants.FuelConstants.*;
 
 public class Shooter extends SubsystemBase {
   private final SparkMax shooterRoller;
+  public final SparkMax fuelAgitator;
 
   /** Creates a new Shooter Subsystem. */
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(SHOOTER_MOTOR_ID, MotorType.kBrushed);
+    shooterRoller = new SparkMax(Constants_Shooter.shooterMotorID, MotorType.kBrushed);
+    fuelAgitator = new SparkMax(Constants_Shooter.fuelAgitatorMotorID, MotorType.kBrushed);
   
     // create the configuration for the shooter roller, set a current limit, (set
     // the motor to inverted so that positive values are used for shooting???), 
@@ -32,18 +34,19 @@ public class Shooter extends SubsystemBase {
     SparkMaxConfig shooterConfig = new SparkMaxConfig();
     // TODO: Not sure if the motor needs to be inverted, test and change if necessary
     //shooterConfig.inverted(true);
-    shooterConfig.smartCurrentLimit(SHOOTER_MOTOR_CURRENT_LIMIT);
+    shooterConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
     shooterRoller.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     // put default values for various fuel operations onto the dashboard
     // all commands using this subsystem pull values from the dashbaord to allow
     // you to tune the values easily, and then replace the values in Constants.java
     // with your new values. For more information, see the Software Guide.
-    SmartDashboard.putNumber("Shooter roller value", SHOOTER_LAUNCH_VOLTAGE);
+    SmartDashboard.putNumber("Shooter roller value", Constants_Shooter.shooterLaunchVoltage);
   }
 
   // A method to set the voltage of the shooter roller
   public void setShooterRoller(double voltage) {
+    
     shooterRoller.setVoltage(voltage);
   }
 
@@ -55,9 +58,22 @@ public class Shooter extends SubsystemBase {
    
   }
   
+  // Return a Command that, while scheduled, runs the shooter at the configured speed
   public Command shootFuel() {
+    return Commands.run(() -> shooterRoller.set(Constants_Shooter.shooterSpeed), this);
+  }
+
+  // Backwards-compatible direct action used by older commands
+  public void shootFuelAction() {
+    shooterRoller.set(Constants_Shooter.shooterSpeed);
+  }
+
+  public void agitateFuel() {
+    fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
+  }
+  public Command reverseAgitator() {
     return Commands.run(() -> {
-      shooterRoller.set(Constants_Shooter.shooterSpeed);
+      fuelAgitator.set(-Constants_Shooter.fuelAgitatorSpeed);
     }, this);
   }
 

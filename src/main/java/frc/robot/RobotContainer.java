@@ -6,14 +6,12 @@ package frc.robot;
 
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
+import frc.robot.Commands.Shoot;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.Controllers;
-import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.IntakeDelayedSpin;
 
@@ -64,10 +62,11 @@ public class RobotContainer {
     u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
     
     // Use inline factory triggers for clarity
-    u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
-    u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
+  u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
+  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
+  u_Controllers.rightStick.button(1).whileTrue(new Shoot(s_Shooter));
     
     //Drive Bindings
     u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
@@ -76,9 +75,8 @@ public class RobotContainer {
     // No-op example bindings removed. Add controller bindings here.
 
     //Shooter Bindings
-    u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
-    u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
-
+  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
+  u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
   }
 
   /**
