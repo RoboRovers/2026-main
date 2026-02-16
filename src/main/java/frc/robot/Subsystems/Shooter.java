@@ -21,6 +21,9 @@ import static frc.robot.Util.Constants.FuelConstants.*;
 public class Shooter extends SubsystemBase {
   private final SparkMax shooterRoller;
   public final SparkMax fuelAgitator;
+  // Runtime adjustable speed for the shooter roller. 
+  // Initializedf from constants.
+  private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
 
   /** Creates a new Shooter Subsystem. */
   public Shooter() {
@@ -60,12 +63,24 @@ public class Shooter extends SubsystemBase {
   
   // Return a Command that, while scheduled, runs the shooter at the configured speed
   public Command shootFuel() {
-    return Commands.run(() -> shooterRoller.set(Constants_Shooter.shooterSpeed), this);
+    return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
   }
 
   // Backwards-compatible direct action used by older commands
   public void shootFuelAction() {
-    shooterRoller.set(Constants_Shooter.shooterSpeed);
+    shooterRoller.set(currentShooterSpeed);
+  }
+
+  /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
+  public void adjustSpeed(double delta) {
+    currentShooterSpeed += delta;
+    if (currentShooterSpeed > 1.0) currentShooterSpeed = 1.0;
+    if (currentShooterSpeed < -1.0) currentShooterSpeed = -1.0;
+    SmartDashboard.putNumber("Shooter roller value", currentShooterSpeed);
+  }
+
+  public double getCurrentShooterSpeed() {
+    return currentShooterSpeed;
   }
 
   public void agitateFuel() {
