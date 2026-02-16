@@ -74,4 +74,21 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public static double getMotorSpeedinRPM(double radius, double deltaY, double deltaX, double theta) 
+  {
+    //This method calculates the angular speed of the motor, in RPM, for a given horizontal displacement
+
+    /*radius = the radius of the roller wheel; meters, CONSTANT
+      deltaY = the height of the hub minus the height of the shooter; meters, CONSTANT
+      deltaX = the horizontal distance from the hub to the shooter; meters, VARIABLE 
+      theta = the launch angle; radians, CONSTANT */
+
+    double squaredRadius = Math.pow(radius, 2);
+    double squaredCosine = Math.pow(Math.cos(Math.toRadians(theta)), 2);
+    double denDifference = (deltaX * Math.tan(Math.toRadians(theta))) - deltaY;
+    double num = 4.9 * Math.pow(deltaX, 2);
+    double den = squaredRadius * squaredCosine * denDifference;
+    return (30.0 / Math.PI) * Math.sqrt(num / den);
+  }
 }
