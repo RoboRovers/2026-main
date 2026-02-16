@@ -4,7 +4,6 @@
 
 package frc.robot.Subsystems;
 
-import frc.robot.Util.Constants;
 import frc.robot.Util.Constants.Constants_Shooter;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -16,13 +15,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Util.Constants.FuelConstants.*;
 
 public class Shooter extends SubsystemBase {
   private final SparkMax shooterRoller;
   public final SparkMax fuelAgitator;
 
   /** Creates a new Shooter Subsystem. */
+  @SuppressWarnings("deprecation")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(Constants_Shooter.shooterMotorID, MotorType.kBrushed);

@@ -35,6 +35,7 @@ public class Intake extends SubsystemBase {
     public SparkFlexConfig rollerIntakeConfig;
     
     
+    @SuppressWarnings("deprecation")
     public Intake() {
     // Left intake motor setup
     leftIntakeConfig = new SparkMaxConfig();
