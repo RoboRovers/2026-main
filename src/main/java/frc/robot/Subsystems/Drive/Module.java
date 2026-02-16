@@ -104,7 +104,7 @@ public class Module extends SubsystemBase
    */
 
   
-  @SuppressWarnings({ "removal", "deprecation" })
+  @SuppressWarnings({ "removal" })
   public Module(int steerNum, int driveNum, boolean invertDrive, boolean invertSteer, int absoluteEncoderID, double absOffset, boolean absoluteReversed)
   {
     driveMotor = new TalonFX(driveNum);

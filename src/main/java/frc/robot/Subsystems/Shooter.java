@@ -21,7 +21,7 @@ public class Shooter extends SubsystemBase {
   public final SparkMax fuelAgitator;
 
   /** Creates a new Shooter Subsystem. */
-  @SuppressWarnings("deprecation")
+  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(Constants_Shooter.shooterMotorID, MotorType.kBrushed);
