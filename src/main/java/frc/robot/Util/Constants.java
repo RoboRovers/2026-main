@@ -24,11 +24,11 @@ public final class Constants {
 
     
   public static final class Constants_Module {
-    public static final double WHEEL_RADIUS_METERS = 0.1016/2; //Inches
-    public static final double WHEEL_CIRCUMFRENCE_METERS = 2*Math.PI*WHEEL_RADIUS_METERS;
-    public static final double DRIVE_GEAR_RATIO = 4.59; //4.59 for Swerve X, 6.75 for sds
-    public static final double DRIVE_ROT_2_METER = (WHEEL_CIRCUMFRENCE_METERS);
-    public static final double DRIVE_MPS_2_RPS = DRIVE_GEAR_RATIO/WHEEL_CIRCUMFRENCE_METERS;
+    public static final double wheelRadiusMeters = 0.05000625; //Inches; 1 31/32; 1.96875 1.96875 to meters = 0.05000625
+    public static final double wheelCircumferenceMeters = 2*Math.PI*wheelRadiusMeters;
+    public static final double driveGearRatio = 4.59; //4.59 for Swerve X, 6.75 for sds
+    public static final double DRIVE_ROT_2_METER = (wheelCircumferenceMeters);
+    public static final double DRIVE_MPS_2_RPS = driveGearRatio/wheelCircumferenceMeters;
 
     public static final double STEER_GEAR_RATIO = 13.3714; //13.3714 for Swerve X, 12.8 for sds
     public static final double STEER_TO_DEGREES = 360 / STEER_GEAR_RATIO;
@@ -54,17 +54,17 @@ public final class Constants {
     public static final Measure<DistanceUnit> WHEEL_RADIUS = edu.wpi.first.units.Units.Inches.of(1.5);
     public static final double COF = 1.2;
     //TODO Measure from the center of each wheel to get these, Front to back for "WHEEL_BASE", Left to right for "TRACK_WIDTH"
-    public static final double TRACK_WIDTH = Units.inchesToMeters(29);  //TODO Update values to what they are for the new robo
+    public static final double trackWidth = Units.inchesToMeters(22.9375);  //TODO Update values to what they are for the new robo
       // Distance between left and right wheels
-    public static final double WHEEL_BASE = Units.inchesToMeters(29);
+    public static final double wheelBase = Units.inchesToMeters(22.6875);
       // Distance between front and back wheels
     public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-      new Translation2d(WHEEL_BASE / 2, TRACK_WIDTH / 2), //front left
-        new Translation2d(WHEEL_BASE / 2, -TRACK_WIDTH / 2), //front right
-        new Translation2d(-WHEEL_BASE / 2,  TRACK_WIDTH / 2), //back left
-        new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)); //back right
+      new Translation2d(wheelBase / 2, trackWidth / 2), //front left
+        new Translation2d(wheelBase / 2, -trackWidth / 2), //front right
+        new Translation2d(-wheelBase / 2,  trackWidth / 2), //back left
+        new Translation2d(-wheelBase / 2, -trackWidth / 2)); //back right
 
-    public static final double MODULE_RADIUS = Units.inchesToMeters(Constants.Constants_Drive.TRACK_WIDTH/2); //measured from center of robot to furthest module.
+    public static final double MODULE_RADIUS = Units.inchesToMeters(Constants.Constants_Drive.trackWidth/2); //measured from center of robot to furthest module.
 
     
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
@@ -90,13 +90,13 @@ public final class Constants {
     public static final boolean BR_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;
 
     public static final double MAX_SPEED_METERS_PER_SEC = 6.949; //6.949 for Swerve X, 4.60248 for sd
-    public static final double MAX_ANGULAR_SPEED_RPS = MAX_SPEED_METERS_PER_SEC/TRACK_WIDTH;
+    public static final double MAX_ANGULAR_SPEED_RPS = MAX_SPEED_METERS_PER_SEC/trackWidth;
 
     //For limiting speed while driving
     public static final double TELEDRIVE_MAX_SPEED_METERS_PER_SEC = MAX_SPEED_METERS_PER_SEC / 1.0;
     public static final double TELEDRIVE_MAX_ANGULAR_SPEED_RPS = MAX_ANGULAR_SPEED_RPS / 1.0;
     public static final double TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC = MAX_SPEED_METERS_PER_SEC/1.50;
-    public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(TRACK_WIDTH/2);
+    public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(trackWidth/2);
   }
 
     public static final class Constants_Shooter 
@@ -115,6 +115,8 @@ public final class Constants {
       public static final double rollerSpeed = 0.05;
       public static final double retractLimit = 2;
       public static final double extendLimit = 50;
+      public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
+      public static final int intakeMotorCurrentLimit = 40; //TODO find the correct current limit for the intake motors
 
       public static final boolean intakeMotorInverted = false;
       public static final boolean leftIntakeMotorInverted = Constants_Intake.intakeMotorInverted;
