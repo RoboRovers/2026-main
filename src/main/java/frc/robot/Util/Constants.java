@@ -35,9 +35,9 @@ public final class Constants {
     public static final double STEER__RPM_2_DEG_PER_SEC = STEER_TO_DEGREES / 60;
 
     //TODO Tune our pid loop for the drives once you add in all the offsets, you can just rotate the wheels to 90 degrees using the flight sticks, then disable and enable the code to set them to 0 degreese and tune off of that vaule
-    public static final double P_TURNING = 0.0075;
-    public static final double I_TURNING = 0.0;
-    public static final double D_TURNING = 0.75;
+    public static final double P_TURNING = 0.0225;
+    public static final double I_TURNING = 0.000001;
+    public static final double D_TURNING = 0;
     public static final double FF_TURNING = 0;
 
     //TODO Dont worry about changing these values
@@ -54,7 +54,7 @@ public final class Constants {
     public static final Measure<DistanceUnit> WHEEL_RADIUS = edu.wpi.first.units.Units.Inches.of(1.5);
     public static final double COF = 1.2;
     //TODO Measure from the center of each wheel to get these, Front to back for "WHEEL_BASE", Left to right for "TRACK_WIDTH"
-    public static final double TRACK_WIDTH = Units.inchesToMeters(29);  //TODO Update values to what they are for the new robo
+    public static final double TRACK_WIDTH = Units.inchesToMeters(29);  //TODO Update values to what they are for the new robot
       // Distance between left and right wheels
     public static final double WHEEL_BASE = Units.inchesToMeters(29);
       // Distance between front and back wheels
@@ -103,7 +103,7 @@ public final class Constants {
     {
       public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorSpeed = 0.05; //TODO Tune this value, it is just a placeholder
-      public static final int shooterMotorID = 7;
+      
       public static final int fuelAgitatorMotorID = 20; // TODO set actual value
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;

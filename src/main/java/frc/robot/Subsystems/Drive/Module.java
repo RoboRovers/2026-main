@@ -127,7 +127,7 @@ public class Module extends SubsystemBase
     absoluteEncoder.getConfigurator().apply(CANConfig);
     
     steerGains = new SparkMaxConfig()
-    .apply(new ClosedLoopConfig().pidf(0.0225, 0.000001, 0.0, 0.0, ClosedLoopSlot.kSlot0).positionWrappingEnabled(true).positionWrappingInputRange(-179.9999999, 180));
+    .apply(new ClosedLoopConfig().pidf(Constants.Constants_Module.P_TURNING, Constants.Constants_Module.I_TURNING, Constants.Constants_Module.D_TURNING, Constants.Constants_Module.FF_TURNING, ClosedLoopSlot.kSlot0).positionWrappingEnabled(true).positionWrappingInputRange(-179.9999999, 180));
     steerGains.encoder.positionConversionFactor(Constants.Constants_Module.STEER_TO_DEGREES);
     steerGains.encoder.velocityConversionFactor(Constants.Constants_Module.STEER__RPM_2_DEG_PER_SEC);
     steerGains.inverted(invertSteer);

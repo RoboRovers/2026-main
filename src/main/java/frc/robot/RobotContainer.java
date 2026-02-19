@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.Shoot;
@@ -38,6 +42,7 @@ public class RobotContainer {
     // Configure the trigger bindings 
     robotFiles();
     configureBindings();
+    //TODO: Add auto chooser here.
   }
 
   /**

@@ -21,6 +21,12 @@ public class RobotMap
         public static final int intakeCanrange = 6;
         public static final int intakeAbsEncoderPwmPort = 8;
     }
+
+    public static final class MAP_SHOOTER
+    {
+        public static final int shooterSparkMAX = 7;
+        public static final int fuelAgitatorSparkMAX = 8;
+    }
     public static final class MAP_DRIVETRAIN
     {
         //Front Left - Module 0

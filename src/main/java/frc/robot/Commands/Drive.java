@@ -41,7 +41,7 @@ public class Drive extends Command{
     @Override
     public void initialize()
     {
-        s_Swerve.faceAllFoward();
+        s_Swerve.faceAllForward();
     }
 
  
