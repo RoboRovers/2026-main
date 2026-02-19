@@ -82,10 +82,11 @@ public class Intake extends SubsystemBase {
 
     public Command spinRollers()
     {
-        return Commands.run(() -> {
+        return Commands.runOnce(() -> {
         rollerIntakeMotor.set(Constants_Intake.rollerSpeed);
-        }, this);
+        });
     }
+    
     public void zeroPosition()
     {
         leftIntakeEncoder.setPosition(2); // TODO: set the correct zero position

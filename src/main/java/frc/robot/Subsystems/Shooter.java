@@ -60,18 +60,23 @@ public class Shooter extends SubsystemBase {
    
   }
   
-  public void shootFuel() {
-    shooterRoller.set(Constants_Shooter.shooterSpeed);
-  }
+  public Command shootFuel() {
+    return Commands.runOnce(() -> {
+      shooterRoller.set(Constants_Shooter.shooterSpeed);
+  }, this);
+}
 
-  public void agitateFuel() {
-    fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
+  public Command agitateFuel() {
+    return Commands.runOnce(() -> {
+      fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
+    }, this);
+
   }
   public Command reverseAgitator() {
-    return Commands.run(() -> {
+    return Commands.runOnce(() -> {
       fuelAgitator.set(-Constants_Shooter.fuelAgitatorSpeed);
     }, this);
-  }
+  } 
 
   @Override
   public void periodic() {
