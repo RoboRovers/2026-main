@@ -33,8 +33,8 @@ public class Shooter extends SubsystemBase {
   @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushed);
-    fuelAgitator = new SparkMax(RobotMap.MAP_SHOOTER.fuelAgitatorSparkMAX, MotorType.kBrushed);
+    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
+    fuelAgitator = new SparkMax(RobotMap.MAP_SHOOTER.fuelAgitatorSparkMAX, MotorType.kBrushless);
   
     // create the configuration for the shooter roller, set a current limit, (set
     // the motor to inverted so that positive values are used for shooting???), 
