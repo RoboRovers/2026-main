@@ -103,7 +103,6 @@ public final class Constants {
     {
       public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorSpeed = 0.05; //TODO Tune this value, it is just a placeholder
-      public static final int shooterMotorID = 7;
       public static final int fuelAgitatorMotorID = 20; // TODO set actual value
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;
