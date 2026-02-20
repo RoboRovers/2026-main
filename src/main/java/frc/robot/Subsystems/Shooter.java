@@ -4,8 +4,9 @@
 
 package frc.robot.Subsystems;
 
-import frc.robot.Util.Constants;
+
 import frc.robot.Util.Constants.Constants_Shooter;
+import frc.robot.Util.RobotMap;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Util.Constants.FuelConstants.*;
+
 
 public class Shooter extends SubsystemBase {
   private final SparkMax shooterRoller;
@@ -27,10 +28,11 @@ public class Shooter extends SubsystemBase {
   private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
 
   /** Creates a new Shooter Subsystem. */
+  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterMotorSparkMAX, MotorType.kBrushed);
-    fuelAgitator = new SparkMax(RobotMap.MAP_SHOOTER.fuelAgitatiorSparkMAX, MotorType.kBrushed);
+    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushed);
+    fuelAgitator = new SparkMax(RobotMap.MAP_SHOOTER.fuelAgitatorSparkMAX, MotorType.kBrushed);
   
     // create the configuration for the shooter roller, set a current limit, (set
     // the motor to inverted so that positive values are used for shooting???), 
@@ -96,5 +98,23 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public static double getRollerSpeed(double radius, double deltaY, double deltaX, double theta) 
+  {
+    //This method calculates the angular speed of the motor, in RPM, for a given horizontal displacement, assuming
+    //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
+
+    //radius = the radius of the roller wheel; meters, CONSTANT
+    //deltaY = the height of the hub minus the height of the shooter; meters, CONSTANT
+    //deltaX = the horizontal distance from the hub to the shooter; meters, VARIABLE 
+    //theta = the launch angle; radians, CONSTANT
+
+    double squaredRadius = Math.pow(radius, 2);
+    double squaredCosine = Math.pow(Math.cos(Math.toRadians(theta)), 2);
+    double denDifference = (deltaX * Math.tan(Math.toRadians(theta))) - deltaY;
+    double num = 4.9 * Math.pow(deltaX, 2);
+    double den = squaredRadius * squaredCosine * denDifference;
+    return (30.0 / Math.PI) * Math.sqrt(num / den);
   }
 }

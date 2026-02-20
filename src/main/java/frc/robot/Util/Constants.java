@@ -35,9 +35,9 @@ public final class Constants {
     public static final double STEER__RPM_2_DEG_PER_SEC = STEER_TO_DEGREES / 60;
 
     //TODO Tune our pid loop for the drives once you add in all the offsets, you can just rotate the wheels to 90 degrees using the flight sticks, then disable and enable the code to set them to 0 degreese and tune off of that vaule
-    public static final double P_TURNING = 0.0075;
-    public static final double I_TURNING = 0.0;
-    public static final double D_TURNING = 0.75;
+    public static final double P_TURNING = 0.0225;
+    public static final double I_TURNING = 0.000001;
+    public static final double D_TURNING = 0;
     public static final double FF_TURNING = 0;
 
     //TODO Dont worry about changing these values

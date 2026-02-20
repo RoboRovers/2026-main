@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start to Refill 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Refill to Shoot 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shoot to Refill 3"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

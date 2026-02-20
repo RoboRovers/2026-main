@@ -127,7 +127,7 @@ public class Swerve extends SubsystemBase{
     }
     
     //face forward method. Called once the bot is enabled
-    public void faceAllFoward() {
+    public void faceAllForward() {
         frontLeftModule.wheelFaceForward();
         frontRightModule.wheelFaceForward();
         backLeftModule.wheelFaceForward();
@@ -146,7 +146,7 @@ public class Swerve extends SubsystemBase{
     
     public Command resetWheels(){
         return runOnce(() -> {
-            faceAllFoward();
+            faceAllForward();
         });
     }
 

@@ -104,6 +104,7 @@ public class Module extends SubsystemBase
    */
 
   
+  @SuppressWarnings({ "removal" })
   public Module(int steerNum, int driveNum, boolean invertDrive, boolean invertSteer, int absoluteEncoderID, double absOffset, boolean absoluteReversed)
   {
     driveMotor = new TalonFX(driveNum);
@@ -126,7 +127,7 @@ public class Module extends SubsystemBase
     absoluteEncoder.getConfigurator().apply(CANConfig);
     
     steerGains = new SparkMaxConfig()
-    .apply(new ClosedLoopConfig().pidf(0.0225, 0.000001, 0.0, 0.0, ClosedLoopSlot.kSlot0).positionWrappingEnabled(true).positionWrappingInputRange(-179.9999999, 180));
+    .apply(new ClosedLoopConfig().pidf(Constants.Constants_Module.P_TURNING, Constants.Constants_Module.I_TURNING, Constants.Constants_Module.D_TURNING, Constants.Constants_Module.FF_TURNING, ClosedLoopSlot.kSlot0).positionWrappingEnabled(true).positionWrappingInputRange(-179.9999999, 180));
     steerGains.encoder.positionConversionFactor(Constants.Constants_Module.STEER_TO_DEGREES);
     steerGains.encoder.velocityConversionFactor(Constants.Constants_Module.STEER__RPM_2_DEG_PER_SEC);
     steerGains.inverted(invertSteer);
@@ -193,6 +194,7 @@ public class Module extends SubsystemBase
 //ben is awesome
       
   //This is our setDesiredState alg. Takes the current state and the desired state shown by the controller and points the wheels to that location
+  @SuppressWarnings("removal")
   public void setDesiredState(SwerveModuleState state) 
   {
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
@@ -203,6 +205,7 @@ public class Module extends SubsystemBase
     steerPIDController.setReference(state.angle.getDegrees(), ControlType.kPosition);
   }
 
+  @SuppressWarnings("removal")
   public void wheelFaceForward() 
   {
     steerEncoder.setPosition(getABSPosition());
@@ -213,6 +216,7 @@ public class Module extends SubsystemBase
     } catch (Exception e){}
   }
 
+  @SuppressWarnings("removal")
   public void wheelFaceRight() 
   {
     steerEncoder.setPosition(getABSPosition());

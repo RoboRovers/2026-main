@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.Shoot;
@@ -12,6 +16,7 @@ import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.Controllers;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.IntakeDelayedSpin;
 
@@ -38,6 +43,7 @@ public class RobotContainer {
     // Configure the trigger bindings 
     robotFiles();
     configureBindings();
+    //TODO: Add auto chooser here.
   }
 
   /**
