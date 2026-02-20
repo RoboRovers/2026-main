@@ -13,7 +13,11 @@ public class RobotMap
         //BUTTON BOARD
     }    
 
-    
+    public static final class MAP_SHOOTER
+    {
+        public static final int shooterMotorSparkMAX = 7;
+        public static final int fuelAgitatiorSparkMAX = 20; // TODO set actual value
+    }
 
     public static final class MAP_INTAKE
     {

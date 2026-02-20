@@ -11,6 +11,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkMax;
+import frc.robot.Util.RobotMap;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,8 +29,8 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter Subsystem. */
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(Constants_Shooter.shooterMotorID, MotorType.kBrushed);
-    fuelAgitator = new SparkMax(Constants_Shooter.fuelAgitatorMotorID, MotorType.kBrushed);
+    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterMotorSparkMAX, MotorType.kBrushed);
+    fuelAgitator = new SparkMax(RobotMap.MAP_SHOOTER.fuelAgitatiorSparkMAX, MotorType.kBrushed);
   
     // create the configuration for the shooter roller, set a current limit, (set
     // the motor to inverted so that positive values are used for shooting???), 
