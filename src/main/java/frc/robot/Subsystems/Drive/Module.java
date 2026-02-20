@@ -103,8 +103,6 @@ public class Module extends SubsystemBase
    * 8. Lastly, Head to the "Drive" Command file and uncomment the one line inside the "Initialize method" which activates the face forward method/algorithm
    */
 
-  
-  @SuppressWarnings({ "removal" })
   public Module(int steerNum, int driveNum, boolean invertDrive, boolean invertSteer, int absoluteEncoderID, double absOffset, boolean absoluteReversed)
   {
     driveMotor = new TalonFX(driveNum);
@@ -194,7 +192,7 @@ public class Module extends SubsystemBase
 //ben is awesome
       
   //This is our setDesiredState alg. Takes the current state and the desired state shown by the controller and points the wheels to that location
-  @SuppressWarnings("removal")
+  
   public void setDesiredState(SwerveModuleState state) 
   {
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
@@ -205,7 +203,6 @@ public class Module extends SubsystemBase
     steerPIDController.setReference(state.angle.getDegrees(), ControlType.kPosition);
   }
 
-  @SuppressWarnings("removal")
   public void wheelFaceForward() 
   {
     steerEncoder.setPosition(getABSPosition());
@@ -216,7 +213,6 @@ public class Module extends SubsystemBase
     } catch (Exception e){}
   }
 
-  @SuppressWarnings("removal")
   public void wheelFaceRight() 
   {
     steerEncoder.setPosition(getABSPosition());
