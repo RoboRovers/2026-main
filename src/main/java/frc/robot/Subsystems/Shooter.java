@@ -30,7 +30,7 @@ public class Shooter extends SubsystemBase {
   public static final double MAX_SPEED = 5676; // Maximum motor speed in rpm
 
   /** Creates a new Shooter Subsystem. */
-  @SuppressWarnings("removal")
+  
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushed);
