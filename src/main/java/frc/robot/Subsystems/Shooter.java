@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
   public static final double RADIUS = 0.05; // Radius of the launch wheel in meters
   public static final double DELTA_Y = 1.251; // Vertical displacement of the ball in meters
   public static final double THETA = 73; // Tangential angle of release for the curved backing in degrees 
-  public static final double MAX_SPEED = 5676; // Maximum motor speed in rpm
+  public static final double MAX_SPEED = 1327; // Maximum motor speed in rpm
 
   /** Creates a new Shooter Subsystem. */
   
