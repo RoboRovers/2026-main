@@ -23,6 +23,12 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterRoller;
   public final SparkMax fuelAgitator;
 
+  public static final double GRAVITY = 9.8; // Acceleration due to gravity in m/s^2
+  public static final double RADIUS = 0.05; // Radius of the launch wheel in meters
+  public static final double DELTA_Y = 1.251; // Vertical displacement of the ball in meters
+  public static final double THETA = 73; // Tangential angle of release for the curved backing in degrees 
+  public static final double MAX_SPEED = 5676; // Maximum motor speed in rpm
+
   /** Creates a new Shooter Subsystem. */
   @SuppressWarnings("removal")
   public Shooter() {
@@ -78,21 +84,15 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public static double getRollerSpeed(double radius, double deltaY, double deltaX, double theta) 
-  {
-    //This method calculates the angular speed of the motor, in RPM, for a given horizontal displacement, assuming
-    //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
-
-    //radius = the radius of the roller wheel; meters, CONSTANT
-    //deltaY = the height of the hub minus the height of the shooter; meters, CONSTANT
-    //deltaX = the horizontal distance from the hub to the shooter; meters, VARIABLE 
-    //theta = the launch angle; radians, CONSTANT
-
-    double squaredRadius = Math.pow(radius, 2);
-    double squaredCosine = Math.pow(Math.cos(Math.toRadians(theta)), 2);
-    double denDifference = (deltaX * Math.tan(Math.toRadians(theta))) - deltaY;
-    double num = 4.9 * Math.pow(deltaX, 2);
-    double den = squaredRadius * squaredCosine * denDifference;
-    return (30.0 / Math.PI) * Math.sqrt(num / den);
+  public static double getMotorRatio(double deltaX) {
+      //Calculates the required speed ratio for a given horizontal displacement, assuming:
+      //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
+      double squaredRadius = Math.pow(RADIUS, 2);
+      double squaredCosine = Math.pow(Math.cos(Math.toRadians(THETA)), 2);
+      double denDifference = (deltaX * Math.tan(Math.toRadians(THETA))) - DELTA_Y;
+      double num = 0.5 * GRAVITY * Math.pow(deltaX, 2);
+      double den = squaredRadius * squaredCosine * denDifference;
+      double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den); 
+      return angularSpeed / MAX_SPEED; //may need to be inverted
   }
 }
