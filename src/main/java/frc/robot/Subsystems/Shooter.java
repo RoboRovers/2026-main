@@ -67,18 +67,16 @@ public class Shooter extends SubsystemBase {
     return Commands.run(() -> {
       shooterRoller.set(0);     
     }, this);
-   
   }
-  
-  // Return a Command that, while scheduled, runs the shooter at the configured speed
+   
+    // Return a Command that, while scheduled, runs the shooter at the configured speed
   public Command shootFuel() {
     return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
   }
 
   // Backwards-compatible direct action used by older commands
-  public Command shootFuelAction() {
-    return Commands.runOnce(() -> {
-      shooterRoller.set(currentShooterSpeed);
+  public void shootFuelAction() {
+    shooterRoller.set(currentShooterSpeed);
   }
 
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
@@ -91,20 +89,19 @@ public class Shooter extends SubsystemBase {
 
   public double getCurrentShooterSpeed() {
     return currentShooterSpeed;
-  }, this);
-}
+  }
 
   public Command agitateFuel() {
     return Commands.runOnce(() -> {
       fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
     }, this);
-
   }
+
   public Command reverseAgitator() {
     return Commands.runOnce(() -> {
       fuelAgitator.set(-Constants_Shooter.fuelAgitatorSpeed);
     }, this);
-  } 
+  }
 
   @Override
   public void periodic() {
@@ -119,7 +116,7 @@ public class Shooter extends SubsystemBase {
       double denDifference = (deltaX * Math.tan(Math.toRadians(THETA))) - DELTA_Y;
       double num = 0.5 * GRAVITY * Math.pow(deltaX, 2);
       double den = squaredRadius * squaredCosine * denDifference;
-      double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den); 
+      double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den);
       return angularSpeed / MAX_SPEED; //may need to be inverted
   }
 }
