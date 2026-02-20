@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Commands.IntakeDelayedSpin;
 
 
 /**
@@ -62,12 +63,20 @@ public class RobotContainer {
     s_Intake = new Intake();
   }
   private void configureBindings() {
-    //Intake Bindings
-    // this may not work because it doesn't make a new command
-    u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
+    // Intake Bindings
+    // Left joystick button 1: while held, run intake out; when complete start rollers
+    u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
+    // Left joystick button 2: single-press increase shooter speed by 0.01
+    u_Controllers.leftStick.button(2).onTrue(new frc.robot.Commands.ShooterIncreaseSpeed(s_Shooter));
+    // Left joystick button 3: single-press decrease shooter speed by 0.01
+    u_Controllers.leftStick.button(3).onTrue(new frc.robot.Commands.ShooterDecreaseSpeed(s_Shooter));
+    
+    // Use inline factory triggers for clarity
+  u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
+  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
-    u_Controllers.rightStick.button(0).whileTrue(new Shoot(s_Shooter)); // doesn't work when not 0
+  u_Controllers.rightStick.button(1).whileTrue(new Shoot(s_Shooter));
     
     //Drive Bindings
     u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
@@ -76,8 +85,8 @@ public class RobotContainer {
     // No-op example bindings removed. Add controller bindings here.
 
     //Shooter Bindings
-    u_Controllers.shootFuel.whileFalse(s_Shooter.stop());
-
+  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
+  u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
   }
 
   /**

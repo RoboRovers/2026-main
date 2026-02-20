@@ -42,6 +42,7 @@ public class Intake extends SubsystemBase {
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
     leftIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
     leftIntakeConfig.inverted(Constants_Intake.leftIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
+    leftIntakeConfig.smartCurrentLimit(Constants_Intake.intakeMotorCurrentLimit);
         
     leftIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.leftIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     leftIntakeEncoder = leftIntakeMotor.getEncoder();
@@ -54,6 +55,7 @@ public class Intake extends SubsystemBase {
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
     rightIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
     rightIntakeConfig.inverted(Constants_Intake.rightIntakeMotorInverted); //TODO: find out if the motor needs to be inverted
+    rightIntakeConfig.smartCurrentLimit(Constants_Intake.intakeMotorCurrentLimit);
         
     rightIntakeMotor = new SparkMax(RobotMap.MAP_INTAKE.rightIntakeSparkMAX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rightIntakeEncoder = rightIntakeMotor.getEncoder();
@@ -66,6 +68,7 @@ public class Intake extends SubsystemBase {
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
     rollerIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
     rollerIntakeConfig.inverted(Constants_Intake.rollerIntakeMotorInverted);
+    rollerIntakeConfig.smartCurrentLimit(Constants_Intake.rollerIntakeMotorCurrentLimit);
         
     rollerIntakeMotor = new SparkFlex(RobotMap.MAP_INTAKE.rollerIntakeSparkFLEX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     rollerIntakeEncoder = rollerIntakeMotor.getEncoder();

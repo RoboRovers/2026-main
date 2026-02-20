@@ -12,7 +12,7 @@ public class RobotMap
         public static final int XBOX_CONTROLLER = 3;
         //BUTTON BOARD
     }    
-
+    
     public static final class MAP_INTAKE
     {
         public static final int leftIntakeSparkMAX = 5;
@@ -27,6 +27,7 @@ public class RobotMap
         public static final int shooterSparkMAX = 7;
         public static final int fuelAgitatorSparkMAX = 8;
     }
+
     public static final class MAP_DRIVETRAIN
     {
         //Front Left - Module 0

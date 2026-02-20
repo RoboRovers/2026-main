@@ -15,7 +15,9 @@ public class Controllers {
         leftStick = new CommandJoystick(MAP_CONTROLLER.LEFT_JOYSTICK);
         rightStick = new CommandJoystick(MAP_CONTROLLER.RIGHT_JOYSTICK);
         xbox = new CommandXboxController(MAP_CONTROLLER.XBOX_CONTROLLER);
-
+        // Initialize the convenience Trigger fields so callers can use them directly
+        initialize_Xbox_Controls();
+        initialize_left_Joystick_Controls();
     }
 
     public void initialize_Xbox_Controls()
@@ -32,14 +34,14 @@ public class Controllers {
     }
 
     public void initialize_left_Joystick_Controls() {
-        // leftBumper = leftStick.button(1);
-        // leftTrigger = leftStick.button(2);
-        
-        spinRollers = leftStick.button(0); // doesn't work when not 0
+        /*
+        leftBumper = leftStick.button(1);
+        leftTrigger = leftStick.button(2);
+        spinRollers = leftStick.button(3);
         shootFuel = leftStick.button(4);   
         intakeOut = leftStick.button(5);
         intakeIn = leftStick.button(6);
-        
+        */
     }
 
     public void intitalize_right_Joystick_Controls() {

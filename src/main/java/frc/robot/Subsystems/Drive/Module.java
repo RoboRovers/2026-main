@@ -108,7 +108,7 @@ public class Module extends SubsystemBase
     driveMotor = new TalonFX(driveNum);
     driveGains = new Slot0Configs().withKP(0.1).withKI(0).withKD(0.1).withKS(0.4).withKV(0.124);
     // driveGains hold the PID gains (values) for the drive motor
-    driveFeedbackConfigs = new FeedbackConfigs().withSensorToMechanismRatio(Constants_Module.DRIVE_GEAR_RATIO);
+    driveFeedbackConfigs = new FeedbackConfigs().withSensorToMechanismRatio(Constants_Module.driveGearRatio);
     neutralModeValue = NeutralModeValue.Brake;
     driveMotor.getConfigurator().apply(driveGains);
     // sets up gains to the drive motor

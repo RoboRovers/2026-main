@@ -19,7 +19,8 @@ public Shoot(Shooter shooter) {
 
     @Override
     public void execute() {
-        shooter.shootFuel();
+        // call the direct action so this command continues to use the motor directly
+        shooter.shootFuelAction();
     }
 
     @Override
