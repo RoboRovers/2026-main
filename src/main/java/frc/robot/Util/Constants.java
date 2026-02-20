@@ -107,7 +107,7 @@ public final class Constants {
       public static final int fuelAgitatorMotorID = 20; // TODO set actual value
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;
-     public static final double spinUpSeconds = 1;
+      public static final double spinUpSeconds = 1;
     }
     
     public static final class Constants_Intake
