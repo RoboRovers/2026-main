@@ -98,7 +98,6 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC = MAX_SPEED_METERS_PER_SEC/1.50;
     public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(trackWidth/2);
   }
-
     public static final class Constants_Shooter 
     {
       public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
@@ -107,7 +106,18 @@ public final class Constants {
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
-    }
+
+      public static final double GRAVITY = 9.8; // Acceleration due to gravity in m/s^2
+      public static final double RADIUS = 0.05; // Radius of the launch wheel in meters
+      public static final double DELTA_Y = 1.251; // Vertical displacement of the ball in meters
+      public static final double THETA = 73; // Tangential angle of release for the curved backing in degrees 
+      public static final double MAX_SPEED = 1327; // Maximum motor speed in rpm
+
+      public static final double CAMERA_HEIGHT = 0.5; // Height of the camera from the ground in meters                            //TODO: get actual value
+      public static final double TAG_HEIGHT = 1.124; // Height of the AprilTag from the ground in meters                             
+      public static final double CAMERA_ANGLE = 20; // Angle of the camera from the horizontal in degrees                          //TODO: get actual value
+      public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
+    }                             
     
     public static final class Constants_Intake
     {
