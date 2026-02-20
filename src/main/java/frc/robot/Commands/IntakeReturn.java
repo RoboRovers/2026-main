@@ -2,6 +2,7 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Intake;
+import frc.robot.Util.Constants.Constants_Intake;
 
 /**
  * Command that runs the intake motors in reverse until the intake position
@@ -9,8 +10,8 @@ import frc.robot.Subsystems.Intake;
  */
 public class IntakeReturn extends Command {
   private final Intake intake;
-  private final double targetPosition = 2.0;
-  private final double retractSpeed = -0.05;
+  private final double targetPosition = Constants_Intake.retractLimit;
+  private final double retractSpeed = Constants_Intake.intakeRetractSpeed;
 
   public IntakeReturn(Intake intake) {
     this.intake = intake;

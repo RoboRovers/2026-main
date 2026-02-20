@@ -114,6 +114,8 @@ public final class Constants {
       public static final double rollerSpeed = 0.05;
       public static final double retractLimit = 2;
       public static final double extendLimit = 50;
+      public static final double intakeRetractSpeed = -0.05;
+      public static final double intakeExtendSpeed = 0.05;
       public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
       public static final int intakeMotorCurrentLimit = 40; //TODO find the correct current limit for the intake motors
 

@@ -99,8 +99,8 @@ public class Intake extends SubsystemBase {
     {
         if (getPosition() < Constants_Intake.retractLimit) { // TODO: set the correct position limit
             return Commands.run(() -> {
-                leftIntakeMotor.set(-.05); // between -1 and 1
-                rightIntakeMotor.set(-.05);
+                leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
+                rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
             }, this); // note `this` makes it require the Intake subsystem
         }
         return Commands.none();
@@ -110,8 +110,8 @@ public class Intake extends SubsystemBase {
     {
         if (getPosition() > Constants_Intake.extendLimit) { // TODO: set the correct position limit
             return Commands.run(() -> {
-                leftIntakeMotor.set(.05);
-                rightIntakeMotor.set(.05);
+                leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+                rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
             }, this); // note `this` makes it require the Intake subsystem
         }
         return Commands.none();
