@@ -67,9 +67,9 @@ public class Shooter extends SubsystemBase {
    
     // Return a Command that, while scheduled, runs the shooter at the speed calculated from the horizontal displacement from the hub.
     public Command shootFuel() {
-      /** return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
-        Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE))), this); **/
-      return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(0.5)), this);
+      return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
+        Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE))), this);
+      // return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(0.5)), this);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
