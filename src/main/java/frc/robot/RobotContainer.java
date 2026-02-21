@@ -67,7 +67,10 @@ public class RobotContainer {
   private void configureBindings() {
     // Intake Bindings
     // Left joystick button 1: while held, run intake out; when complete start rollers
-    u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
+    // We capture the Trigger so we can start a retract command on release
+    Trigger leftIntakeTrigger = u_Controllers.leftStick.button(1);
+    leftIntakeTrigger.whileTrue(new IntakeDelayedSpin(s_Intake));
+    leftIntakeTrigger.onFalse(new frc.robot.Commands.IntakeReturn(s_Intake));
     // Left joystick button 2: single-press increase shooter speed by 0.01
     u_Controllers.leftStick.button(2).onTrue(new ShooterIncreaseSpeed(s_Shooter));
     // Left joystick button 3: single-press decrease shooter speed by 0.01
