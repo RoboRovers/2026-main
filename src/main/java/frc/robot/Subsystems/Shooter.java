@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private final Limelight LL_Shoot;
   // Runtime adjustable speed for the shooter roller. 
   // Initializedf from constants.
-  private double currentShooterSpeed;
+  private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
   /** Creates a new Shooter Subsystem. */
   
   public Shooter() {
@@ -57,18 +57,20 @@ public class Shooter extends SubsystemBase {
   }
 
   // A method to stop the rollers
-  public Command stop() {
+  public void stop() {
     currentShooterSpeed = 0;
-    return Commands.run(() -> {
-      shooterRoller.set(0);     
-    }, this);
+    shooterRoller.set(0);
   }
    
     // Return a Command that, while scheduled, runs the shooter at the speed calculated from the horizontal displacement from the hub.
-    public Command shootFuel() {
+    public Command assistedShootFuel() {
         currentShooterSpeed = Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
           Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE));
         return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
+     }
+     
+     public void shootFuel() {
+        shooterRoller.set(currentShooterSpeed);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
@@ -89,7 +91,7 @@ public class Shooter extends SubsystemBase {
     }, this);
   }
 
-  public Command manuallReverseAgitator() {
+  public Command manualReverseAgitator() {
     return Commands.runOnce(() -> {
       fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
     }, this);

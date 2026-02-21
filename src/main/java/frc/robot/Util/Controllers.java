@@ -3,12 +3,16 @@ package frc.robot.Util;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Commands.ShooterIncreaseSpeed;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 
 public class Controllers {
     public CommandJoystick leftStick, rightStick;
     public CommandXboxController xbox;
-    public Trigger intakeOut, intakeIn, spinRollers, shootFuel, leftBumper, rightBumper, leftTrigger, rightTrigger;
+    public Trigger intakeFuel, spinRollers, shootFuel, zeroHeading, FO_toggle, 
+    resetWheels, shooterIncreaseSpeed, shooterDecreaseSpeed, manualReverseAgitator, 
+    leftBumper, rightBumper, leftTrigger, rightTrigger;
 
     public Controllers() 
     {
@@ -22,18 +26,25 @@ public class Controllers {
 
     public void initialize_Xbox_Controls()
     {
+        intakeFuel = xbox.leftTrigger();
+        shootFuel = xbox.rightTrigger();
         // spinRollers = xbox.leftTrigger();
-        // shootFuel = xbox.rightTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();
-        leftBumper = xbox.leftBumper();
+        manualReverseAgitator = xbox.leftBumper();
         rightBumper = xbox.rightBumper();
         leftTrigger = xbox.leftTrigger();
         rightTrigger = xbox.rightTrigger();
+        shooterIncreaseSpeed = xbox.x();
+        shooterDecreaseSpeed = xbox.y();
+        
 
     }
 
     public void initialize_left_Joystick_Controls() {
+        zeroHeading = leftStick.button(2);
+        FO_toggle   = leftStick.button(3);
+        resetWheels = leftStick.button(4);
         /*
         leftBumper = leftStick.button(1);
         leftTrigger = leftStick.button(2);
