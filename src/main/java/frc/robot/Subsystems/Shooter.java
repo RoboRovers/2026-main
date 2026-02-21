@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private final Limelight LL_Shoot;
   // Runtime adjustable speed for the shooter roller. 
   // Initializedf from constants.
-  private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
+  private double currentShooterSpeed;
   /** Creates a new Shooter Subsystem. */
   
   @SuppressWarnings("removal")
@@ -59,6 +59,7 @@ public class Shooter extends SubsystemBase {
 
   // A method to stop the rollers
   public Command stop() {
+    currentShooterSpeed = 0;
     return Commands.run(() -> {
       shooterRoller.set(0);     
     }, this);
@@ -68,7 +69,9 @@ public class Shooter extends SubsystemBase {
     public Command shootFuel() {
       /** return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
         Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE))), this); **/
-      return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(0.5)), this);
+        currentShooterSpeed = Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
+          Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE));
+        return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
@@ -111,9 +114,7 @@ public class Shooter extends SubsystemBase {
       double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den);
 
       //Keep the speed within bounds
-      if (angularSpeed > Constants_Shooter.MAX_SPEED) {
-        angularSpeed = Constants_Shooter.MAX_SPEED;
-      } 
+      if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
       return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
   }
 }
