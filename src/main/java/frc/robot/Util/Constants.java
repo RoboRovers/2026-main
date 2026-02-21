@@ -103,7 +103,7 @@ public final class Constants {
       //public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorSpeed = 0.05; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorReversedSpeed = -0.05;
-      public static final int fuelAgitatorMotorID = 20; // TODO set actual value
+      public static final double manualFuelAgitatorReverseSpeed = 0.2;
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
@@ -142,10 +142,7 @@ public final class Constants {
   
       public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
     }
-  /*public static final class constants_Elevator
-  {
 
-  }*/
 
 
   /**public static final class Constants_Climber 
