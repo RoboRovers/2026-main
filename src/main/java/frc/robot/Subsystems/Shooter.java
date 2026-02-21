@@ -12,7 +12,6 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkMax;
-import frc.robot.Util.RobotMap;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -113,8 +112,8 @@ public class Shooter extends SubsystemBase {
       //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
       double squaredRadius = Math.pow(Constants_Shooter.RADIUS, 2);
       double squaredCosine = Math.pow(Math.cos(Math.toRadians(Constants_Shooter.THETA)), 2);
-      double denDifference = ((deltaX + 0.3) * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - Constants_Shooter.DELTA_Y;
-      double num = 0.5 * Constants_Shooter.GRAVITY * Math.pow(deltaX + 0.3, 2);
+      double denDifference = (deltaX * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2); //the 0.2 ensures that the ball always follows a feasible path into the hub and accounts for AF
+      double num = 0.5 * Constants_Shooter.GRAVITY * Math.pow(deltaX, 2);
       double den = squaredRadius * squaredCosine * denDifference;
       double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den);
 

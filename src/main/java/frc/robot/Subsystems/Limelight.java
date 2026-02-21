@@ -16,8 +16,8 @@ public class Limelight {
             double angle = cameraAngle + LimelightHelpers.getTY(limelightName);
             return deltaY / Math.tan(Math.toRadians(angle));
         }
-        // if the limelight doesn't have a valid target, return -0.3, causing the shooter to stop rather than throw an exception.
-        return -0.3;
+        // if the limelight doesn't have a valid target, return 0, causing the shooter to stop rather than throw an exception.
+        return 0;
     } 
 }
 
