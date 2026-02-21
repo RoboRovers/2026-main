@@ -45,7 +45,7 @@ public final class Constants {
     public static final double V_DRIVE = 0.124;
     public static final double A_DRIVE = 0.1;
     public static final double P_DRIVE = 0.1;
-    public static final double I_DRIVE = 0.1;
+    public static final double I_DRIVE = 0;
   }
 
 
