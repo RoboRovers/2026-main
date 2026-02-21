@@ -88,7 +88,6 @@ public class RobotContainer {
     u_Controllers.xbox.b().whileTrue(new Shoot(s_Shooter));
     
     // Shooter hold/stop on the Xbox right trigger
-    u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
     u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
 
     // Use inline factory triggers for clarity (non-mirrored bindings)

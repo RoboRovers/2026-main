@@ -27,7 +27,6 @@ public class Shooter extends SubsystemBase {
   private double currentShooterSpeed;
   /** Creates a new Shooter Subsystem. */
   
-  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
@@ -84,15 +83,9 @@ public class Shooter extends SubsystemBase {
     return currentShooterSpeed;
   }
 
-  public Command agitateFuel() {
-    return Commands.runOnce(() -> {
-      fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
-    }, this);
-  }
-
   public Command reverseAgitator() {
     return Commands.runOnce(() -> {
-      fuelAgitator.set(-Constants_Shooter.fuelAgitatorSpeed);
+      fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
     }, this);
   }
 

@@ -194,6 +194,9 @@ public class Module extends SubsystemBase
       
   //This is our setDesiredState alg. Takes the current state and the desired state shown by the controller and points the wheels to that location
   
+
+  
+
   public void setDesiredState(SwerveModuleState state) 
   {
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
@@ -201,8 +204,9 @@ public class Module extends SubsystemBase
     state.cosineScale(getModulePosition().angle);
     driveMotor.set(state.speedMetersPerSecond / Constants.Constants_Drive.MAX_SPEED_METERS_PER_SEC);
     // getUpToSpeed(state.speedMetersPerSecond);
-    steerPIDController.setReference(state.angle.getDegrees(), ControlType.kPosition);
+    steerPIDController.setSetpoint(state.angle.getDegrees(), ControlType.kPosition);
   }
+
 
   public void wheelFaceForward() 
   {
@@ -210,9 +214,11 @@ public class Module extends SubsystemBase
     try 
     {
       Thread.sleep(10);
-      steerPIDController.setReference(0, ControlType.kPosition);
+      steerPIDController.setSetpoint(0, ControlType.kPosition);
     } catch (Exception e){}
   }
+
+
 
   public void wheelFaceRight() 
   {
@@ -220,7 +226,7 @@ public class Module extends SubsystemBase
     try 
     {
       Thread.sleep(10);
-      steerPIDController.setReference(90, ControlType.kPosition);
+      steerPIDController.setSetpoint(90, ControlType.kPosition);
     } catch (Exception e){}
   }
 }
