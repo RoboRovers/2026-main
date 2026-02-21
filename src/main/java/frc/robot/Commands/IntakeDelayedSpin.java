@@ -12,7 +12,7 @@ import frc.robot.Util.Constants.Constants_Intake;
 public class IntakeDelayedSpin extends Command {
   private final Intake intake;
   private boolean rollersStarted = false;
-  private final double positionThreshold = 50.0;
+  private final double positionThreshold = Constants_Intake.extendLimit;
 
   public IntakeDelayedSpin(Intake intake) {
     this.intake = intake;

@@ -72,11 +72,10 @@ public class RobotContainer {
     u_Controllers.leftStick.button(3).onTrue(new frc.robot.Commands.ShooterDecreaseSpeed(s_Shooter));
     
     // Use inline factory triggers for clarity
-  u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
-  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
+    u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
-  u_Controllers.rightStick.button(1).whileTrue(new Shoot(s_Shooter));
+    u_Controllers.rightStick.button(1).whileTrue(new Shoot(s_Shooter));
     
     //Drive Bindings
     u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
@@ -85,8 +84,7 @@ public class RobotContainer {
     // No-op example bindings removed. Add controller bindings here.
 
     //Shooter Bindings
-  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
-  u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
+    u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
   }
 
   /**

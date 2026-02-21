@@ -35,7 +35,6 @@ public class Shooter extends SubsystemBase {
 
   /** Creates a new Shooter Subsystem. */
   
-  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
@@ -69,15 +68,10 @@ public class Shooter extends SubsystemBase {
       shooterRoller.set(0);     
     }, this);
   }
-   
-    // Return a Command that, while scheduled, runs the shooter at the configured speed
-  public Command shootFuel() {
-    return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
-  }
-
   // Backwards-compatible direct action used by older commands
-  public void shootFuelAction() {
-    shooterRoller.set(currentShooterSpeed);
+  public void shootFuel() {
+    shooterRoller.set(currentShooterSpeed); // this will change in compexity once we have the function to determine the speed
+    // of the motor based on the x distance from the hub.
   }
 
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
@@ -92,15 +86,9 @@ public class Shooter extends SubsystemBase {
     return currentShooterSpeed;
   }
 
-  public Command agitateFuel() {
-    return Commands.runOnce(() -> {
-      fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
-    }, this);
-  }
-
   public Command reverseAgitator() {
     return Commands.runOnce(() -> {
-      fuelAgitator.set(-Constants_Shooter.fuelAgitatorSpeed);
+      fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
     }, this);
   }
 
