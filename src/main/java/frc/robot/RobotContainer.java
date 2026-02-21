@@ -10,6 +10,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
+import frc.robot.Commands.ShooterDecreaseSpeed;
+import frc.robot.Commands.ShooterIncreaseSpeed;
 import frc.robot.Commands.Shoot;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
@@ -67,9 +69,9 @@ public class RobotContainer {
     // Left joystick button 1: while held, run intake out; when complete start rollers
     u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
     // Left joystick button 2: single-press increase shooter speed by 0.01
-    u_Controllers.leftStick.button(2).onTrue(new frc.robot.Commands.ShooterIncreaseSpeed(s_Shooter));
+    u_Controllers.leftStick.button(2).onTrue(new ShooterIncreaseSpeed(s_Shooter));
     // Left joystick button 3: single-press decrease shooter speed by 0.01
-    u_Controllers.leftStick.button(3).onTrue(new frc.robot.Commands.ShooterDecreaseSpeed(s_Shooter));
+    u_Controllers.leftStick.button(3).onTrue(new ShooterDecreaseSpeed(s_Shooter));
     
     // Use inline factory triggers for clarity
   u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
