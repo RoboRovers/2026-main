@@ -16,8 +16,7 @@ public class ShooterDecreaseSpeed extends Command {
 
   @Override
   public void initialize() {
-    shooter.adjustSpeed(delta);
-  }
+  shooter.setCurrentShooterSpeed(shooter.getCurrentShooterSpeed() - delta);  }
 
   @Override
   public void execute() {}

@@ -55,7 +55,6 @@ public class Shooter extends SubsystemBase {
   public void setShooterRoller(double voltage) {
     shooterRoller.setVoltage(voltage);
   }
-
   // A method to stop the rollers
   public void stop() {
     currentShooterSpeed = 0;
@@ -83,6 +82,10 @@ public class Shooter extends SubsystemBase {
 
   public double getCurrentShooterSpeed() {
     return currentShooterSpeed;
+  }
+  
+  public void setCurrentShooterSpeed(double speed) {
+    currentShooterSpeed = speed;
   }
 
   public Command reverseAgitator() {
