@@ -45,7 +45,7 @@ public final class Constants {
     public static final double V_DRIVE = 0.124;
     public static final double A_DRIVE = 0.1;
     public static final double P_DRIVE = 0.1;
-    public static final double I_DRIVE = 0.1;
+    public static final double I_DRIVE = 0;
   }
 
 
@@ -98,18 +98,31 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC = MAX_SPEED_METERS_PER_SEC/1.50;
     public static final double TELEDRIVE_MAX_ANGULAR_ACCEL_UNITS_PER_SEC = TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SEC/(trackWidth/2);
   }
-
     public static final class Constants_Shooter 
     {
-      public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
+      //public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorSpeed = 0.05; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final int fuelAgitatorMotorID = 20; // TODO set actual value
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
+
       public static final double motorDelta = 0.01;
-    }
+    
+
+
+      public static final double GRAVITY = 9.8; // Acceleration due to gravity in m/s^2
+      public static final double RADIUS = 0.05; // Radius of the launch wheel in meters
+      public static final double DELTA_Y = 1.251; // Vertical displacement of the ball in meters
+      public static final double THETA = 73; // Tangential angle of release for the curved backing in degrees 
+      public static final double MAX_SPEED = 1327; // Maximum motor speed in rpm
+
+      public static final double CAMERA_HEIGHT = 0.5; // Height of the camera from the ground in meters                            //TODO: get actual value
+      public static final double TAG_HEIGHT = 1.124; // Height of the AprilTag from the ground in meters                             
+      public static final double CAMERA_ANGLE = 40; // Angle of the camera from the horizontal in degrees                          //TODO: get actual value
+      public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
+    }                            
     
     public static final class Constants_Intake
     {
@@ -117,6 +130,8 @@ public final class Constants {
       public static final double rollerSpeed = 0.05;
       public static final double retractLimit = 2;
       public static final double extendLimit = 50;
+      public static final double intakeRetractSpeed = -0.05;
+      public static final double intakeExtendSpeed = 0.05;
       public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
       public static final int intakeMotorCurrentLimit = 40; //TODO find the correct current limit for the intake motors
 
@@ -133,7 +148,7 @@ public final class Constants {
   }*/
 
 
-  public static final class Constants_Climber 
+  /**public static final class Constants_Climber 
   {
     public static final double CLIMBER_GEAR_RATIO = 1.0/125.0;
     public static final boolean CLIMBER_INVERTED = false;
@@ -150,7 +165,7 @@ public final class Constants {
     {
       this.angle = angle;
     }
-  }
+  }**/
 
   public static final class Constants_AprilTags{ //[id num, height in inches, coordinate x, coordinate y, heading] inches to meters; use field manual image for id reference
     /*public static final double[];

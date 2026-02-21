@@ -10,6 +10,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
+import frc.robot.Commands.ShooterDecreaseSpeed;
+import frc.robot.Commands.ShooterIncreaseSpeed;
 import frc.robot.Commands.Shoot;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
@@ -67,11 +69,25 @@ public class RobotContainer {
     // Left joystick button 1: while held, run intake out; when complete start rollers
     u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
     // Left joystick button 2: single-press increase shooter speed by 0.01
-    u_Controllers.leftStick.button(2).onTrue(new frc.robot.Commands.ShooterIncreaseSpeed(s_Shooter));
+    u_Controllers.leftStick.button(2).onTrue(new ShooterIncreaseSpeed(s_Shooter));
     // Left joystick button 3: single-press decrease shooter speed by 0.01
-    u_Controllers.leftStick.button(3).onTrue(new frc.robot.Commands.ShooterDecreaseSpeed(s_Shooter));
+    u_Controllers.leftStick.button(3).onTrue(new ShooterDecreaseSpeed(s_Shooter));
     
-    // Use inline factory triggers for clarity
+    // --- Xbox mirror bindings (mirror joystick controls) ---
+    // These mirror the same actions available on the flight sticks so either
+    // controller can be used interchangeably. Keep these grouped for clarity.
+    // Map primary intake action (left stick button 1)
+    u_Controllers.xbox.a().whileTrue(new IntakeDelayedSpin(s_Intake));
+    // Map fine shooter adjustments (left stick buttons 2/3)
+    u_Controllers.xbox.leftBumper().onTrue(new ShooterIncreaseSpeed(s_Shooter));
+    u_Controllers.xbox.rightBumper().onTrue(new ShooterDecreaseSpeed(s_Shooter));
+    // Map shoot command (right stick button 1)
+    u_Controllers.xbox.b().whileTrue(new Shoot(s_Shooter));
+    
+    // Shooter hold/stop on the Xbox right trigger
+    u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
+
+    // Use inline factory triggers for clarity (non-mirrored bindings)
     u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
     u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
     u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
@@ -81,10 +97,6 @@ public class RobotContainer {
     u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
     u_Controllers.rightStick.button(3).toggleOnTrue(s_Swerve.fieldOrientedToggle());
     u_Controllers.rightStick.button(4).onTrue(s_Swerve.resetWheels()); //window looking button
-    // No-op example bindings removed. Add controller bindings here.
-
-    //Shooter Bindings
-    u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
   }
 
   /**

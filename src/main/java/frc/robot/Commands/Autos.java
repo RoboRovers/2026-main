@@ -23,7 +23,6 @@ import frc.robot.Util.Constants.Constants_AprilTags;
 import frc.robot.Util.Constants.Constants_Auto;
 
 public final class Autos {
-  private Drive c_Drive;
   private Swerve s_Swerve;
   //private Vision s_Vision;//TODO: Add vision subsystem
   private RobotConfig config;
@@ -31,7 +30,6 @@ public final class Autos {
   private PIDController rotationConstants = new PIDController(Constants_Auto.P_THETA, Constants_Auto.I_THETA, Constants_Auto.D_THETA);
   
   public Autos(Drive c_Drive, Swerve s_Swerve, Shooter s_Shooter, Intake s_Intake/* , Vision s_Vision*/, RobotConfig config) {
-    this.c_Drive = c_Drive;
     this.s_Swerve = s_Swerve;
     //this.s_Vision = s_Vision;//TODO: Add vision subsystem
  

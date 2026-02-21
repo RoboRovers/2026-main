@@ -103,11 +103,11 @@ public class Module extends SubsystemBase
    * 8. Lastly, Head to the "Drive" Command file and uncomment the one line inside the "Initialize method" which activates the face forward method/algorithm
    */
 
-  @SuppressWarnings("removal")
   public Module(int steerNum, int driveNum, boolean invertDrive, boolean invertSteer, int absoluteEncoderID, double absOffset, boolean absoluteReversed)
   {
     driveMotor = new TalonFX(driveNum);
-    driveGains = new Slot0Configs().withKP(0.1).withKI(0).withKD(0.1).withKS(0.4).withKV(0.124);
+    driveGains = new Slot0Configs().withKP(Constants_Module.P_DRIVE).withKI(Constants_Module.I_DRIVE)
+    .withKD(Constants_Module.A_DRIVE).withKS(Constants_Module.S_DRIVE).withKV(Constants_Module.V_DRIVE);
     // driveGains hold the PID gains (values) for the drive motor
     driveFeedbackConfigs = new FeedbackConfigs().withSensorToMechanismRatio(Constants_Module.driveGearRatio);
     neutralModeValue = NeutralModeValue.Brake;
@@ -194,7 +194,9 @@ public class Module extends SubsystemBase
       
   //This is our setDesiredState alg. Takes the current state and the desired state shown by the controller and points the wheels to that location
   
+
   
+
   public void setDesiredState(SwerveModuleState state) 
   {
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
@@ -205,7 +207,7 @@ public class Module extends SubsystemBase
     steerPIDController.setSetpoint(state.angle.getDegrees(), ControlType.kPosition);
   }
 
- 
+
   public void wheelFaceForward() 
   {
     steerEncoder.setPosition(getABSPosition());
@@ -215,6 +217,7 @@ public class Module extends SubsystemBase
       steerPIDController.setSetpoint(0, ControlType.kPosition);
     } catch (Exception e){}
   }
+
 
 
   public void wheelFaceRight() 

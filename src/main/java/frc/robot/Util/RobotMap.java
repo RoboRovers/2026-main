@@ -25,7 +25,7 @@ public class RobotMap
     public static final class MAP_SHOOTER
     {
         public static final int shooterSparkMAX = 7;
-        public static final int fuelAgitatorSparkMAX = 8;
+        public static final int fuelAgitatorSparkFLEX = 8;
     }
 
     public static final class MAP_DRIVETRAIN
