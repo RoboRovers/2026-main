@@ -140,7 +140,7 @@ public final class Constants {
   }*/
 
 
-  public static final class Constants_Climber 
+  /**public static final class Constants_Climber 
   {
     public static final double CLIMBER_GEAR_RATIO = 1.0/125.0;
     public static final boolean CLIMBER_INVERTED = false;
@@ -157,7 +157,7 @@ public final class Constants {
     {
       this.angle = angle;
     }
-  }
+  }**/
 
   public static final class Constants_AprilTags{ //[id num, height in inches, coordinate x, coordinate y, heading] inches to meters; use field manual image for id reference
     /*public static final double[];

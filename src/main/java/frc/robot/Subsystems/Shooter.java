@@ -66,18 +66,12 @@ public class Shooter extends SubsystemBase {
   }
    
     // Return a Command that, while scheduled, runs the shooter at the speed calculated from the horizontal displacement from the hub.
-    // The getMotorRatio() dynamically adjusts speed based on the robot's position using projectile physics.
     public Command shootFuel() {
       /** return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
         Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE))), this); **/
       return Commands.run(() -> shooterRoller.set(Shooter.getMotorRatio(0.5)), this);
      }
-
-  // Backwards-compatible direct action used by older commands
-  public void shootFuelAction() {
-    shooterRoller.set(currentShooterSpeed);
-  }
-
+     
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
   public void adjustSpeed(double delta) {
     currentShooterSpeed += delta;
