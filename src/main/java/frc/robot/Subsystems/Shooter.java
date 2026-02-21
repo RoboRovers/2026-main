@@ -4,7 +4,6 @@
 
 package frc.robot.Subsystems;
 
-
 import frc.robot.Util.Constants.Constants_Shooter;
 import frc.robot.Util.RobotMap;
 import com.revrobotics.spark.SparkBase.PersistMode;
