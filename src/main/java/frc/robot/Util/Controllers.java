@@ -16,9 +16,9 @@ public class Controllers {
 
     public Controllers() 
     {
-        leftStick = new CommandJoystick(MAP_CONTROLLER.LEFT_JOYSTICK);
-        rightStick = new CommandJoystick(MAP_CONTROLLER.RIGHT_JOYSTICK);
-        xbox = new CommandXboxController(MAP_CONTROLLER.XBOX_CONTROLLER);
+        leftStick = new CommandJoystick(MAP_CONTROLLER.leftJoystick);
+        rightStick = new CommandJoystick(MAP_CONTROLLER.rightJoystick);
+        xbox = new CommandXboxController(MAP_CONTROLLER.xboxController);
         // Initialize the convenience Trigger fields so callers can use them directly
         initialize_Xbox_Controls();
         initialize_left_Joystick_Controls();
