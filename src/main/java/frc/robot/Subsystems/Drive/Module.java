@@ -195,13 +195,6 @@ public class Module extends SubsystemBase
       
   //This is our setDesiredState alg. Takes the current state and the desired state shown by the controller and points the wheels to that location
   
-<<<<<<< HEAD
-  @SuppressWarnings("removal")
-=======
-
-  
-
->>>>>>> 42e278cd5c057b1dc85fe2c9be84ce874274544e
   public void setDesiredState(SwerveModuleState state) 
   {
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
@@ -212,11 +205,6 @@ public class Module extends SubsystemBase
     steerPIDController.setSetpoint(state.angle.getDegrees(), ControlType.kPosition);
   }
 
-<<<<<<< HEAD
-  @SuppressWarnings("removal")
-=======
-
->>>>>>> 42e278cd5c057b1dc85fe2c9be84ce874274544e
   public void wheelFaceForward() 
   {
     steerEncoder.setPosition(getABSPosition());
@@ -227,12 +215,6 @@ public class Module extends SubsystemBase
     } catch (Exception e){}
   }
 
-<<<<<<< HEAD
-  @SuppressWarnings("removal")
-=======
-
-
->>>>>>> 42e278cd5c057b1dc85fe2c9be84ce874274544e
   public void wheelFaceRight() 
   {
     steerEncoder.setPosition(getABSPosition());
