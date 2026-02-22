@@ -24,10 +24,9 @@ public class Shooter extends SubsystemBase {
   private final Limelight LL_Shoot;
   // Runtime adjustable speed for the shooter roller. 
   // Initializedf from constants.
-  private double currentShooterSpeed;
+  private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
   /** Creates a new Shooter Subsystem. */
   
-  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
@@ -56,20 +55,21 @@ public class Shooter extends SubsystemBase {
   public void setShooterRoller(double voltage) {
     shooterRoller.setVoltage(voltage);
   }
-
   // A method to stop the rollers
-  public Command stop() {
+  public void stop() {
     currentShooterSpeed = 0;
-    return Commands.run(() -> {
-      shooterRoller.set(0);     
-    }, this);
+    shooterRoller.set(0);
   }
    
     // Return a Command that, while scheduled, runs the shooter at the speed calculated from the horizontal displacement from the hub.
-    public Command shootFuel() {
+    public Command assistedShootFuel() {
         currentShooterSpeed = Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
           Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE));
         return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
+     }
+     
+     public void shootFuel() {
+        shooterRoller.set(currentShooterSpeed);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
@@ -83,16 +83,20 @@ public class Shooter extends SubsystemBase {
   public double getCurrentShooterSpeed() {
     return currentShooterSpeed;
   }
-
-  public Command agitateFuel() {
-    return Commands.runOnce(() -> {
-      fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
-    }, this);
+  
+  public void setCurrentShooterSpeed(double speed) {
+    currentShooterSpeed = speed;
   }
 
   public Command reverseAgitator() {
     return Commands.runOnce(() -> {
-      fuelAgitator.set(-Constants_Shooter.fuelAgitatorSpeed);
+      fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+    }, this);
+  }
+
+  public Command manualReverseAgitator() {
+    return Commands.runOnce(() -> {
+      fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
     }, this);
   }
 

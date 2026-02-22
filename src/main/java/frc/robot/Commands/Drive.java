@@ -15,7 +15,7 @@ public class Drive extends Command{
     public final CommandJoystick left, right;
 
     private final SlewRateLimiter xLimiter, yLimiter, turningLimiter;
-    private boolean fieldOriented=false;
+    private boolean driveFieldOriented=false;
     public double ySpeed, xSpeed, turningSpeed;
     public ChassisSpeeds chassisSpeeds;
 
@@ -52,7 +52,7 @@ public class Drive extends Command{
         xSpeed = -right.getY();
         ySpeed = -right.getX();
         turningSpeed = -left.getX();
-        fieldOriented = s_Swerve.fieldOriented;
+        driveFieldOriented = s_Swerve.fieldOriented;
 
         xSpeed = Math.abs(xSpeed) > DEADBAND ? xSpeed : 0.0;
         ySpeed = Math.abs(ySpeed) > DEADBAND ? ySpeed : 0.0;
@@ -68,7 +68,7 @@ public class Drive extends Command{
     
     public void drive()
     {
-        if(fieldOriented)
+        if(driveFieldOriented)
         {
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(new ChassisSpeeds(xSpeed, ySpeed, turningSpeed), s_Swerve.getRotation2d());
         }else

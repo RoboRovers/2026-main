@@ -12,7 +12,7 @@ import frc.robot.Util.Constants.Constants_Intake;
 public class IntakeDelayedSpin extends Command {
   private final Intake intake;
   private boolean rollersStarted = false;
-  private final double positionThreshold = 50.0;
+  private final double positionThreshold = Constants_Intake.extendLimit;
 
   public IntakeDelayedSpin(Intake intake) {
     this.intake = intake;
@@ -56,10 +56,8 @@ public class IntakeDelayedSpin extends Command {
     // stop the intake extension motors before starting retract
     intake.leftIntakeMotor.set(0);
     intake.rightIntakeMotor.set(0);
-
-    // Schedule the retract command to run intake motors in reverse until
-    // the encoder reports the retracted position (IntakeReturn will stop them)
-    new IntakeReturn(intake).schedule();
+    // Do not schedule the retract here (schedule() is deprecated). The
+    // trigger binding in RobotContainer will start `IntakeReturn` on release.
   }
 
   @Override

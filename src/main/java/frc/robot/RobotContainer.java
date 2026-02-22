@@ -13,6 +13,7 @@ import frc.robot.Commands.Drive;
 import frc.robot.Commands.ShooterDecreaseSpeed;
 import frc.robot.Commands.ShooterIncreaseSpeed;
 import frc.robot.Commands.Shoot;
+import frc.robot.Commands.IntakeReturn;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.Controllers;
@@ -66,29 +67,19 @@ public class RobotContainer {
   }
   private void configureBindings() {
     // Intake Bindings
-    // Left joystick button 1: while held, run intake out; when complete start rollers
-    u_Controllers.leftStick.button(1).whileTrue(new IntakeDelayedSpin(s_Intake));
-    // Left joystick button 2: single-press increase shooter speed by 0.01
-    u_Controllers.leftStick.button(2).onTrue(new ShooterIncreaseSpeed(s_Shooter));
-    // Left joystick button 3: single-press decrease shooter speed by 0.01
-    u_Controllers.leftStick.button(3).onTrue(new ShooterDecreaseSpeed(s_Shooter));
     
-    // Use inline factory triggers for clarity
-  u_Controllers.xbox.leftTrigger().whileTrue(s_Intake.spinRollers());
-  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
-    u_Controllers.xbox.y().whileTrue(s_Intake.intakeIn());
-    u_Controllers.xbox.x().whileTrue(s_Intake.intakeOut());
-  u_Controllers.rightStick.button(1).whileTrue(new Shoot(s_Shooter));
-    
+    // Operator bindings
+    u_Controllers.shootFuel.whileTrue(new Shoot(s_Shooter));
+    u_Controllers.intakeFuel.whileTrue(new IntakeDelayedSpin(s_Intake));
+    u_Controllers.intakeFuel.onFalse(new IntakeReturn(s_Intake));
+    u_Controllers.shooterIncreaseSpeed.onTrue(new ShooterIncreaseSpeed(s_Shooter));
+    u_Controllers.shooterDecreaseSpeed.onTrue(new ShooterDecreaseSpeed(s_Shooter));
+    u_Controllers.manualReverseAgitator.onTrue(s_Shooter.manualReverseAgitator());
+        
     //Drive Bindings
-    u_Controllers.rightStick.button(2).toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
-    u_Controllers.rightStick.button(3).toggleOnTrue(s_Swerve.fieldOrientedToggle());
-    u_Controllers.rightStick.button(4).onTrue(s_Swerve.resetWheels()); //window looking button
-    // No-op example bindings removed. Add controller bindings here.
-
-    //Shooter Bindings
-  u_Controllers.xbox.rightTrigger().whileTrue(s_Shooter.shootFuel());
-  u_Controllers.xbox.rightTrigger().whileFalse(s_Shooter.stop());
+    u_Controllers.FO_toggle.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
+    u_Controllers.zeroHeading.toggleOnTrue(s_Swerve.fieldOrientedToggle());
+    u_Controllers.resetWheels.onTrue(s_Swerve.resetWheels()); //window looking button
   }
 
   /**

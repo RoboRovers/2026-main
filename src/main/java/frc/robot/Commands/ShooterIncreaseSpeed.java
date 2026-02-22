@@ -2,11 +2,11 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Shooter;
-
+import frc.robot.Util.Constants;
 /** Increase the shooter speed by +0.01 when triggered. */
 public class ShooterIncreaseSpeed extends Command {
   private final Shooter shooter;
-  private final double delta = 0.01;
+  private final double delta = Constants.Constants_Shooter.motorDelta;
 
   public ShooterIncreaseSpeed(Shooter shooter) {
     this.shooter = shooter;
@@ -15,7 +15,7 @@ public class ShooterIncreaseSpeed extends Command {
 
   @Override
   public void initialize() {
-    shooter.adjustSpeed(delta);
+   shooter.setCurrentShooterSpeed(shooter.getCurrentShooterSpeed() + delta);
   }
 
   @Override
