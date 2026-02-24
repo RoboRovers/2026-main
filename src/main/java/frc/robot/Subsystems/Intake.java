@@ -85,9 +85,11 @@ public class Intake extends SubsystemBase {
 
     public Command spinRollers()
     {
-        return Commands.runOnce(() -> {
-        rollerIntakeMotor.set(Constants_Intake.rollerSpeed);
-        });
+        // While scheduled, run the roller; ensure it is stopped when the command ends.
+        return Commands.startEnd(
+            () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed),
+            () -> rollerIntakeMotor.set(0),
+            this);
     }
     
     public void zeroPosition()
@@ -95,25 +97,38 @@ public class Intake extends SubsystemBase {
         leftIntakeEncoder.setPosition(2); // TODO: set the correct zero position
         rightIntakeEncoder.setPosition(2); // TODO: set the correct zero position
     }
-    
+    // shouldn't use intakeIn
      public Command intakeIn()
     {
         if (getPosition() < Constants_Intake.retractLimit) { // TODO: set the correct position limit
-            return Commands.run(() -> {
-                leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
-                rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
-            }, this); // note `this` makes it require the Intake subsystem
+            // Use startEnd so motors are stopped when the command ends/interrupted.
+            return Commands.startEnd(
+                () -> {
+                    leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
+                    rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
+                },
+                () -> {
+                    leftIntakeMotor.set(0);
+                    rightIntakeMotor.set(0);
+                },
+                this);
         }
         return Commands.none();
     }
-
+// shouldn't use intakeOut
      public Command intakeOut()
     {
         if (getPosition() > Constants_Intake.extendLimit) { // TODO: set the correct position limit
-            return Commands.run(() -> {
-                leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
-                rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
-            }, this); // note `this` makes it require the Intake subsystem
+            return Commands.startEnd(
+                () -> {
+                    leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+                    rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+                },
+                () -> {
+                    leftIntakeMotor.set(0);
+                    rightIntakeMotor.set(0);
+                },
+                this);
         }
         return Commands.none();
     }

@@ -12,13 +12,13 @@ public class Controllers {
     public CommandXboxController xbox;
     public Trigger intakeFuel, spinRollers, shootFuel, zeroHeading, FO_toggle, 
     resetWheels, shooterIncreaseSpeed, shooterDecreaseSpeed, manualReverseAgitator, 
-    leftBumper, rightBumper, leftTrigger, rightTrigger;
+    toggleAutoAgitator, leftBumper, rightBumper, leftTrigger, rightTrigger;
 
     public Controllers() 
     {
-        leftStick = new CommandJoystick(MAP_CONTROLLER.LEFT_JOYSTICK);
-        rightStick = new CommandJoystick(MAP_CONTROLLER.RIGHT_JOYSTICK);
-        xbox = new CommandXboxController(MAP_CONTROLLER.XBOX_CONTROLLER);
+        leftStick = new CommandJoystick(MAP_CONTROLLER.leftJoystick);
+        rightStick = new CommandJoystick(MAP_CONTROLLER.rightJoystick);
+        xbox = new CommandXboxController(MAP_CONTROLLER.xboxController);
         // Initialize the convenience Trigger fields so callers can use them directly
         initialize_Xbox_Controls();
         initialize_left_Joystick_Controls();
@@ -28,10 +28,10 @@ public class Controllers {
     {
         intakeFuel = xbox.leftTrigger();
         shootFuel = xbox.rightTrigger();
-        // spinRollers = xbox.leftTrigger();
+        spinRollers = xbox.leftTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();
-        manualReverseAgitator = xbox.leftBumper();
+        
         rightBumper = xbox.rightBumper();
         leftTrigger = xbox.leftTrigger();
         rightTrigger = xbox.rightTrigger();
@@ -45,6 +45,8 @@ public class Controllers {
         zeroHeading = leftStick.button(2);
         FO_toggle   = leftStick.button(3);
         resetWheels = leftStick.button(4);
+        //spinRollers = leftStick.button(1);
+        manualReverseAgitator = leftStick.button(1);
         /*
         leftBumper = leftStick.button(1);
         leftTrigger = leftStick.button(2);
@@ -56,7 +58,7 @@ public class Controllers {
     }
 
     public void intitalize_right_Joystick_Controls() {
-
+        toggleAutoAgitator = rightStick.button(2); // should be in sbox for operator controls
 
     }
     
