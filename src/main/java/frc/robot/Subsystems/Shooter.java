@@ -22,6 +22,7 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterRoller;
   public final SparkFlex fuelAgitator;
   private final Limelight LL_Shoot;
+  public boolean reverseToggle;
   // Runtime adjustable speed for the shooter roller. 
   // Initializedf from constants.
   private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
@@ -88,10 +89,28 @@ public class Shooter extends SubsystemBase {
     currentShooterSpeed = speed;
   }
 
+  public boolean getReverse()
+  {
+    return reverseToggle;
+  }
   public Command reverseAgitator() {
-    return Commands.runOnce(() -> {
-      fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
-    }, this);
+    return Commands.startEnd(() -> {
+      if (reverseToggle)
+      {
+        fuelAgitator.set(0);
+        reverseToggle= false;
+      } else
+      {
+        fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+        reverseToggle = true;
+        
+      }
+
+      },
+      () -> {
+        fuelAgitator.set(0);
+        
+      }, this);
   }
 
   public Command manualReverseAgitator() {

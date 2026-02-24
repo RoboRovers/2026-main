@@ -68,10 +68,10 @@ public final class Constants {
 
     
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
-    public static final double FL_OFFSET = 0.012207; //0.011230;
-    public static final double FR_OFFSET = 0.161377; //0.159424;
-    public static final double BL_OFFSET = 0.386230; //0.385986;
-    public static final double BR_OFFSET = 0.415283; // 0.415527;
+    public static final double FL_OFFSET = -0.101807; //0.011230;
+    public static final double FR_OFFSET = 0.171387; //0.159424;
+    public static final double BL_OFFSET = 0.400391; //0.385986;
+    public static final double BR_OFFSET = -0.496582; // 0.415527;
 
     //TODO Invert any motor to match controller output
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
@@ -128,7 +128,7 @@ public final class Constants {
     public static final class Constants_Intake
     {
       public static final double inchesToRotations = 00; //TODO Get number
-      public static final double rollerSpeed = 0.05;
+      public static final double rollerSpeed = -0.2;
       public static final double retractLimit = 2;
       public static final double extendLimit = 50;
       public static final double intakeRetractSpeed = -0.05;
