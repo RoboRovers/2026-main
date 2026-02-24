@@ -101,7 +101,7 @@ public final class Constants {
     public static final class Constants_Shooter 
     {
       //public static final double shooterSpeed = 0.05; //TODO Tune this value, it is just a placeholder
-      public static final double fuelAgitatorSpeed = 0.05; //TODO Tune this value, it is just a placeholder
+      public static final double fuelAgitatorSpeed = 0.2; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final double manualFuelAgitatorReverseSpeed = 0.2;
       public static final int shooterMotorCurrentLimit = 60;
