@@ -62,6 +62,9 @@ public class RobotContainer {
     u_Controllers = new Controllers();
     s_Swerve = new Swerve();
     c_Drive = new Drive(s_Swerve, u_Controllers.leftStick, u_Controllers.rightStick);
+    // Make Drive the default command for the swerve subsystem so joystick
+    // inputs are processed continuously while no other command requires s_Swerve.
+    s_Swerve.setDefaultCommand(c_Drive);
     s_Shooter = new Shooter();
     s_Intake = new Intake();
   }
