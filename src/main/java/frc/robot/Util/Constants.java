@@ -71,7 +71,7 @@ public final class Constants {
     public static final double FL_OFFSET = -0.101807; //0.011230;
     public static final double FR_OFFSET = 0.171387; //0.159424;
     public static final double BL_OFFSET = 0.400391; //0.385986;
-    public static final double BR_OFFSET = -0.496582; // 0.415527;
+    public static final double BR_OFFSET = -0.415527; // 0.415527;
 
     //TODO Invert any motor to match controller output
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
@@ -80,9 +80,9 @@ public final class Constants {
     public static final boolean BR_STEER_ENCODER_REVERSED = true;
 
     public static final boolean FL_DRIVE_ENCODER_REVERSED = false;
-    public static final boolean FR_DRIVE_ENCODER_REVERSED = true;
+    public static final boolean FR_DRIVE_ENCODER_REVERSED = false;
     public static final boolean BL_DRIVE_ENCODER_REVERSED = false;
-    public static final boolean BR_DRIVE_ENCODER_REVERSED = true;
+    public static final boolean BR_DRIVE_ENCODER_REVERSED = false;
 
     public static final boolean FL_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;

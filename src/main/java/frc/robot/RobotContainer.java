@@ -45,6 +45,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings 
     robotFiles();
+    s_Swerve.setDefaultCommand(c_Drive);
     configureBindings();
     //TODO: Add auto chooser here.
   }
@@ -64,7 +65,7 @@ public class RobotContainer {
     c_Drive = new Drive(s_Swerve, u_Controllers.leftStick, u_Controllers.rightStick);
     // Make Drive the default command for the swerve subsystem so joystick
     // inputs are processed continuously while no other command requires s_Swerve.
-    s_Swerve.setDefaultCommand(c_Drive);
+    
     s_Shooter = new Shooter();
     s_Intake = new Intake();
   }
@@ -78,8 +79,8 @@ public class RobotContainer {
     u_Controllers.shooterIncreaseSpeed.onTrue(new ShooterIncreaseSpeed(s_Shooter));
     u_Controllers.shooterDecreaseSpeed.onTrue(new ShooterDecreaseSpeed(s_Shooter));
     u_Controllers.manualReverseAgitator.onTrue(s_Shooter.manualReverseAgitator());
-    u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
-    u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
+    //u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
+    //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
         
     //Drive Bindings
     u_Controllers.FO_toggle.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
