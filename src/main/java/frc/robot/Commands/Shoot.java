@@ -27,7 +27,7 @@ public Shoot(Shooter shooter) {
     @Override
     public void execute() {
         // call the direct action so this command continues to use the motor directly
-        shooter.shootFuel();
+        shooter.remoteShootFuel();
         if (delay.get() > 2) // delay is in seconds
         {
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);

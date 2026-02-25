@@ -21,10 +21,6 @@ public class Drive extends Command{
 
     public static final double DEADBAND = 0.075;
 
-    
-
-
-
     // public DriveCommand(s_Swerve s_Swerve, CommandXboxController opController, CommandJoystick leftStick, CommandJoystick rightStick) {
     public Drive(Swerve s_Swerve, CommandJoystick left, CommandJoystick right) {
 
@@ -43,9 +39,6 @@ public class Drive extends Command{
     {
         s_Swerve.faceAllForward();
     }
-
- 
-
 
     @Override
     public void execute() {

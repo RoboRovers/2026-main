@@ -65,13 +65,13 @@ public class Shooter extends SubsystemBase {
   }
    
     // Return a Command that, while scheduled, runs the shooter at the speed calculated from the horizontal displacement from the hub.
-    public Command assistedShootFuel() {
+    public Command calculatedShootFuel() {
         currentShooterSpeed = Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
           Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE));
         return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
      }
      
-     public void shootFuel() {
+     public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
      }
      
@@ -126,13 +126,13 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   
-  public static double getMotorRatio(double deltaX) {
+  public static double getMotorRatio(double xDist) {
       //Calculates the required speed ratio for a given horizontal displacement, assuming:
       //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
       double squaredRadius = Math.pow(Constants_Shooter.RADIUS, 2);
       double squaredCosine = Math.pow(Math.cos(Math.toRadians(Constants_Shooter.THETA)), 2);
-      double denDifference = (deltaX * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2); //the 0.2 ensures that the ball always follows a feasible path into the hub and accounts for AF
-      double num = 0.5 * Constants_Shooter.GRAVITY * Math.pow(deltaX, 2);
+      double denDifference = (xDist * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2); //the 0.2 ensures that the ball always follows a feasible path into the hub and accounts for AF
+      double num = 0.5 * Constants_Shooter.GRAVITY * Math.pow(xDist, 2);
       double den = squaredRadius * squaredCosine * denDifference;
       double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den);
 
