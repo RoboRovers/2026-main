@@ -28,25 +28,26 @@ public class Controllers {
     {
         intakeFuel = xbox.leftTrigger();
         shootFuel = xbox.rightTrigger();
-        spinRollers = xbox.leftTrigger();
+        // spinRollers = xbox.leftTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();
         
-        rightBumper = xbox.rightBumper();
+        manualReverseAgitator = xbox.rightBumper();
         leftTrigger = xbox.leftTrigger();
         rightTrigger = xbox.rightTrigger();
-        shooterIncreaseSpeed = xbox.x();
-        shooterDecreaseSpeed = xbox.y();
+        toggleAutoAgitator = xbox.x();
+        shooterIncreaseSpeed = xbox.y();
+        shooterDecreaseSpeed = xbox.b();
         
 
     }
 
     public void initialize_left_Joystick_Controls() {
-        zeroHeading = leftStick.button(2);
-        FO_toggle   = leftStick.button(3);
-        resetWheels = leftStick.button(4);
+        zeroHeading = leftStick.button(5);
+        FO_toggle   = leftStick.button(6);
+        resetWheels = leftStick.button(7);
         //spinRollers = leftStick.button(1);
-        manualReverseAgitator = leftStick.button(1);
+        // manualReverseAgitator = leftStick.button(1);
         /*
         leftBumper = leftStick.button(1);
         leftTrigger = leftStick.button(2);
