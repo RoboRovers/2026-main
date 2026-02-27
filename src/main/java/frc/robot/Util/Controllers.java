@@ -26,18 +26,18 @@ public class Controllers {
 
     public void initialize_Xbox_Controls()
     {
-        intakeFuel = xbox.leftTrigger();
+        //intakeFuel = xbox.leftTrigger();
         shootFuel = xbox.rightTrigger();
-        // spinRollers = xbox.leftTrigger();
+        spinRollers = xbox.leftTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();
         
         manualReverseAgitator = xbox.rightBumper();
-        leftTrigger = xbox.leftTrigger();
-        rightTrigger = xbox.rightTrigger();
+        //leftTrigger = xbox.leftTrigger();
+        //rightTrigger = xbox.rightTrigger();
         toggleAutoAgitator = xbox.x();
         shooterIncreaseSpeed = xbox.y();
-        shooterDecreaseSpeed = xbox.b();
+        shooterDecreaseSpeed = xbox.a();
         
 
     }

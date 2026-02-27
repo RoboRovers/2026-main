@@ -19,7 +19,13 @@ public Shoot(Shooter shooter) {
 
     @Override
     public void initialize() {
-        delay.start();
+        if (delay.get()>1)
+        {
+            delay.restart();
+        }else {
+            delay.start();
+        }
+        
         shooter.fuelAgitator.set(0);
         
     }
@@ -28,7 +34,7 @@ public Shoot(Shooter shooter) {
     public void execute() {
         // call the direct action so this command continues to use the motor directly
         shooter.remoteShootFuel();
-        if (delay.get() > 2) // delay is in seconds
+        if (delay.get() > 1) // delay is in seconds
         {
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
         }
@@ -38,6 +44,7 @@ public Shoot(Shooter shooter) {
     @Override
     public void end(boolean interrupted) {
         shooter.stop();
+        
         if (shooter.getReverse())
         shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         
