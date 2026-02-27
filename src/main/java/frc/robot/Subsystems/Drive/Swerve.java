@@ -29,10 +29,11 @@ public class Swerve extends SubsystemBase{
     Optional<Alliance> alliance;
   
     
-    public static Module frontLeftModule = new Module(MAP_DRIVETRAIN.frontLeftAbsEncoder, MAP_DRIVETRAIN.frontLeftDriveKraken, Constants_Drive.FL_DRIVE_ENCODER_REVERSED, Constants_Drive.FL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.frontLeftAbsEncoder, Constants_Drive.FL_OFFSET, Constants_Drive.FL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    public static Module frontRightModule = new Module(MAP_DRIVETRAIN.frontRightAbsEncoder, MAP_DRIVETRAIN.frontRightDriveKraken, Constants_Drive.FR_DRIVE_ENCODER_REVERSED, Constants_Drive.FR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.frontRightAbsEncoder, Constants_Drive.FR_OFFSET, Constants_Drive.FR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    public static Module backLeftModule = new Module(MAP_DRIVETRAIN.backLeftAbsEncoder, MAP_DRIVETRAIN.backLeftDriveKraken, Constants_Drive.BL_DRIVE_ENCODER_REVERSED, Constants_Drive.BL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.backLeftAbsEncoder, Constants_Drive.BL_OFFSET, Constants_Drive.BL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
-    public static Module backRightModule = new Module(MAP_DRIVETRAIN.backRightAbsEncoder, MAP_DRIVETRAIN.backRightDriveKraken, Constants_Drive.BR_DRIVE_ENCODER_REVERSED, Constants_Drive.BR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.backRightAbsEncoder, Constants_Drive.BR_OFFSET, Constants_Drive.BR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    // Module constructor: Module(int steerNum, int driveNum, boolean invertDrive, boolean invertSteer, int absoluteEncoderID, double absOffset, boolean absoluteReversed)
+    public static Module frontLeftModule = new Module(MAP_DRIVETRAIN.frontLeftSteerSparkMAX, MAP_DRIVETRAIN.frontLeftDriveKraken, Constants_Drive.FL_DRIVE_ENCODER_REVERSED, Constants_Drive.FL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.frontLeftAbsEncoder, Constants_Drive.FL_OFFSET, Constants_Drive.FL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    public static Module frontRightModule = new Module(MAP_DRIVETRAIN.frontRightSteerSparkMAX, MAP_DRIVETRAIN.frontRightDriveKraken, Constants_Drive.FR_DRIVE_ENCODER_REVERSED, Constants_Drive.FR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.frontRightAbsEncoder, Constants_Drive.FR_OFFSET, Constants_Drive.FR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    public static Module backLeftModule = new Module(MAP_DRIVETRAIN.backLeftSteerSparkMAX, MAP_DRIVETRAIN.backLeftDriveKraken, Constants_Drive.BL_DRIVE_ENCODER_REVERSED, Constants_Drive.BL_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.backLeftAbsEncoder, Constants_Drive.BL_OFFSET, Constants_Drive.BL_DRIVE_ABSOLUTE_ENCODER_REVERSED);
+    public static Module backRightModule = new Module(MAP_DRIVETRAIN.backRightSteerSparkMAX, MAP_DRIVETRAIN.backRightDriveKraken, Constants_Drive.BR_DRIVE_ENCODER_REVERSED, Constants_Drive.BR_STEER_ENCODER_REVERSED, MAP_DRIVETRAIN.backRightAbsEncoder, Constants_Drive.BR_OFFSET, Constants_Drive.BR_DRIVE_ABSOLUTE_ENCODER_REVERSED);
     
     public Swerve() 
     {
@@ -180,10 +181,10 @@ public class Swerve extends SubsystemBase{
         SmartDashboard.putNumber("Back Right AE Value", backRightModule.getABSPosition());
 
         //RE Degrees Reading
-        // SmartDashboard.putNumber("Front left RE Value", frontLeftModule.getModulePosition().angle.getDegrees());
-        // SmartDashboard.putNumber("Front Right RE Value", frontRightModule.getModulePosition().angle.getDegrees());
-        // SmartDashboard.putNumber("Back left RE Value", backLeftModule.getModulePosition().angle.getDegrees());
-        // SmartDashboard.putNumber("Back Right RE Value", backRightModule.getModulePosition().angle.getDegrees());
+    SmartDashboard.putNumber("Front left RE Value", frontLeftModule.getModulePosition().angle.getDegrees());
+    SmartDashboard.putNumber("Front Right RE Value", frontRightModule.getModulePosition().angle.getDegrees());
+    SmartDashboard.putNumber("Back left RE Value", backLeftModule.getModulePosition().angle.getDegrees());
+    SmartDashboard.putNumber("Back Right RE Value", backRightModule.getModulePosition().angle.getDegrees());
         //RE Distance Reading
         // SmartDashboard.putNumber("Front Left Drive Position", frontLeftModule.getDrivePosition());
         // SmartDashboard.putNumber("Front Right Drive Position", frontRightModule.getDrivePosition());

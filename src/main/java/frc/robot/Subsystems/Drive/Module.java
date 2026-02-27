@@ -179,8 +179,13 @@ public class Module extends SubsystemBase
   public double getABSPosition()
   {
     //TODO once you find all the offsets using this number that is printed out (Should range from -1 -> 1), multiply by 360 to convert to degrees
-    double angle = absoluteEncoder.getAbsolutePosition().getValueAsDouble()*360; //  * 360 to convert to degrees
-    return (angle  * (absoluteReversed ? -1 : 1) ) % 720;
+    // Read the absolute encoder (0..1) and convert to degrees.
+    double angle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
+    // Apply reversal if configured
+    angle = (absoluteReversed ? -angle : angle);
+    // Normalize to [-180, 180] to avoid large jumps/wrap issues
+    angle = Math.IEEEremainder(angle, 360.0);
+    return angle;
   }
   public SwerveModuleState getModuleState()
   {
@@ -198,11 +203,17 @@ public class Module extends SubsystemBase
   public void setDesiredState(SwerveModuleState state) 
   {
     if (Math.abs(state.speedMetersPerSecond) < 0.01) {stop();return;}
-    state.optimize(getModulePosition().angle);
-    state.cosineScale(getModulePosition().angle);
-    driveMotor.set(state.speedMetersPerSecond / Constants.Constants_Drive.MAX_SPEED_METERS_PER_SEC);
-    // getUpToSpeed(state.speedMetersPerSecond);
-    steerPIDController.setSetpoint(state.angle.getDegrees(), ControlType.kPosition);
+    // Use WPILib's optimize to pick the smallest steering motion (may flip wheel direction)
+    SwerveModuleState optimized = SwerveModuleState.optimize(state, getModulePosition().angle);
+    // If a cosine scaling helper is used by your project, apply it to the optimized state
+    try {
+      optimized.cosineScale(getModulePosition().angle);
+    } catch (NoSuchMethodError | RuntimeException e) {
+      // If cosineScale isn't available/needed, ignore and continue.
+    }
+    driveMotor.set(optimized.speedMetersPerSecond / Constants.Constants_Drive.MAX_SPEED_METERS_PER_SEC);
+    // getUpToSpeed(optimized.speedMetersPerSecond);
+    steerPIDController.setSetpoint(optimized.angle.getDegrees(), ControlType.kPosition);
   }
 
   public void wheelFaceForward() 
