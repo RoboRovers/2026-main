@@ -97,10 +97,10 @@ public class Intake extends SubsystemBase {
         leftIntakeEncoder.setPosition(2); // TODO: set the correct zero position
         rightIntakeEncoder.setPosition(2); // TODO: set the correct zero position
     }
-    // shouldn't use intakeIn
+
      public Command intakeIn()
     {
-        if (getPosition() < Constants_Intake.retractLimit) { // TODO: set the correct position limit
+        if (getPosition() > Constants_Intake.retractLimit) { // TODO: set the correct position limit
             // Use startEnd so motors are stopped when the command ends/interrupted.
             return Commands.startEnd(
                 () -> {
@@ -115,10 +115,10 @@ public class Intake extends SubsystemBase {
         }
         return Commands.none();
     }
-// shouldn't use intakeOut
-     public Command intakeOut()
+
+    public Command intakeOut()
     {
-        if (getPosition() > Constants_Intake.extendLimit) { // TODO: set the correct position limit
+        if (getPosition() < Constants_Intake.extendLimit) { // TODO: set the correct position limit
             return Commands.startEnd(
                 () -> {
                     leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);

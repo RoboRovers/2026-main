@@ -81,6 +81,15 @@ public class RobotContainer {
     u_Controllers.manualReverseAgitator.onTrue(s_Shooter.manualReverseAgitator());
     u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
     //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
+
+    //Intake Extend + Retract
+    u_Controllers.intakeInD.whileTrue(s_Intake.intakeIn());
+    u_Controllers.intakeInDL.whileTrue(s_Intake.intakeIn());
+    u_Controllers.intakeInDR.whileTrue(s_Intake.intakeIn());
+    
+    u_Controllers.intakeOutU.whileTrue(s_Intake.intakeOut());
+    u_Controllers.intakeOutUL.whileTrue(s_Intake.intakeOut());
+    u_Controllers.intakeOutUR.whileTrue(s_Intake.intakeOut());
         
     //Drive Bindings
     u_Controllers.FO_toggle.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));

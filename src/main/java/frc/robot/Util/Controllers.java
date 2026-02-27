@@ -12,7 +12,8 @@ public class Controllers {
     public CommandXboxController xbox;
     public Trigger intakeFuel, spinRollers, shootFuel, zeroHeading, FO_toggle, 
     resetWheels, shooterIncreaseSpeed, shooterDecreaseSpeed, manualReverseAgitator, 
-    toggleAutoAgitator, leftBumper, rightBumper, leftTrigger, rightTrigger;
+    toggleAutoAgitator, leftBumper, rightBumper, leftTrigger, rightTrigger,
+    intakeOutU, intakeOutUL, intakeOutUR, intakeInD, intakeInDL, intakeInDR;
 
     public Controllers() 
     {
@@ -38,7 +39,14 @@ public class Controllers {
         toggleAutoAgitator = xbox.x();
         shooterIncreaseSpeed = xbox.y();
         shooterDecreaseSpeed = xbox.a();
-        
+
+        intakeOutU = xbox.povUp();
+        intakeOutUL = xbox.povUpLeft();
+        intakeOutUR = xbox.povUpRight();
+    
+        intakeInD = xbox.povDown();
+        intakeInDL = xbox.povDownLeft();
+        intakeInDR = xbox.povDownRight();
 
     }
 
