@@ -10,6 +10,7 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,18 +31,15 @@ public class Shooter extends SubsystemBase {
   private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
   /** Creates a new Shooter Subsystem. */
   
+  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
-
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
-  
-    // create the configuration for the shooter roller, set a current limit, (set
-    // the motor to inverted so that positive values are used for shooting???), 
-    // and apply the config to the controller
     SparkMaxConfig shooterConfig = new SparkMaxConfig();
+    shooterConfig.idleMode(IdleMode.kCoast);
     // TODO: Not sure if the motor needs to be inverted, test and change if necessary
     //shooterConfig.inverted(true);
     shooterConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
@@ -60,7 +58,6 @@ public class Shooter extends SubsystemBase {
   }
   // A method to stop the rollers
   public void stop() {
-    currentShooterSpeed = 0;
     shooterRoller.set(0);
   }
    
@@ -124,6 +121,7 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Shooter Speed", currentShooterSpeed);
   }
   
   public static double getMotorRatio(double xDist) {
@@ -140,6 +138,6 @@ public class Shooter extends SubsystemBase {
       if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
       return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
   }
-
+  
   
 }

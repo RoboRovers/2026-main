@@ -74,12 +74,12 @@ public class RobotContainer {
     
     // Operator bindings
     u_Controllers.shootFuel.whileTrue(new Shoot(s_Shooter));
-    u_Controllers.intakeFuel.whileTrue(new IntakeDelayedSpin(s_Intake));
-    u_Controllers.intakeFuel.onFalse(new IntakeReturn(s_Intake));
+    //u_Controllers.intakeFuel.whileTrue(new IntakeDelayedSpin(s_Intake));
+    //u_Controllers.intakeFuel.onFalse(new IntakeReturn(s_Intake));
     u_Controllers.shooterIncreaseSpeed.onTrue(new ShooterIncreaseSpeed(s_Shooter));
     u_Controllers.shooterDecreaseSpeed.onTrue(new ShooterDecreaseSpeed(s_Shooter));
     u_Controllers.manualReverseAgitator.onTrue(s_Shooter.manualReverseAgitator());
-    //u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
+    u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
     //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
         
     //Drive Bindings

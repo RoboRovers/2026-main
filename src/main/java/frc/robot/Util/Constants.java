@@ -35,7 +35,7 @@ public final class Constants {
     public static final double STEER__RPM_2_DEG_PER_SEC = STEER_TO_DEGREES / 60;
 
     //TODO Tune our pid loop for the drives once you add in all the offsets, you can just rotate the wheels to 90 degrees using the flight sticks, then disable and enable the code to set them to 0 degreese and tune off of that vaule
-    public static final double P_TURNING = 0.0225;
+    public static final double P_TURNING = 0.0001;
     public static final double I_TURNING = 0.000001;
     public static final double D_TURNING = 0;
     public static final double FF_TURNING = 0;
@@ -68,16 +68,16 @@ public final class Constants {
 
     
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
-    public static final double FL_OFFSET = -0.101807; //0.011230;
-    public static final double FR_OFFSET = 0.171387; //0.159424;
-    public static final double BL_OFFSET = 0.400391; //0.385986;
+    public static final double FL_OFFSET = -0.092285; //0.011230;
+    public static final double FR_OFFSET = 0.176514; //0.159424;
+    public static final double BL_OFFSET = 0.395020; //0.385986;
     public static final double BR_OFFSET = -0.484375; // 0.415527;
 
     //TODO Invert any motor to match controller output
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_STEER_ENCODER_REVERSED = true;
     public static final boolean BL_STEER_ENCODER_REVERSED = true;
-    public static final boolean BR_STEER_ENCODER_REVERSED = true;
+    public static final boolean BR_STEER_ENCODER_REVERSED = false;
 
     public static final boolean FL_DRIVE_ENCODER_REVERSED = false;
     public static final boolean FR_DRIVE_ENCODER_REVERSED = false;
@@ -105,7 +105,7 @@ public final class Constants {
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final double manualFuelAgitatorReverseSpeed = -0.2;
       public static final int shooterMotorCurrentLimit = 60;
-      public static final double shooterSpeed = .05; //TODO Tune this value, it is just a placeholder
+      public static final double shooterSpeed = .87; //TODO Tune this value, it is just a placeholder
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
 
@@ -126,7 +126,7 @@ public final class Constants {
     public static final class Constants_Intake
     {
       public static final double inchesToRotations = 00; //TODO Get number
-      public static final double rollerSpeed = -0.2;
+      public static final double rollerSpeed = -0.3;
       public static final double retractLimit = 2;
       public static final double extendLimit = 50;
       public static final double intakeRetractSpeed = -0.05;
