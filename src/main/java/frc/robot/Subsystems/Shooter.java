@@ -112,8 +112,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public Command manualReverseAgitator() {
-    return Commands.runOnce(() -> {
+    return Commands.startEnd(() -> {
       fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
+    },
+    () -> {
+      fuelAgitator.set(0);
     }, this);
   }
 

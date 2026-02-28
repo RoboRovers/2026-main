@@ -65,7 +65,7 @@ public class Intake extends SubsystemBase {
 
     // Roller intake motor setup
     rollerIntakeConfig = new SparkFlexConfig();
-    rollerIntakeConfig.idleMode(IdleMode.kBrake);
+    rollerIntakeConfig.idleMode(IdleMode.kCoast);
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
     rollerIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
     rollerIntakeConfig.inverted(Constants_Intake.rollerIntakeMotorInverted);
@@ -89,6 +89,22 @@ public class Intake extends SubsystemBase {
         // While scheduled, run the roller; ensure it is stopped when the command ends.
         return Commands.startEnd(
             () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed),
+            () -> rollerIntakeMotor.set(0),
+            this);
+    }
+    public Command reverseSpinRollers()
+    {
+        // While scheduled, run the roller; ensure it is stopped when the command ends.
+        return Commands.startEnd(
+            () -> rollerIntakeMotor.set(-Constants_Intake.rollerSpeed),
+            () -> rollerIntakeMotor.set(0),
+            this);
+    }
+    public Command fastSpinRollers()
+    {
+        // While scheduled, run the roller; ensure it is stopped when the command ends.
+        return Commands.startEnd(
+            () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed*2),
             () -> rollerIntakeMotor.set(0),
             this);
     }
@@ -125,6 +141,7 @@ public class Intake extends SubsystemBase {
                 rightIntakeMotor.set(0);
             }, this);
     }
+
 
     //  public Command stopIntake()
     // {

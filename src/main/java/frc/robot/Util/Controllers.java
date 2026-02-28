@@ -13,7 +13,8 @@ public class Controllers {
     public Trigger intakeFuel, spinRollers, shootFuel, zeroHeading, FO_toggle, 
     resetWheels, shooterIncreaseSpeed, shooterDecreaseSpeed, manualReverseAgitator, 
     toggleAutoAgitator, leftBumper, rightBumper, leftTrigger, rightTrigger,
-    intakeOutU, intakeOutUL, intakeOutUR, intakeInD, intakeInDL, intakeInDR;
+    intakeOutU, intakeOutUL, intakeOutUR, intakeInD, intakeInDL, intakeInDR,
+    reverseSpinRollers, fastSpinRollers;
 
     public Controllers() 
     {
@@ -30,15 +31,17 @@ public class Controllers {
         //intakeFuel = xbox.leftTrigger();
         shootFuel = xbox.rightTrigger();
         spinRollers = xbox.leftTrigger();
-        // intakeOut = xbox.x();
-        // intakeIn = xbox.y();
+        reverseSpinRollers = xbox.x();
+        fastSpinRollers = xbox.b();
         
         manualReverseAgitator = xbox.rightBumper();
         //leftTrigger = xbox.leftTrigger();
         //rightTrigger = xbox.rightTrigger();
-        toggleAutoAgitator = xbox.x();
+        // toggleAutoAgitator = xbox.x();
+
         shooterIncreaseSpeed = xbox.y();
         shooterDecreaseSpeed = xbox.a();
+    
 
         intakeOutU = xbox.povUp();
         intakeOutUL = xbox.povUpLeft();
