@@ -11,6 +11,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,55 +23,60 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Shooter extends SubsystemBase {
-  private final SparkMax shooterRoller;
+  private final SparkFlex shooterOut;
   public final SparkFlex fuelAgitator;
+  private final SparkMax shooterIntake;
   private final Limelight LL_Shoot;
   public boolean reverseToggle;
-  // Runtime adjustable speed for the shooter roller. 
-  // Initializedf from constants.
   private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
-  /** Creates a new Shooter Subsystem. */
+
   
   public Shooter() {
-    // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
+    // create brushless motors for each of the motors on the shooter mechanism
+    shooterOut = new SparkFlex(RobotMap.MAP_SHOOTER.shooterOutSparkFLEX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
+    shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
-    SparkMaxConfig shooterConfig = new SparkMaxConfig();
-    shooterConfig.idleMode(IdleMode.kCoast);
-    // TODO: Not sure if the motor needs to be inverted, test and change if necessary
-    //shooterConfig.inverted(true);
-    shooterConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
-    shooterRoller.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    // put default values for various fuel operations onto the dashboard
-    // all commands using this subsystem pull values from the dashbaord to allow
-    // you to tune the values easily, and then replace the values in Constants.java
-    // with your new values. For more information, see the Software Guide.
+    SparkMaxConfig shooterintakeConfig = new SparkMaxConfig();
+    shooterintakeConfig.idleMode(IdleMode.kCoast);
+    shooterintakeConfig.inverted(false);
+    shooterintakeConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
+    shooterIntake.configure(shooterintakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+
+    SparkFlexConfig shooterOutConfig = new SparkFlexConfig();
+    shooterOutConfig.idleMode(IdleMode.kCoast);
+    shooterOutConfig.inverted(false);
+    shooterOutConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
+    shooterOut.configure(shooterOutConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
     SmartDashboard.putNumber("Shooter roller value", Constants_Shooter.shooterLaunchVoltage);
   }
-
+  // un used
   // A method to set the voltage of the shooter roller
   public void setShooterRoller(double voltage) {
-    shooterRoller.setVoltage(voltage);
+    shooterOut.setVoltage(voltage);
   }
   // A method to stop the rollers
   public void stop() {
-    shooterRoller.set(0);
+    shooterOut.set(0);
+    shooterIntake.set(0);
   }
    
     // Return a Command that, while scheduled, runs the shooter at the speed calculated from the horizontal displacement from the hub.
     public Command calculatedShootFuel() {
         currentShooterSpeed = Shooter.getMotorRatio(LL_Shoot.getDeltaX(Constants_Shooter.TAG_HEIGHT, 
           Constants_Shooter.CAMERA_HEIGHT, Constants_Shooter.CAMERA_ANGLE));
-        return Commands.run(() -> shooterRoller.set(currentShooterSpeed), this);
+        return Commands.run(() -> shooterOut.set(currentShooterSpeed), this);
      }
      
      public void remoteShootFuel() {
-        shooterRoller.set(currentShooterSpeed);
+        shooterOut.set(currentShooterSpeed);
+        shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
-     
+
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
   public void adjustSpeed(double delta) {
     currentShooterSpeed += delta;

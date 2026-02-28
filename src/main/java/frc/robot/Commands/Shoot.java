@@ -11,6 +11,7 @@ public final Shooter shooter;
 private Timer delay = new Timer();
 
 
+
 public Shoot(Shooter shooter) {
     this.shooter = shooter;
     addRequirements(shooter);
@@ -19,7 +20,7 @@ public Shoot(Shooter shooter) {
 
     @Override
     public void initialize() {
-        if (delay.get()>1)
+        if (!(delay.get()== 0))
         {
             delay.restart();
         }else {

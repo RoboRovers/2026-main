@@ -74,16 +74,19 @@ public final class Constants {
     public static final double BR_OFFSET = -0.484375; // 0.415527;
 
     //TODO Invert any motor to match controller output
+    // while steering, wheel is rotated 90 degrees in
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_STEER_ENCODER_REVERSED = true;
     public static final boolean BL_STEER_ENCODER_REVERSED = true;
     public static final boolean BR_STEER_ENCODER_REVERSED = false;
 
+    // reverses the direction the wheel is spinning (drive)
     public static final boolean FL_DRIVE_ENCODER_REVERSED = false;
     public static final boolean FR_DRIVE_ENCODER_REVERSED = false;
     public static final boolean BL_DRIVE_ENCODER_REVERSED = false;
     public static final boolean BR_DRIVE_ENCODER_REVERSED = false;
 
+    // changes the rotation (clockwise or cc) the encoder reads as positive and negative. if set to true, multiples by -1
     public static final boolean FL_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;
     public static final boolean BL_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;
@@ -104,6 +107,8 @@ public final class Constants {
       public static final double fuelAgitatorSpeed = 0.2; //TODO Tune this value, it is just a placeholder
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final double manualFuelAgitatorReverseSpeed = -0.2;
+      public static final double shooterIntakeSpeed = 0.2;
+      
       public static final int shooterMotorCurrentLimit = 60;
       public static final double shooterSpeed = .87; //TODO Tune this value, it is just a placeholder
       public static final double shooterLaunchVoltage = 10.6;
