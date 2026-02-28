@@ -18,14 +18,13 @@ public class RobotMap
         public static final int leftIntakeSparkMAX = 5;
         public static final int rightIntakeSparkMAX = 6;
         public static final int rollerIntakeSparkFLEX = 9;
-        // public static final int intakeCanrange = 6;
-        public static final int intakeAbsEncoderPwmPort = 8;
     }
 
     public static final class MAP_SHOOTER
     {
-        public static final int shooterSparkMAX = 7;
+        public static final int shooterOutSparkFLEX = 7;
         public static final int fuelAgitatorSparkFLEX = 8;
+        public static final int shooterIntakeSparkMAX = 10;
     }
 
     public static final class MAP_DRIVETRAIN
