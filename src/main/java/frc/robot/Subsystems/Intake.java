@@ -83,6 +83,7 @@ public class Intake extends SubsystemBase {
         return leftIntakeEncoder.getPosition();
     }
 
+    
     public Command spinRollers()
     {
         // While scheduled, run the roller; ensure it is stopped when the command ends.
@@ -98,39 +99,31 @@ public class Intake extends SubsystemBase {
         rightIntakeEncoder.setPosition(2); // TODO: set the correct zero position
     }
 
+
      public Command intakeIn()
     {
-        if (getPosition() > Constants_Intake.retractLimit) { // TODO: set the correct position limit
-            // Use startEnd so motors are stopped when the command ends/interrupted.
-            return Commands.startEnd(
-                () -> {
-                    leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
-                    rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
-                },
-                () -> {
-                    leftIntakeMotor.set(0);
-                    rightIntakeMotor.set(0);
-                },
-                this);
-        }
-        return Commands.none();
+        return Commands.startEnd(
+            () -> {
+                leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
+                rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
+            },
+            () -> {
+                leftIntakeMotor.set(0);
+                rightIntakeMotor.set(0);
+            }, this);
     }
 
     public Command intakeOut()
     {
-        if (getPosition() < Constants_Intake.extendLimit) { // TODO: set the correct position limit
-            return Commands.startEnd(
-                () -> {
-                    leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
-                    rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
-                },
-                () -> {
-                    leftIntakeMotor.set(0);
-                    rightIntakeMotor.set(0);
-                },
-                this);
-        }
-        return Commands.none();
+        return Commands.startEnd(
+            () -> {
+                leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+                rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+            },
+            () -> {
+                leftIntakeMotor.set(0);
+                rightIntakeMotor.set(0);
+            }, this);
     }
 
     //  public Command stopIntake()
@@ -144,6 +137,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Position", getPosition());
+        SmartDashboard.putNumber("Left Intake Current Draw", leftIntakeMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Right Intake Current Draw", rightIntakeMotor.getOutputCurrent());
     }
-
 }
