@@ -125,7 +125,14 @@ public final class Constants {
       public static final double CAMERA_HEIGHT = 0.5; // Height of the camera from the ground in meters                            //TODO: get actual value
       public static final double TAG_HEIGHT = 1.124; // Height of the AprilTag from the ground in meters                             
       public static final double CAMERA_ANGLE = 40; // Angle of the camera from the horizontal in degrees                          //TODO: get actual value
-      public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
+      public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables
+      
+      // Shooter PID values
+      // TODO: Set the PID constants (Tune these values!)
+      public static final double kP = 0.1; 
+      public static final double kI = 0.0001;
+      public static final double kD = 1; 
+      public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
     }                            
     
     public static final class Constants_Intake

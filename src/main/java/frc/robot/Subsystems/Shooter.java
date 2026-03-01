@@ -8,6 +8,7 @@ import frc.robot.Util.Constants.Constants_Shooter;
 import frc.robot.Util.RobotMap;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
@@ -19,8 +20,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 public class Shooter extends SubsystemBase {
   private final SparkFlex shooterOut;
@@ -28,12 +27,14 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterIntake;
   private final Limelight LL_Shoot;
   public boolean reverseToggle;
+  private SparkClosedLoopController shooterOutPidController;
   private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
 
   
   public Shooter() {
     // create brushless motors for each of the motors on the shooter mechanism
     shooterOut = new SparkFlex(RobotMap.MAP_SHOOTER.shooterOutSparkFLEX, MotorType.kBrushless);
+    shooterOutPidController = shooterOut.getClosedLoopController();
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
     shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
     //create the limelight for the shooter
@@ -45,20 +46,26 @@ public class Shooter extends SubsystemBase {
     shooterintakeConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
     shooterIntake.configure(shooterintakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-
     SparkFlexConfig shooterOutConfig = new SparkFlexConfig();
     shooterOutConfig.idleMode(IdleMode.kCoast);
     shooterOutConfig.inverted(false);
     shooterOutConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
+    shooterOutConfig.closedLoop.p(Constants_Shooter.kP);
+    shooterOutConfig.closedLoop.i(Constants_Shooter.kI);
+    shooterOutConfig.closedLoop.d(Constants_Shooter.kD);
+    shooterOutConfig.closedLoop.velocityFF(Constants_Shooter.kFF);
+    shooterOutConfig.closedLoop.outputRange(-1, 1);
     shooterOut.configure(shooterOutConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SmartDashboard.putNumber("Shooter roller value", Constants_Shooter.shooterLaunchVoltage);
   }
+
   // un used
   // A method to set the voltage of the shooter roller
   public void setShooterRoller(double voltage) {
     shooterOut.setVoltage(voltage);
   }
+
   // A method to stop the rollers
   public void stop() {
     shooterOut.set(0);
@@ -73,6 +80,9 @@ public class Shooter extends SubsystemBase {
      }
      
      public void remoteShootFuel() {
+        // TOOD: To switch from manual voltage control (which sags as your battery drains) to PID 
+        // velocity control we need to replace the .set() method with .setReference(). However, 
+        // .setReference() requires a velocity in RPM which we need to figure out. 
         shooterOut.set(currentShooterSpeed);
         shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
@@ -93,10 +103,10 @@ public class Shooter extends SubsystemBase {
     currentShooterSpeed = speed;
   }
 
-  public boolean getReverse()
-  {
+  public boolean getReverse() {
     return reverseToggle;
   }
+
   public Command reverseAgitator() {
     return Commands.startEnd(() -> {
       if (reverseToggle)
