@@ -104,11 +104,12 @@ public final class Constants {
       public static final double fuelAgitatorSpeed = 0.2; 
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final double manualFuelAgitatorReverseSpeed = -0.2;
+      public static final double shooterIntakeSpeed = 0.2;
+      public static final double shooterRollerSpeed = 0.5; 
+      
       public static final int shooterMotorCurrentLimit = 60;
-      public static final double shooterSpeed = .87; 
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
-
       public static final double motorDelta = 0.01;
   
       public static final double GRAVITY = 9.8; // Acceleration due to gravity in m/s^2
@@ -121,6 +122,13 @@ public final class Constants {
       public static final double TAG_HEIGHT = 1.124; // Height of the AprilTag from the ground in meters                             
       public static final double CAMERA_ANGLE = 40; // Angle of the camera from the horizontal in degrees                          //TODO: get actual value
       public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
+
+      // Shooter PID values
+      // TODO: Set the PID constants (Tune these values!)
+      public static final double kP = 0.1; 
+      public static final double kI = 0.0001;
+      public static final double kD = 0.0001; 
+      public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
     }                            
     
     public static final class Constants_Intake

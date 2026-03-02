@@ -11,7 +11,9 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,28 +24,41 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Shooter extends SubsystemBase {
-  private final SparkMax shooterRoller;
+  private final SparkMax shooterIntake;
+  private final SparkFlex shooterRoller;
   public final SparkFlex fuelAgitator;
   private final Limelight LL_Shoot;
+
+  //private SparkClosedLoopController rollerPID;
   public boolean reverseToggle;
-  // Runtime adjustable speed for the shooter roller. 
-  // Initializedf from constants.
-  private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
+  private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
   /** Creates a new Shooter Subsystem. */
   
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
+    shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
+    shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterOutSparkFLEX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
+    //rollerPID = shooterRoller.getClosedLoopController();
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
-    SparkMaxConfig shooterConfig = new SparkMaxConfig();
-    shooterConfig.idleMode(IdleMode.kCoast);
-    // TODO: Not sure if the motor needs to be inverted, test and change if necessary
-    //shooterConfig.inverted(true);
-    shooterConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
-    shooterRoller.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
+    SparkMaxConfig shooterIntakeConfig = new SparkMaxConfig();
+    shooterIntakeConfig.idleMode(IdleMode.kCoast);
+    shooterIntakeConfig.inverted(false);
+    shooterIntakeConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
+    shooterIntake.configure(shooterIntakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    SparkFlexConfig shooterRollerConfig = new SparkFlexConfig();
+    shooterRollerConfig.idleMode(IdleMode.kCoast);
+    shooterRollerConfig.inverted(false);
+    shooterRollerConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
+    shooterRollerConfig.closedLoop.p(Constants_Shooter.kP);
+    shooterRollerConfig.closedLoop.i(Constants_Shooter.kI);
+    shooterRollerConfig.closedLoop.d(Constants_Shooter.kD);
+    shooterRollerConfig.closedLoop.velocityFF(Constants_Shooter.kFF);
+    shooterRollerConfig.closedLoop.outputRange(-1, 1);
+    shooterRoller.configure(shooterRollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     // put default values for various fuel operations onto the dashboard
     // all commands using this subsystem pull values from the dashbaord to allow
     // you to tune the values easily, and then replace the values in Constants.java
@@ -57,6 +72,7 @@ public class Shooter extends SubsystemBase {
   }
   // A method to stop the rollers
   public void stop() {
+    shooterIntake.set(0);
     shooterRoller.set(0);
   }
    
@@ -69,6 +85,7 @@ public class Shooter extends SubsystemBase {
      
      public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
+        shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */

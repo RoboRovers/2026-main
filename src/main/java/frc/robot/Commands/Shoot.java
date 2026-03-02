@@ -25,9 +25,7 @@ public Shoot(Shooter shooter) {
         }else {
             delay.start();
         }
-        
-        shooter.fuelAgitator.set(0);
-        
+        shooter.fuelAgitator.set(0);    
     }
 
     @Override
@@ -38,7 +36,6 @@ public Shoot(Shooter shooter) {
         {
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
         }
-    
     }
 
     @Override
@@ -47,7 +44,7 @@ public Shoot(Shooter shooter) {
         
         if (shooter.getReverse())
         shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
-        
+
         shooter.fuelAgitator.set(0);
     }
 
