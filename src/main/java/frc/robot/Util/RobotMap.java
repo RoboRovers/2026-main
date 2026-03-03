@@ -24,7 +24,7 @@ public class RobotMap
 
     public static final class MAP_SHOOTER
     {
-        public static final int shooterOutSparkFLEX = 10;
+        public static final int shooterRollerSparkFLEX = 10;
         public static final int fuelAgitatorSparkFLEX = 8;
         public static final int shooterIntakeSparkMAX = 7;             //TODO Get Actual Value
     }

@@ -107,7 +107,8 @@ public final class Constants {
       public static final double shooterIntakeSpeed = 0.2;
       public static final double shooterRollerSpeed = 0.5; 
       
-      public static final int shooterMotorCurrentLimit = 60;
+      public static final int shooterRollerCurrentLimit = 60;
+      public static final int shooterIntakeCurrentLimit = 60;
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
       public static final double motorDelta = 0.01;

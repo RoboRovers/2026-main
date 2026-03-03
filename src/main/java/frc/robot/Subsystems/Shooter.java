@@ -13,8 +13,8 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkClosedLoopController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -37,7 +37,7 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
-    shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterOutSparkFLEX, MotorType.kBrushless);
+    shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterRollerSparkFLEX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
     //rollerPID = shooterRoller.getClosedLoopController();
     //create the limelight for the shooter
@@ -46,24 +46,23 @@ public class Shooter extends SubsystemBase {
     SparkMaxConfig shooterIntakeConfig = new SparkMaxConfig();
     shooterIntakeConfig.idleMode(IdleMode.kCoast);
     shooterIntakeConfig.inverted(false);
-    shooterIntakeConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
+    shooterIntakeConfig.smartCurrentLimit(Constants_Shooter.shooterIntakeCurrentLimit);
     shooterIntake.configure(shooterIntakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SparkFlexConfig shooterRollerConfig = new SparkFlexConfig();
     shooterRollerConfig.idleMode(IdleMode.kCoast);
-    shooterRollerConfig.inverted(false);
-    shooterRollerConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
-    shooterRollerConfig.closedLoop.p(Constants_Shooter.kP);
+    shooterRollerConfig.inverted(true);
+    shooterRollerConfig.smartCurrentLimit(Constants_Shooter.shooterRollerCurrentLimit);
+    shooterRoller.configure(shooterRollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    /**shooterRollerConfig.closedLoop.p(Constants_Shooter.kP);
     shooterRollerConfig.closedLoop.i(Constants_Shooter.kI);
     shooterRollerConfig.closedLoop.d(Constants_Shooter.kD);
     shooterRollerConfig.closedLoop.velocityFF(Constants_Shooter.kFF);
-    shooterRollerConfig.closedLoop.outputRange(-1, 1);
-    shooterRoller.configure(shooterRollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    // put default values for various fuel operations onto the dashboard
-    // all commands using this subsystem pull values from the dashbaord to allow
-    // you to tune the values easily, and then replace the values in Constants.java
-    // with your new values. For more information, see the Software Guide.
+    shooterRollerConfig.closedLoop.outputRange(-1, 1);**/
+
     SmartDashboard.putNumber("Shooter roller value", Constants_Shooter.shooterLaunchVoltage);
+    SmartDashboard.putNumber("Shooter Roller ID", shooterRoller.getDeviceId());
+    SmartDashboard.putNumber("Shooter Intake ID", shooterIntake.getDeviceId());
   }
 
   // A method to set the voltage of the shooter roller
@@ -85,7 +84,7 @@ public class Shooter extends SubsystemBase {
      
      public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
-        shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
+        //shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
