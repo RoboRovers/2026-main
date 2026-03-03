@@ -29,7 +29,7 @@ public class Controllers {
     public void initialize_Xbox_Controls()
     {
         //intakeFuel = xbox.leftTrigger();
-        shootFuel = xbox.rightTrigger();
+        shootFuel = xbox.leftBumper();
         spinRollers = xbox.leftTrigger();
         reverseSpinRollers = xbox.x();
         fastSpinRollers = xbox.b();

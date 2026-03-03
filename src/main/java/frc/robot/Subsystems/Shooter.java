@@ -118,13 +118,10 @@ public class Shooter extends SubsystemBase {
       {
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
-        
       }
-
       },
       () -> {
-        fuelAgitator.set(0);
-        
+        fuelAgitator.set(0);   
       }, this);
   }
 
