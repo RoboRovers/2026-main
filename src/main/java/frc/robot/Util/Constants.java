@@ -108,10 +108,9 @@ public final class Constants {
       public static final double shooterRollerSpeed = 0.5; 
       
       public static final int shooterMotorCurrentLimit = 60;
-<<<<<<< HEAD
+
       public static final double shooterSpeed = .87; //TODO Tune this value, it is just a placeholder
-=======
->>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
+
       public static final double shooterLaunchVoltage = 10.6;
       public static final double spinUpSeconds = 1;
       public static final double motorDelta = 0.01;
@@ -137,13 +136,10 @@ public final class Constants {
     
     public static final class Constants_Intake
     {
-<<<<<<< HEAD
+
       public static final double inchesToRotations = 00; //TODO Get number
       public static final double rollerSpeed = -0.3;
-=======
-      public static final double rollerSpeed = -0.2;
       public static final double fasterRollerSpeed = -0.5;
->>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
       public static final double retractLimit = 2;
       public static final double extendLimit = 50;
       public static final double intakeRetractSpeed = -0.05;

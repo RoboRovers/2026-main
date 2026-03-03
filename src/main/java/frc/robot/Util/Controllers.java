@@ -29,27 +29,26 @@ public class Controllers {
     public void initialize_Xbox_Controls()
     {
         //intakeFuel = xbox.leftTrigger();
-<<<<<<< HEAD
         shootFuel = xbox.rightTrigger();
         spinRollers = xbox.leftTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();
-=======
+
         shootFuel = xbox.leftBumper();
         spinRollers = xbox.leftTrigger();
         reverseSpinRollers = xbox.x();
         fastSpinRollers = xbox.b();
->>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
+
         
         manualReverseAgitator = xbox.rightBumper();
         //leftTrigger = xbox.leftTrigger();
         //rightTrigger = xbox.rightTrigger();
-<<<<<<< HEAD
+
         toggleAutoAgitator = xbox.x();
         shooterIncreaseSpeed = xbox.y();
         shooterDecreaseSpeed = xbox.a();
         
-=======
+
         // toggleAutoAgitator = xbox.x();
 
         shooterIncreaseSpeed = xbox.y();
@@ -63,7 +62,7 @@ public class Controllers {
         intakeInD = xbox.povDown();
         intakeInDL = xbox.povDownLeft();
         intakeInDR = xbox.povDownRight();
->>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
+
 
     }
 

@@ -25,13 +25,13 @@ public Shoot(Shooter shooter) {
         }else {
             delay.start();
         }
-<<<<<<< HEAD
+
         
         shooter.fuelAgitator.set(0);
         
-=======
+
         shooter.fuelAgitator.set(0);    
->>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
+
     }
 
     @Override
