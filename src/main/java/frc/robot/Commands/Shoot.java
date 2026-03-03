@@ -25,9 +25,13 @@ public Shoot(Shooter shooter) {
         }else {
             delay.start();
         }
+<<<<<<< HEAD
         
         shooter.fuelAgitator.set(0);
         
+=======
+        shooter.fuelAgitator.set(0);    
+>>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
     }
 
     @Override
@@ -38,7 +42,6 @@ public Shoot(Shooter shooter) {
         {
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
         }
-    
     }
 
     @Override
@@ -47,7 +50,7 @@ public Shoot(Shooter shooter) {
         
         if (shooter.getReverse())
         shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
-        
+
         shooter.fuelAgitator.set(0);
     }
 

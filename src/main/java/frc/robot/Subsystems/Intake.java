@@ -65,7 +65,7 @@ public class Intake extends SubsystemBase {
 
     // Roller intake motor setup
     rollerIntakeConfig = new SparkFlexConfig();
-    rollerIntakeConfig.idleMode(IdleMode.kBrake);
+    rollerIntakeConfig.idleMode(IdleMode.kCoast);
     // TODO: set the correct conversion factor for the intake encoder (units -> meters or rotations)
     rollerIntakeConfig.encoder.positionConversionFactor(Constants_Intake.intakePositionConversionFactor);
     rollerIntakeConfig.inverted(Constants_Intake.rollerIntakeMotorInverted);
@@ -83,11 +83,28 @@ public class Intake extends SubsystemBase {
         return leftIntakeEncoder.getPosition();
     }
 
+    
     public Command spinRollers()
     {
         // While scheduled, run the roller; ensure it is stopped when the command ends.
         return Commands.startEnd(
             () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed),
+            () -> rollerIntakeMotor.set(0),
+            this);
+    }
+    public Command reverseSpinRollers()
+    {
+        // While scheduled, run the roller; ensure it is stopped when the command ends.
+        return Commands.startEnd(
+            () -> rollerIntakeMotor.set(-Constants_Intake.rollerSpeed),
+            () -> rollerIntakeMotor.set(0),
+            this);
+    }
+    public Command fastSpinRollers()
+    {
+        // While scheduled, run the roller; ensure it is stopped when the command ends.
+        return Commands.startEnd(
+            () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed*2),
             () -> rollerIntakeMotor.set(0),
             this);
     }
@@ -97,41 +114,34 @@ public class Intake extends SubsystemBase {
         leftIntakeEncoder.setPosition(2); // TODO: set the correct zero position
         rightIntakeEncoder.setPosition(2); // TODO: set the correct zero position
     }
-    // shouldn't use intakeIn
+
+
      public Command intakeIn()
     {
-        if (getPosition() < Constants_Intake.retractLimit) { // TODO: set the correct position limit
-            // Use startEnd so motors are stopped when the command ends/interrupted.
-            return Commands.startEnd(
-                () -> {
-                    leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
-                    rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
-                },
-                () -> {
-                    leftIntakeMotor.set(0);
-                    rightIntakeMotor.set(0);
-                },
-                this);
-        }
-        return Commands.none();
+        return Commands.startEnd(
+            () -> {
+                leftIntakeMotor.set(Constants_Intake.intakeRetractSpeed); // between -1 and 1
+                rightIntakeMotor.set(Constants_Intake.intakeRetractSpeed);
+            },
+            () -> {
+                leftIntakeMotor.set(0);
+                rightIntakeMotor.set(0);
+            }, this);
     }
-// shouldn't use intakeOut
-     public Command intakeOut()
+
+    public Command intakeOut()
     {
-        if (getPosition() > Constants_Intake.extendLimit) { // TODO: set the correct position limit
-            return Commands.startEnd(
-                () -> {
-                    leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
-                    rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
-                },
-                () -> {
-                    leftIntakeMotor.set(0);
-                    rightIntakeMotor.set(0);
-                },
-                this);
-        }
-        return Commands.none();
+        return Commands.startEnd(
+            () -> {
+                leftIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+                rightIntakeMotor.set(Constants_Intake.intakeExtendSpeed);
+            },
+            () -> {
+                leftIntakeMotor.set(0);
+                rightIntakeMotor.set(0);
+            }, this);
     }
+
 
     //  public Command stopIntake()
     // {
@@ -144,6 +154,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Position", getPosition());
+        SmartDashboard.putNumber("Left Intake Current Draw", leftIntakeMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Right Intake Current Draw", rightIntakeMotor.getOutputCurrent());
     }
-
 }

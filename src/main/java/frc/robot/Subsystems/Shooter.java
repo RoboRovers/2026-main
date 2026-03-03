@@ -10,8 +10,8 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,24 +22,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Shooter extends SubsystemBase {
-  private final SparkMax shooterRoller;
+  private final SparkMax shooterIntake;
+  private final SparkFlex shooterRoller;
   public final SparkFlex fuelAgitator;
   private final Limelight LL_Shoot;
+
+  //private SparkClosedLoopController rollerPID;
   public boolean reverseToggle;
-  // Runtime adjustable speed for the shooter roller. 
-  // Initializedf from constants.
-  private double currentShooterSpeed = Constants_Shooter.shooterSpeed;
+  private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
   /** Creates a new Shooter Subsystem. */
   
   @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
-    shooterRoller = new SparkMax(RobotMap.MAP_SHOOTER.shooterSparkMAX, MotorType.kBrushless);
+    shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
+    shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterOutSparkFLEX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
+
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
+  
+    // create the configuration for the shooter roller, set a current limit, (set
+    // the motor to inverted so that positive values are used for shooting???), 
+    // and apply the config to the controller
     SparkMaxConfig shooterConfig = new SparkMaxConfig();
-    shooterConfig.idleMode(IdleMode.kCoast);
     // TODO: Not sure if the motor needs to be inverted, test and change if necessary
     //shooterConfig.inverted(true);
     shooterConfig.smartCurrentLimit(Constants_Shooter.shooterMotorCurrentLimit);
@@ -58,6 +64,7 @@ public class Shooter extends SubsystemBase {
   }
   // A method to stop the rollers
   public void stop() {
+    currentShooterSpeed = 0;
     shooterRoller.set(0);
   }
    
@@ -70,6 +77,7 @@ public class Shooter extends SubsystemBase {
      
      public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
+        shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
      
   /** Adjust the shooter speed by a delta (e.g. +0.01 or -0.01). Clamped to [-1.0, 1.0]. */
@@ -102,19 +110,19 @@ public class Shooter extends SubsystemBase {
       {
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
-        
       }
-
       },
       () -> {
-        fuelAgitator.set(0);
-        
+        fuelAgitator.set(0);   
       }, this);
   }
 
   public Command manualReverseAgitator() {
-    return Commands.runOnce(() -> {
+    return Commands.startEnd(() -> {
       fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
+    },
+    () -> {
+      fuelAgitator.set(0);
     }, this);
   }
 
@@ -138,6 +146,6 @@ public class Shooter extends SubsystemBase {
       if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
       return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
   }
-  
+
   
 }

@@ -12,7 +12,9 @@ public class Controllers {
     public CommandXboxController xbox;
     public Trigger intakeFuel, spinRollers, shootFuel, zeroHeading, FO_toggle, 
     resetWheels, shooterIncreaseSpeed, shooterDecreaseSpeed, manualReverseAgitator, 
-    toggleAutoAgitator, leftBumper, rightBumper, leftTrigger, rightTrigger;
+    toggleAutoAgitator, leftBumper, rightBumper, leftTrigger, rightTrigger,
+    intakeOutU, intakeOutUL, intakeOutUR, intakeInD, intakeInDL, intakeInDR,
+    reverseSpinRollers, fastSpinRollers;
 
     public Controllers() 
     {
@@ -27,18 +29,41 @@ public class Controllers {
     public void initialize_Xbox_Controls()
     {
         //intakeFuel = xbox.leftTrigger();
+<<<<<<< HEAD
         shootFuel = xbox.rightTrigger();
         spinRollers = xbox.leftTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();
+=======
+        shootFuel = xbox.leftBumper();
+        spinRollers = xbox.leftTrigger();
+        reverseSpinRollers = xbox.x();
+        fastSpinRollers = xbox.b();
+>>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
         
         manualReverseAgitator = xbox.rightBumper();
         //leftTrigger = xbox.leftTrigger();
         //rightTrigger = xbox.rightTrigger();
+<<<<<<< HEAD
         toggleAutoAgitator = xbox.x();
         shooterIncreaseSpeed = xbox.y();
         shooterDecreaseSpeed = xbox.a();
         
+=======
+        // toggleAutoAgitator = xbox.x();
+
+        shooterIncreaseSpeed = xbox.y();
+        shooterDecreaseSpeed = xbox.a();
+    
+
+        intakeOutU = xbox.povUp();
+        intakeOutUL = xbox.povUpLeft();
+        intakeOutUR = xbox.povUpRight();
+    
+        intakeInD = xbox.povDown();
+        intakeInDL = xbox.povDownLeft();
+        intakeInDR = xbox.povDownRight();
+>>>>>>> 05692108bb03f25c765214cf270968d8fae8b9a8
 
     }
 
