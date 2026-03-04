@@ -33,8 +33,6 @@ public class Intake extends SubsystemBase {
     public RelativeEncoder rollerIntakeEncoder;
     public SparkClosedLoopController rollerIntakePID;
     public SparkFlexConfig rollerIntakeConfig;
-
-    public RelativeEncoder rollerEncoder;
     
     
     @SuppressWarnings("removal")
@@ -74,8 +72,8 @@ public class Intake extends SubsystemBase {
     rollerIntakeConfig.smartCurrentLimit(Constants_Intake.rollerIntakeMotorCurrentLimit);
         
     rollerIntakeMotor = new SparkFlex(RobotMap.MAP_INTAKE.rollerIntakeSparkFLEX, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    rollerIntakeEncoder= rollerIntakeMotor.getEncoder();
     rollerIntakeMotor.configure(rollerIntakeConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    rollerEncoder = rollerIntakeMotor.getEncoder();
 
     rollerIntakeConfig.closedLoop.p(Constants_Intake.rollerP);
     rollerIntakeConfig.closedLoop.i(Constants_Intake.rollerI);
@@ -162,6 +160,6 @@ public class Intake extends SubsystemBase {
         SmartDashboard.putNumber("Intake Position", getPosition());
         SmartDashboard.putNumber("Left Intake Current Draw", leftIntakeMotor.getOutputCurrent());
         SmartDashboard.putNumber("Right Intake Current Draw", rightIntakeMotor.getOutputCurrent());
-        SmartDashboard.putNumber("Intake Roller RPM Velocity", rollerEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake Roller RPM Velocity", rollerIntakeEncoder.getVelocity());
     }
 }

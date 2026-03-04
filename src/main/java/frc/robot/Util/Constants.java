@@ -153,7 +153,7 @@ public final class Constants {
       public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
 
       //Dummy Values; TODO: Tune these values!
-      public static final double rollerP = 0.4;
+      public static final double rollerP = 0.9;
       public static final double rollerI = 0.0000;
       public static final double rollerD = 0.0001;
     }
