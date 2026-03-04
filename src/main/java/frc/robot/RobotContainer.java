@@ -80,10 +80,13 @@ public class RobotContainer {
     u_Controllers.shooterDecreaseSpeed.onTrue(new ShooterDecreaseSpeed(s_Shooter));
     u_Controllers.manualReverseAgitator.onTrue(s_Shooter.manualReverseAgitator());
     u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
+
+
     u_Controllers.fastSpinRollers.whileTrue(s_Intake.fastSpinRollers());
     u_Controllers.reverseSpinRollers.whileTrue(s_Intake.reverseSpinRollers());
 
     
+
     //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
 
     //Intake Extend + Retract

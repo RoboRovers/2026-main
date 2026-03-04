@@ -25,7 +25,13 @@ public Shoot(Shooter shooter) {
         }else {
             delay.start();
         }
+
+        
+        shooter.fuelAgitator.set(0);
+        
+
         shooter.fuelAgitator.set(0);    
+
     }
 
     @Override

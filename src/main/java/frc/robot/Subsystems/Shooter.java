@@ -10,8 +10,6 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.RelativeEncoder;
@@ -35,13 +33,15 @@ public class Shooter extends SubsystemBase {
   private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
 
   /** Creates a new Shooter Subsystem. */
+  
+  @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
     shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterRollerSparkFLEX, MotorType.kBrushless);
     relEnc = shooterRoller.getEncoder();
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
-    //rollerPID = shooterRoller.getClosedLoopController();
+
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
 
@@ -72,7 +72,7 @@ public class Shooter extends SubsystemBase {
   }
   // A method to stop the rollers
   public void stop() {
-    shooterIntake.set(0);
+    currentShooterSpeed = 0;
     shooterRoller.set(0);
   }
    
@@ -156,4 +156,6 @@ public class Shooter extends SubsystemBase {
       if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
       return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
   }
+
+  
 }

@@ -134,7 +134,9 @@ public final class Constants {
     
     public static final class Constants_Intake
     {
-      public static final double rollerSpeed = -0.2;
+
+      public static final double inchesToRotations = 00; //TODO Get number
+      public static final double rollerSpeed = -0.3;
       public static final double fasterRollerSpeed = -0.5;
       public static final double intakeRetractSpeed = -0.05;
       public static final double intakeExtendSpeed = 0.05;
