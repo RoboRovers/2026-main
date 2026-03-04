@@ -104,8 +104,9 @@ public final class Constants {
       public static final double fuelAgitatorSpeed = 0.2; 
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final double manualFuelAgitatorReverseSpeed = -0.2;
-      public static final double shooterIntakeSpeed = 0.2;
-      public static final double shooterRollerSpeed = 0.5; 
+      public static final double shooterIntakeSpeed = 0.18;
+      public static final double shooterRollerSpeed = 0.70; 
+      public static final double shooterRPM = 3000;
       
       public static final int shooterRollerCurrentLimit = 60;
       public static final int shooterIntakeCurrentLimit = 60;
@@ -125,21 +126,20 @@ public final class Constants {
       public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
 
       // Shooter PID values
-      // TODO: Set the PID constants (Tune these values!)
-      public static final double kP = 0.1; 
-      public static final double kI = 0.0001;
+      public static final double kP = 0.7; 
+      public static final double kI = 0.0000;
       public static final double kD = 0.0001; 
-      public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
+      //public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
     }                            
     
     public static final class Constants_Intake
     {
       public static final double rollerSpeed = -0.2;
       public static final double fasterRollerSpeed = -0.5;
-      public static final double retractLimit = 2;
-      public static final double extendLimit = 50;
       public static final double intakeRetractSpeed = -0.05;
       public static final double intakeExtendSpeed = 0.05;
+      public static final double retractLimit = 2;
+      public static final double extendLimit = 50;
       public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
       public static final int intakeMotorCurrentLimit = 40; //TODO find the correct current limit for the intake motors
 
@@ -149,6 +149,11 @@ public final class Constants {
       public static final boolean rollerIntakeMotorInverted = Constants_Intake.intakeMotorInverted;
   
       public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
+
+      //Dummy Values; TODO: Tune these values!
+      public static final double rollerP = 0.4;
+      public static final double rollerI = 0.0000;
+      public static final double rollerD = 0.0001;
     }
 
 
