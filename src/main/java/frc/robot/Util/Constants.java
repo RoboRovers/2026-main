@@ -106,7 +106,6 @@ public final class Constants {
       public static final double manualFuelAgitatorReverseSpeed = -0.2;
       public static final double shooterIntakeSpeed = 0.18;
       public static final double shooterRollerSpeed = 0.70; 
-      public static final double shooterRPM = 3000;
       
       public static final int shooterRollerCurrentLimit = 60;
       public static final int shooterIntakeCurrentLimit = 60;
@@ -126,7 +125,7 @@ public final class Constants {
       public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
 
       // Shooter PID values
-      public static final double kP = 0.7; 
+      public static final double kP = 0.75; 
       public static final double kI = 0.0000;
       public static final double kD = 0.0001; 
       //public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
@@ -140,7 +139,7 @@ public final class Constants {
       public static final double fasterRollerSpeed = -0.5;
       public static final double intakeRetractSpeed = -0.05;
       public static final double intakeExtendSpeed = 0.05;
-      public static final double retractLimit = 2;
+      public static final double retractLimit = 0;
       public static final double extendLimit = 50;
       public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
       public static final int intakeMotorCurrentLimit = 40; //TODO find the correct current limit for the intake motors
@@ -157,8 +156,6 @@ public final class Constants {
       public static final double rollerI = 0.0000;
       public static final double rollerD = 0.0001;
     }
-
-
 
   /**public static final class Constants_Climber 
   {

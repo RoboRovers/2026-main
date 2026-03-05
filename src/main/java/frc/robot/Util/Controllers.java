@@ -3,8 +3,6 @@ package frc.robot.Util;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Commands.ShooterIncreaseSpeed;
-import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.RobotMap.MAP_CONTROLLER;
 
 public class Controllers {
@@ -29,7 +27,7 @@ public class Controllers {
     public void initialize_Xbox_Controls()
     {
         //intakeFuel = xbox.leftTrigger();
-        shootFuel = xbox.rightTrigger();
+        //shootFuel = xbox.rightTrigger();
         spinRollers = xbox.leftTrigger();
         // intakeOut = xbox.x();
         // intakeIn = xbox.y();

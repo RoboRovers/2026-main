@@ -108,15 +108,15 @@ public class Intake extends SubsystemBase {
     {
         // While scheduled, run the roller; ensure it is stopped when the command ends.
         return Commands.startEnd(
-            () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed*2),
+            () -> rollerIntakeMotor.set(Constants_Intake.rollerSpeed * 2),
             () -> rollerIntakeMotor.set(0),
             this);
     }
     
     public void zeroPosition()
     {
-        leftIntakeEncoder.setPosition(2); // TODO: set the correct zero position
-        rightIntakeEncoder.setPosition(2); // TODO: set the correct zero position
+        leftIntakeEncoder.setPosition(0); // TODO: set the correct zero position
+        rightIntakeEncoder.setPosition(0); // TODO: set the correct zero position
     }
 
 
