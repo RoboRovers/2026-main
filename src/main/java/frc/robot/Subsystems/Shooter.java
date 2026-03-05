@@ -28,6 +28,7 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterIntake;
   private final SparkFlex shooterRoller;
   public final SparkFlex fuelAgitator;
+  public final SparkFlex magicCarpet;
   private final Limelight LL_Shoot;
   RelativeEncoder relEnc;
 
@@ -44,6 +45,7 @@ public class Shooter extends SubsystemBase {
     shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterRollerSparkFLEX, MotorType.kBrushless);
     relEnc = shooterRoller.getEncoder();
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
+    magicCarpet = new SparkFlex(RobotMap.MAP_SHOOTER.magicCarpetSparkFLEX, MotorType.kBrushless);
 
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
@@ -88,6 +90,7 @@ public class Shooter extends SubsystemBase {
      
      public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
+
         shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
      
@@ -115,10 +118,12 @@ public class Shooter extends SubsystemBase {
     return Commands.startEnd(() -> {
       if (reverseToggle)
       {
+        //magicCarpet.set(0);
         fuelAgitator.set(0);
         reverseToggle= false;
       } else
       {
+        //magicCarpet.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
       }
@@ -130,9 +135,12 @@ public class Shooter extends SubsystemBase {
 
   public Command manualReverseAgitator() {
     return Commands.startEnd(() -> {
+      
+      //magicCarpet.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
       fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
     },
     () -> {
+      //magicCarpet.set(0);
       fuelAgitator.set(0);
     }, this);
   }

@@ -113,11 +113,11 @@ public class Intake extends SubsystemBase {
             this);
     }
     
-    public void zeroPosition()
+    /*public void zeroPosition()
     {
         leftIntakeEncoder.setPosition(2); // TODO: set the correct zero position
-        rightIntakeEncoder.setPosition(2); // TODO: set the correct zero position
-    }
+        rightIntakeEncoder.setPosition(0); // TODO: set the correct zero position
+    }*/
 
 
      public Command intakeIn()
