@@ -147,6 +147,4 @@ public class Shooter extends SubsystemBase {
       if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
       return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
   }
-
-  
 }
