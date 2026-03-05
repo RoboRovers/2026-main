@@ -30,7 +30,7 @@ public Shoot(Shooter shooter) {
         shooter.fuelAgitator.set(0);
         
 
-        shooter.fuelAgitator.set(0);    
+        //shooter.magicCarpet.set(0);    
 
     }
 
@@ -41,6 +41,7 @@ public Shoot(Shooter shooter) {
         if (delay.get() > 1) // delay is in seconds
         {
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
+            //shooter.magicCarpet.set(Constants_Shooter.fuelAgitatorSpeed);
         }
     }
 
@@ -49,11 +50,16 @@ public Shoot(Shooter shooter) {
         shooter.stop();
         
         if (shooter.getReverse())
-        shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
-
-        shooter.fuelAgitator.set(0);
+        {
+            shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+           // shooter.magicCarpet.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+        }
+        else
+        {
+            shooter.fuelAgitator.set(0);
+            //shooter.magicCarpet.set(0);
+        }
     }
-
     @Override
     public boolean isFinished()
     {

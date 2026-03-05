@@ -110,6 +110,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null;
+    return Commands.run(() -> s_Shooter.remoteShootFuel(), s_Shooter);
   }
 }
