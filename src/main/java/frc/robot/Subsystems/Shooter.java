@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterIntake;
   private final SparkFlex shooterRoller;
   public final SparkFlex fuelAgitator;
-  //public final SparkFlex magicCarpet;
+  public final SparkFlex magicCarpet;
   private final Limelight LL_Shoot;
   public boolean reverseToggle;
   private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
     shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
     shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterRollerSparkFLEX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
-    //magicCarpet = new SparkFlex(RobotMap.MAP_SHOOTER.magicCarpetSparkFLEX, MotorType.kBrushless);
+    magicCarpet = new SparkFlex(RobotMap.MAP_SHOOTER.magicCarpetSparkFLEX, MotorType.kBrushless);
 
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
@@ -58,9 +58,10 @@ public class Shooter extends SubsystemBase {
     shooterRollerConfig.closedLoop.d(Constants_Shooter.kD);
     shooterRollerConfig.closedLoop.outputRange(-1, 1);
 
-    //magicCarpetConfig = new SparkFlexConfig();
-    //magicCarpetConfig.inverted(false);
-    //magicCarpet.configure(magicCarpetConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    SparkFlexConfig magicCarpetConfig = new SparkFlexConfig();
+    magicCarpetConfig = new SparkFlexConfig();
+    magicCarpetConfig.inverted(false);
+    magicCarpet.configure(magicCarpetConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   // A method to set the voltage of the shooter roller
@@ -70,6 +71,7 @@ public class Shooter extends SubsystemBase {
   // A method to stop the rollers
   public void stop() {
     currentShooterSpeed = 0;
+    magicCarpet.set(0);
     shooterIntake.set(0);
     shooterRoller.set(0);
   }
@@ -109,12 +111,12 @@ public class Shooter extends SubsystemBase {
     return Commands.startEnd(() -> {
       if (reverseToggle)
       {
-        //magicCarpet.set(0);
+        magicCarpet.set(0);
         fuelAgitator.set(0);
         reverseToggle= false;
       } else
       {
-        //magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
+        magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
       }
@@ -127,11 +129,11 @@ public class Shooter extends SubsystemBase {
   public Command manualReverseAgitator() {
     return Commands.startEnd(() -> {
       
-      //magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
+      magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
       fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReversedSpeed);
     },
     () -> {
-      //magicCarpet.set(0);
+      magicCarpet.set(0);
       fuelAgitator.set(0);
     }, this);
   }
