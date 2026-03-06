@@ -25,13 +25,8 @@ public Shoot(Shooter shooter) {
         }else {
             delay.start();
         }
-
-        
         shooter.fuelAgitator.set(0);
-        
-
         //shooter.magicCarpet.set(0);    
-
     }
 
     @Override
@@ -40,19 +35,18 @@ public Shoot(Shooter shooter) {
         shooter.remoteShootFuel();
         if (delay.get() > 1) // delay is in seconds
         {
+            //shooter.magicCarpet.set(Constants_Shooter.magicCarpetSpeed);
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
-            //shooter.magicCarpet.set(Constants_Shooter.fuelAgitatorSpeed);
         }
     }
 
     @Override
     public void end(boolean interrupted) {
         shooter.stop();
-        
         if (shooter.getReverse())
         {
             shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
-           // shooter.magicCarpet.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+           //shooter.magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
         }
         else
         {

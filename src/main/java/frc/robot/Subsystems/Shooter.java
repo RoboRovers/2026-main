@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterIntake;
   private final SparkFlex shooterRoller;
   public final SparkFlex fuelAgitator;
-  //private final SparkFlex magicCarpet;
+  //public final SparkFlex magicCarpet;
   private final Limelight LL_Shoot;
   public boolean reverseToggle;
   private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
@@ -57,6 +57,10 @@ public class Shooter extends SubsystemBase {
     shooterRollerConfig.closedLoop.i(Constants_Shooter.kI);
     shooterRollerConfig.closedLoop.d(Constants_Shooter.kD);
     shooterRollerConfig.closedLoop.outputRange(-1, 1);
+
+    //magicCarpetConfig = new SparkFlexConfig();
+    //magicCarpetConfig.inverted(false);
+    //magicCarpet.configure(magicCarpetConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   // A method to set the voltage of the shooter roller
@@ -66,6 +70,7 @@ public class Shooter extends SubsystemBase {
   // A method to stop the rollers
   public void stop() {
     currentShooterSpeed = 0;
+    shooterIntake.set(0);
     shooterRoller.set(0);
   }
    
@@ -78,7 +83,6 @@ public class Shooter extends SubsystemBase {
      
      public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
-
         shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
      
@@ -110,7 +114,7 @@ public class Shooter extends SubsystemBase {
         reverseToggle= false;
       } else
       {
-        //magicCarpet.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+        //magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
       }
@@ -123,8 +127,8 @@ public class Shooter extends SubsystemBase {
   public Command manualReverseAgitator() {
     return Commands.startEnd(() -> {
       
-      //magicCarpet.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
-      fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
+      //magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
+      fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReversedSpeed);
     },
     () -> {
       //magicCarpet.set(0);
@@ -135,23 +139,19 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //shooterRoller.set((Constants_Shooter.shooterRPM - relEnc.getVelocity()) * 0.001);
     SmartDashboard.putNumber("Shooter Speed", currentShooterSpeed);
     SmartDashboard.putNumber("Shooter Roller RPM Velocity", shooterRoller.getEncoder().getVelocity());
   }
   
   public static double getMotorRatio(double xDist) {
       //Calculates the required speed ratio for a given horizontal displacement, assuming:
-      //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
       double squaredRadius = Math.pow(Constants_Shooter.RADIUS, 2);
       double squaredCosine = Math.pow(Math.cos(Math.toRadians(Constants_Shooter.THETA)), 2);
-      double denDifference = (xDist * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2); //the 0.2 ensures that the ball always follows a feasible path into the hub and accounts for AF
+      double denDifference = (xDist * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2);
       double num = 0.5 * Constants_Shooter.GRAVITY * Math.pow(xDist, 2);
       double den = squaredRadius * squaredCosine * denDifference;
       double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den);
-
-      //Keep the speed within bounds
       if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
-      return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
+      return angularSpeed / Constants_Shooter.MAX_SPEED;
   }
 }
