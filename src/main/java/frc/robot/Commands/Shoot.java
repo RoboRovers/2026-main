@@ -45,7 +45,7 @@ public Shoot(Shooter shooter) {
         shooter.stop();
         if (shooter.getReverse())
         {
-            shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+        shooter.fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
            shooter.magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
         }
         else
