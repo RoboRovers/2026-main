@@ -126,7 +126,7 @@ public final class Constants {
       public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
 
       // Shooter PID values
-      public static final double kP = 0.75; 
+      public static final double kP = 0.8; 
       public static final double kI = 0.0000001;
       public static final double kD = 0.0000001; 
       //public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
