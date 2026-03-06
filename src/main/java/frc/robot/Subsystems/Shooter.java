@@ -60,7 +60,7 @@ public class Shooter extends SubsystemBase {
 
     SparkFlexConfig magicCarpetConfig = new SparkFlexConfig();
     magicCarpetConfig = new SparkFlexConfig();
-    magicCarpetConfig.inverted(false);
+    magicCarpetConfig.inverted(true);
     magicCarpet.configure(magicCarpetConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
