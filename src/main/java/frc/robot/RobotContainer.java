@@ -85,7 +85,6 @@ public class RobotContainer {
     u_Controllers.fastSpinRollers.whileTrue(s_Intake.fastSpinRollers());
     u_Controllers.reverseSpinRollers.whileTrue(s_Intake.reverseSpinRollers());
 
-    
 
     //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
 
@@ -111,6 +110,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Commands.run(() -> s_Shooter.remoteShootFuel(), s_Shooter);
+    //return Commands.run(() -> s_Shooter.remoteShootFuel(), s_Shooter);
+    return new Shoot(s_Shooter);
   }
 }

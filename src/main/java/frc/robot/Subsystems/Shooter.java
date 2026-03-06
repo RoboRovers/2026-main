@@ -12,16 +12,12 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
-import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkFlex;
-import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Shooter extends SubsystemBase {
@@ -30,26 +26,22 @@ public class Shooter extends SubsystemBase {
   public final SparkFlex fuelAgitator;
   public final SparkFlex magicCarpet;
   private final Limelight LL_Shoot;
-  RelativeEncoder relEnc;
-
-  //private SparkClosedLoopController rollerPID;
   public boolean reverseToggle;
   private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
 
   /** Creates a new Shooter Subsystem. */
-  
   @SuppressWarnings("removal")
   public Shooter() {
     // create brushed motors for each of the motors on the shooter mechanism
     shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
     shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterRollerSparkFLEX, MotorType.kBrushless);
-    relEnc = shooterRoller.getEncoder();
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
     magicCarpet = new SparkFlex(RobotMap.MAP_SHOOTER.magicCarpetSparkFLEX, MotorType.kBrushless);
 
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
-
+    
+    //Motor Configurations
     SparkMaxConfig shooterIntakeConfig = new SparkMaxConfig();
     shooterIntakeConfig.idleMode(IdleMode.kCoast);
     shooterIntakeConfig.inverted(false);
@@ -66,9 +58,11 @@ public class Shooter extends SubsystemBase {
     shooterRollerConfig.closedLoop.d(Constants_Shooter.kD);
     shooterRollerConfig.closedLoop.outputRange(-1, 1);
 
-    SmartDashboard.putNumber("Shooter roller value", Constants_Shooter.shooterLaunchVoltage);
-    SmartDashboard.putNumber("Shooter Roller ID", shooterRoller.getDeviceId());
-    SmartDashboard.putNumber("Shooter Intake ID", shooterIntake.getDeviceId());
+    SparkFlexConfig magicCarpetConfig = new SparkFlexConfig();
+    magicCarpetConfig = new SparkFlexConfig();
+    magicCarpetConfig.idleMode(IdleMode.kCoast);
+    magicCarpetConfig.inverted(true);
+    magicCarpet.configure(magicCarpetConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   // A method to set the voltage of the shooter roller
@@ -78,6 +72,8 @@ public class Shooter extends SubsystemBase {
   // A method to stop the rollers
   public void stop() {
     currentShooterSpeed = 0;
+    magicCarpet.set(0);
+    shooterIntake.set(0);
     shooterRoller.set(0);
   }
    
@@ -90,7 +86,6 @@ public class Shooter extends SubsystemBase {
      
      public void remoteShootFuel() {
         shooterRoller.set(currentShooterSpeed);
-
         shooterIntake.set(Constants_Shooter.shooterIntakeSpeed);
      }
      
@@ -99,7 +94,6 @@ public class Shooter extends SubsystemBase {
     currentShooterSpeed += delta;
     if (currentShooterSpeed > 1.0) currentShooterSpeed = 1.0;
     if (currentShooterSpeed < -1.0) currentShooterSpeed = -1.0;
-    SmartDashboard.putNumber("Shooter roller value", currentShooterSpeed);
   }
 
   public double getCurrentShooterSpeed() {
@@ -123,7 +117,8 @@ public class Shooter extends SubsystemBase {
         reverseToggle= false;
       } else
       {
-        magicCarpet.set(Constants_Shooter.fuelAgitatorReversedSpeed);
+
+        magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
       }
@@ -136,8 +131,10 @@ public class Shooter extends SubsystemBase {
   public Command manualReverseAgitator() {
     return Commands.startEnd(() -> {
       
-      magicCarpet.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
-      fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReverseSpeed);
+
+      magicCarpet.set(Constants_Shooter.manualFuelAgitatorReversedSpeed);
+      fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReversedSpeed);
+
     },
     () -> {
       magicCarpet.set(0);
@@ -148,25 +145,19 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //shooterRoller.set((Constants_Shooter.shooterRPM - relEnc.getVelocity()) * 0.001);
     SmartDashboard.putNumber("Shooter Speed", currentShooterSpeed);
-    SmartDashboard.putNumber("RPM Shooter Velocity", relEnc.getVelocity());
+    SmartDashboard.putNumber("Shooter Roller RPM Velocity", shooterRoller.getEncoder().getVelocity());
   }
   
   public static double getMotorRatio(double xDist) {
       //Calculates the required speed ratio for a given horizontal displacement, assuming:
-      //1) negligible air friction, and 2) the ball sticks to the roller such that its exit speed matches the wheel's linear speed
       double squaredRadius = Math.pow(Constants_Shooter.RADIUS, 2);
       double squaredCosine = Math.pow(Math.cos(Math.toRadians(Constants_Shooter.THETA)), 2);
-      double denDifference = (xDist * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2); //the 0.2 ensures that the ball always follows a feasible path into the hub and accounts for AF
+      double denDifference = (xDist * Math.tan(Math.toRadians(Constants_Shooter.THETA))) - (Constants_Shooter.DELTA_Y + 0.2);
       double num = 0.5 * Constants_Shooter.GRAVITY * Math.pow(xDist, 2);
       double den = squaredRadius * squaredCosine * denDifference;
       double angularSpeed = (30.0 / Math.PI) * Math.sqrt(num / den);
-
-      //Keep the speed within bounds
       if (angularSpeed > Constants_Shooter.MAX_SPEED) {angularSpeed = Constants_Shooter.MAX_SPEED;}
-      return angularSpeed / Constants_Shooter.MAX_SPEED; //entire block may need to be inverted
+      return angularSpeed / Constants_Shooter.MAX_SPEED;
   }
-
-  
 }
