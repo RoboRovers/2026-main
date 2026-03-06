@@ -136,10 +136,10 @@ public final class Constants {
     {
 
       public static final double inchesToRotations = 00; //TODO Get number
-      public static final double rollerSpeed = -0.01;
-      public static final double fasterRollerSpeed = -0.5;
-      public static final double intakeRetractSpeed = -0.05;
-      public static final double intakeExtendSpeed = 0.05;
+      public static final double rollerSpeed = -0.13;
+      public static final double fasterRollerSpeed = -0.3;
+      public static final double intakeRetractSpeed = -0.3;
+      public static final double intakeExtendSpeed = 0.3;
       public static final double retractLimit = -10.904818;
       public static final double extendLimit = 0;
       public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
