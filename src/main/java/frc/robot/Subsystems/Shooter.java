@@ -14,7 +14,6 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkFlex;
-import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -25,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private final SparkMax shooterIntake;
   private final SparkFlex shooterRoller;
   public final SparkFlex fuelAgitator;
-  public final SparkFlex magicCarpet;
+  //private final SparkFlex magicCarpet;
   private final Limelight LL_Shoot;
   public boolean reverseToggle;
   private double currentShooterSpeed = Constants_Shooter.shooterRollerSpeed;
@@ -37,7 +36,7 @@ public class Shooter extends SubsystemBase {
     shooterIntake = new SparkMax(RobotMap.MAP_SHOOTER.shooterIntakeSparkMAX, MotorType.kBrushless);
     shooterRoller = new SparkFlex(RobotMap.MAP_SHOOTER.shooterRollerSparkFLEX, MotorType.kBrushless);
     fuelAgitator = new SparkFlex(RobotMap.MAP_SHOOTER.fuelAgitatorSparkFLEX, MotorType.kBrushless);
-    magicCarpet = new SparkFlex(RobotMap.MAP_SHOOTER.magicCarpetSparkFLEX, MotorType.kBrushless);
+    //magicCarpet = new SparkFlex(RobotMap.MAP_SHOOTER.magicCarpetSparkFLEX, MotorType.kBrushless);
 
     //create the limelight for the shooter
     LL_Shoot = new Limelight(Constants_Shooter.CAMERA_NAME);
