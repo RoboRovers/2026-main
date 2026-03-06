@@ -103,8 +103,8 @@ public final class Constants {
       public static final double fuelAgitatorSpeed = 0.2; 
       public static final double fuelAgitatorReversedSpeed = -0.05;
       public static final double manualFuelAgitatorReversedSpeed = -0.2;
-      public static final double magicCarpetSpeed = 0.4;
-      public static final double magicCarpetReversedSpeed = -0.4;
+      public static final double magicCarpetSpeed = 0.2;
+      public static final double magicCarpetReversedSpeed = -magicCarpetSpeed;
       public static final double shooterIntakeSpeed = 0.18;
       public static final double shooterRollerSpeed = 0.70; 
       
