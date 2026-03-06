@@ -126,7 +126,7 @@ public final class Constants {
       public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
 
       // Shooter PID values
-      public static final double kP = 0.7; 
+      public static final double kP = 0.75; 
       public static final double kI = 0.0000001;
       public static final double kD = 0.0000001; 
       //public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
@@ -134,7 +134,7 @@ public final class Constants {
     
     public static final class Constants_Intake
     {
-      public static final double inchesToRotations = 00; //TODO Get number
+      public static final double inchesToRotations = 0.0; //TODO Get number
 
       public static final double rollerSpeed = 0.13;
       public static final double fasterRollerSpeed = rollerSpeed * 2;
@@ -155,8 +155,8 @@ public final class Constants {
 
       //Dummy Values; TODO: Tune these values!
       public static final double rollerP = 0.7;
-      public static final double rollerI = 0.0000;
-      public static final double rollerD = 0.0001;
+      public static final double rollerI = 0.001;
+      public static final double rollerD = 0.001;
     }
 
   /**public static final class Constants_Climber 

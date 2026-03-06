@@ -79,14 +79,12 @@ public class Intake extends SubsystemBase {
     rollerIntakeConfig.closedLoop.i(Constants_Intake.rollerI);
     rollerIntakeConfig.closedLoop.d(Constants_Intake.rollerD);
     rollerIntakeConfig.closedLoop.outputRange(-1,1);
-
-    // Configure intake motor settings here
     }
+
     public double getPosition()
     {
         return leftIntakeEncoder.getPosition();
     }
-
     
     public Command spinRollers()
     {
@@ -96,6 +94,7 @@ public class Intake extends SubsystemBase {
             () -> rollerIntakeMotor.set(0),
             this);
     }
+
     public Command reverseSpinRollers()
     {
         // While scheduled, run the roller; ensure it is stopped when the command ends.
@@ -104,6 +103,7 @@ public class Intake extends SubsystemBase {
             () -> rollerIntakeMotor.set(0),
             this);
     }
+
     public Command fastSpinRollers()
     {
         // While scheduled, run the roller; ensure it is stopped when the command ends.
@@ -118,7 +118,6 @@ public class Intake extends SubsystemBase {
         leftIntakeEncoder.setPosition(0); // TODO: set the correct zero position
         rightIntakeEncoder.setPosition(0); // TODO: set the correct zero position
     }*/
-
 
      public Command intakeIn()
     {
@@ -146,7 +145,6 @@ public class Intake extends SubsystemBase {
             }, this);
     }
 
-
     //  public Command stopIntake()
     // {
     //     return Commands.runOnce(()->
@@ -155,6 +153,7 @@ public class Intake extends SubsystemBase {
     //         rightIntakeMotor.set(0);
     //     });
     // }
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Position", getPosition());

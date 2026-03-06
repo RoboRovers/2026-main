@@ -117,7 +117,6 @@ public class Shooter extends SubsystemBase {
         reverseToggle= false;
       } else
       {
-
         magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
         fuelAgitator.set(Constants_Shooter.fuelAgitatorReversedSpeed);
         reverseToggle = true;
@@ -130,9 +129,7 @@ public class Shooter extends SubsystemBase {
 
   public Command manualReverseAgitator() {
     return Commands.startEnd(() -> {
-      
-
-      magicCarpet.set(Constants_Shooter.manualFuelAgitatorReversedSpeed);
+      magicCarpet.set(Constants_Shooter.magicCarpetReversedSpeed);
       fuelAgitator.set(Constants_Shooter.manualFuelAgitatorReversedSpeed);
 
     },
