@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.IntakeDelayedSpin;
+import frc.robot.Commands.IntakeExtend;
 
 
 /**
@@ -78,8 +79,9 @@ public class RobotContainer {
     //u_Controllers.intakeFuel.onFalse(new IntakeReturn(s_Intake));
     u_Controllers.shooterIncreaseSpeed.onTrue(new ShooterIncreaseSpeed(s_Shooter));
     u_Controllers.shooterDecreaseSpeed.onTrue(new ShooterDecreaseSpeed(s_Shooter));
-    u_Controllers.manualReverseAgitator.onTrue(s_Shooter.manualReverseAgitator());
+    u_Controllers.manualReverseAgitator.whileTrue(s_Shooter.manualReverseAgitator());
     u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
+    
 
 
     u_Controllers.fastSpinRollers.whileTrue(s_Intake.fastSpinRollers());
@@ -89,13 +91,13 @@ public class RobotContainer {
     //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
 
     //Intake Extend + Retract
-    u_Controllers.intakeInD.whileTrue(s_Intake.intakeIn());
-    u_Controllers.intakeInDL.whileTrue(s_Intake.intakeIn());
-    u_Controllers.intakeInDR.whileTrue(s_Intake.intakeIn());
+    u_Controllers.intakeInD.whileTrue(new IntakeReturn(s_Intake));
+    u_Controllers.intakeInDL.whileTrue(new IntakeReturn(s_Intake));
+    u_Controllers.intakeInDR.whileTrue(new IntakeReturn(s_Intake));
     
-    u_Controllers.intakeOutU.whileTrue(s_Intake.intakeOut());
-    u_Controllers.intakeOutUL.whileTrue(s_Intake.intakeOut());
-    u_Controllers.intakeOutUR.whileTrue(s_Intake.intakeOut());
+    u_Controllers.intakeOutU.whileTrue(new IntakeExtend(s_Intake));
+    u_Controllers.intakeOutUL.whileTrue(new IntakeExtend(s_Intake));
+    u_Controllers.intakeOutUR.whileTrue(new IntakeExtend(s_Intake));
         
     //Drive Bindings
     u_Controllers.FO_toggle.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));

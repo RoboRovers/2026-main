@@ -8,13 +8,13 @@ import frc.robot.Util.Constants.Constants_Intake;
  * Command that runs the intake motors in reverse until the intake position
  * reaches the given retracted position (default 2), then stops the motors.
  */
-public class IntakeReturn extends Command {
+public class IntakeExtend extends Command {
   private final Intake intake;
-  private final double leftTargetPosition = Constants_Intake.retractLimitRight;
-  private final double rightTargetPosition = Constants_Intake.retractLimitLeft;
-  private final double retractSpeed = Constants_Intake.intakeRetractSpeed;
+  private final double leftTargetPosition = Constants_Intake.extendLimit;
+ 
+  private final double extendSpeed = Constants_Intake.intakeExtendSpeed;
 
-  public IntakeReturn(Intake intake) {
+  public IntakeExtend(Intake intake) {
     this.intake = intake;
     addRequirements(intake);
   }
@@ -24,10 +24,9 @@ public class IntakeReturn extends Command {
     // Start retracting immediately when button is released.
     // Check the intake position, don't try to retract if 
     // we're already at the target position.
-    if (intake.getLeftPosition() > leftTargetPosition) 
-      intake.leftIntakeMotor.set(retractSpeed);
-    if (intake.getRightPosition() > rightTargetPosition)
-      intake.rightIntakeMotor.set(retractSpeed);
+    if (intake.getLeftPosition() < leftTargetPosition) 
+      intake.leftIntakeMotor.set(extendSpeed);
+      intake.rightIntakeMotor.set(extendSpeed);
     
   }
 
@@ -35,14 +34,20 @@ public class IntakeReturn extends Command {
   public void execute() {
     // Ensure motors keep retracting until we reach the target 
     // position, then stop them.
-    if (intake.getLeftPosition() > leftTargetPosition) 
-      intake.leftIntakeMotor.set(retractSpeed);
+    if (intake.getLeftPosition() < leftTargetPosition) 
+    {
+      intake.leftIntakeMotor.set(extendSpeed);
+      intake.rightIntakeMotor.set(extendSpeed);
+    }
     else
+    {
       intake.leftIntakeMotor.set(0);
-    if (intake.getRightPosition() > rightTargetPosition)
-      intake.rightIntakeMotor.set(retractSpeed);
-    else intake.rightIntakeMotor.set(0);
-  }
+      intake.rightIntakeMotor.set(0);
+    }
+      
+    }
+
+  
 
   @Override
   public void end(boolean interrupted) {
@@ -53,6 +58,6 @@ public class IntakeReturn extends Command {
 
   @Override
   public boolean isFinished() {
-    return intake.getLeftPosition() <= leftTargetPosition;
+    return intake.getLeftPosition() >= leftTargetPosition;
   }
 }

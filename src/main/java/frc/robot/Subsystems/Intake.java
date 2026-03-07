@@ -81,10 +81,16 @@ public class Intake extends SubsystemBase {
     rollerIntakeConfig.closedLoop.outputRange(-1,1);
     }
 
-    public double getPosition()
+    public double getLeftPosition()
     {
         return leftIntakeEncoder.getPosition();
     }
+    public double getRightPosition()
+    {
+        return rightIntakeEncoder.getPosition();
+    }
+
+
     
     public Command spinRollers()
     {
@@ -156,9 +162,10 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Intake Position", getPosition());
+        SmartDashboard.putNumber("Intake Left Position", getLeftPosition());
         SmartDashboard.putNumber("Left Intake Current Draw", leftIntakeMotor.getOutputCurrent());
         SmartDashboard.putNumber("Right Intake Current Draw", rightIntakeMotor.getOutputCurrent());
         SmartDashboard.putNumber("Intake Roller RPM Velocity", rollerIntakeEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake Right Position", getRightPosition());
     }
 }

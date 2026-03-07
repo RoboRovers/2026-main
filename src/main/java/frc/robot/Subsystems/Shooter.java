@@ -71,7 +71,7 @@ public class Shooter extends SubsystemBase {
   }
   // A method to stop the rollers
   public void stop() {
-    currentShooterSpeed = 0;
+    
     magicCarpet.set(0);
     shooterIntake.set(0);
     shooterRoller.set(0);
@@ -108,6 +108,7 @@ public class Shooter extends SubsystemBase {
   {
     return reverseToggle;
   }
+
   public Command reverseAgitator() {
     return Commands.startEnd(() -> {
       if (reverseToggle)
@@ -125,6 +126,17 @@ public class Shooter extends SubsystemBase {
       () -> {
         fuelAgitator.set(0);   
       }, this);
+  }
+  public Command agitator() {
+    return Commands.startEnd(() -> {
+      magicCarpet.set(Constants_Shooter.magicCarpetSpeed);
+      fuelAgitator.set(Constants_Shooter.fuelAgitatorSpeed);
+
+    },
+    () -> {
+      magicCarpet.set(0);
+      fuelAgitator.set(0);
+    }, this);
   }
 
   public Command manualReverseAgitator() {

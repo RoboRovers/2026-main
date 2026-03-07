@@ -126,9 +126,11 @@ public final class Constants {
       public static final String CAMERA_NAME = "limelight-shooter"; // Name of the camera in the network tables                    //TODO: get actual value  
 
       // Shooter PID values
-      public static final double kP = 0.8; 
-      public static final double kI = 0.01;
-      public static final double kD = 0.0000001; 
+
+      public static final double kP = 0.7; 
+      public static final double kI = 0.0000001;
+      public static final double kD = 0.000001; 
+
       //public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
     }                            
     
@@ -136,12 +138,13 @@ public final class Constants {
     {
       public static final double inchesToRotations = 0.0; //TODO Get number
 
-      public static final double rollerSpeed = 0.13;
+      public static final double rollerSpeed = -0.3;
       public static final double fasterRollerSpeed = rollerSpeed * 2;
       public static final double intakeRetractSpeed = -0.3;
-      public static final double intakeExtendSpeed = 0.15;
-
-      public static final double retractLimit = -10.904818;
+      public static final double intakeExtendSpeed = 0.3;
+ 
+      public static final double retractLimitRight = -14.023829;
+      public static final double retractLimitLeft = -14.452393;
       public static final double extendLimit = 0;
       public static final int rollerIntakeMotorCurrentLimit = 40; //TODO find the correct current limit for the roller motor
       public static final int intakeMotorCurrentLimit = 40; //TODO find the correct current limit for the intake motors
