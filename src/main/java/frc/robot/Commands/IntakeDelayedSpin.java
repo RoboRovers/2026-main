@@ -25,7 +25,7 @@ public class IntakeDelayedSpin extends Command {
     // Start extending the intake immediately on trigger press.
     // Check the intake position, don't try to extend if we're 
     // already at or beyond the threshold position.
-    if (intake.getPosition() < positionThreshold) {
+    if (intake.getLeftPosition() < positionThreshold) {
         intake.leftIntakeMotor.set(.05);
         intake.rightIntakeMotor.set(.05);
     }
@@ -35,7 +35,7 @@ public class IntakeDelayedSpin extends Command {
   public void execute() {
     // While rollers haven't started yet, extend the intake until position threshold
     if (!rollersStarted) {
-      if (intake.getPosition() < positionThreshold) {
+      if (intake.getLeftPosition() < positionThreshold) {
         // keep extending
         intake.leftIntakeMotor.set(.05);
         intake.rightIntakeMotor.set(.05);
