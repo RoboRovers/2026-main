@@ -127,7 +127,7 @@ public final class Constants {
 
       // Shooter PID values
       public static final double kP = 0.8; 
-      public static final double kI = 0.0000001;
+      public static final double kI = 0.01;
       public static final double kD = 0.0000001; 
       //public static final double kFF = 0.00015; // Feed Forward (useful for velocity)
     }                            
@@ -154,9 +154,9 @@ public final class Constants {
       public static final double intakePositionConversionFactor = 1.0; //TODO Set the correct conversion factor for the intake encoder (units -> meters or rotations)
 
       //Dummy Values; TODO: Tune these values!
-      public static final double rollerP = 0.7;
-      public static final double rollerI = 0.001;
-      public static final double rollerD = 0.001;
+      public static final double rollerP = 0.6;
+      public static final double rollerI = 0.000001;
+      public static final double rollerD = 0.01;
     }
 
   /**public static final class Constants_Climber 
