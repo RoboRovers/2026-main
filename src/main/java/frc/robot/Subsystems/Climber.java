@@ -46,7 +46,7 @@ public class Climber extends SubsystemBase {
 
     public Command climb()
     {
-        return null; //TODO: Implement climb command
+        return Commands.none(); //TODO: Implement climb command
     }
 
     public Command manualStop()

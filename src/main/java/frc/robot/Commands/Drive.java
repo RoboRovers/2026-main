@@ -1,6 +1,5 @@
 package frc.robot.Commands;
 
-
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,7 +31,6 @@ public class Drive extends Command{
         this.right = right;
         addRequirements(s_Swerve);
     }
-
 
     @Override
     public void initialize()
@@ -94,7 +92,4 @@ public class Drive extends Command{
     {
         return false;
     }
-
-
-
 }
