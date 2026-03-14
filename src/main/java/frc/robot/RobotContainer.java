@@ -8,21 +8,16 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+
+import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
-import frc.robot.Commands.ShooterDecreaseSpeed;
-import frc.robot.Commands.ShooterIncreaseSpeed;
-import frc.robot.Commands.Shoot;
-import frc.robot.Commands.IntakeReturn;
-import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.Shooter;
 import frc.robot.Util.Controllers;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.Commands.Climb;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Commands.IntakeDelayedSpin;
-import frc.robot.Commands.IntakeExtend;
 
 
 /**
@@ -36,9 +31,8 @@ public class RobotContainer {
   public Controllers u_Controllers;
   public Swerve s_Swerve;
   public Drive c_Drive;
-  public Intake s_Intake;
-  public Shooter s_Shooter;
-  
+  public Climber s_Climb;
+
   // public Auto c_Auto;
   
 
@@ -63,46 +57,18 @@ public class RobotContainer {
   private void robotFiles() {
     u_Controllers = new Controllers();
     s_Swerve = new Swerve();
+    s_Climb = new Climber();
     c_Drive = new Drive(s_Swerve, u_Controllers.leftStick, u_Controllers.rightStick);
     // Make Drive the default command for the swerve subsystem so joystick
     // inputs are processed continuously while no other command requires s_Swerve.
-    
-    s_Shooter = new Shooter();
-    s_Intake = new Intake();
   }
   private void configureBindings() {
-    // Intake Bindings
-    
-    // Operator bindings
-    u_Controllers.shootFuel.whileTrue(new Shoot(s_Shooter));
-    //u_Controllers.intakeFuel.whileTrue(new IntakeDelayedSpin(s_Intake));
-    //u_Controllers.intakeFuel.onFalse(new IntakeReturn(s_Intake));
-    u_Controllers.shooterIncreaseSpeed.onTrue(new ShooterIncreaseSpeed(s_Shooter));
-    u_Controllers.shooterDecreaseSpeed.onTrue(new ShooterDecreaseSpeed(s_Shooter));
-    u_Controllers.manualReverseAgitator.whileTrue(s_Shooter.manualReverseAgitator());
-    u_Controllers.spinRollers.whileTrue(s_Intake.spinRollers());
-    
-
-
-    u_Controllers.fastSpinRollers.whileTrue(s_Intake.fastSpinRollers());
-    u_Controllers.reverseSpinRollers.whileTrue(s_Intake.reverseSpinRollers());
-
-
-    //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
-
-    //Intake Extend + Retract
-    u_Controllers.intakeInD.whileTrue(new IntakeReturn(s_Intake));
-    u_Controllers.intakeInDL.whileTrue(new IntakeReturn(s_Intake));
-    u_Controllers.intakeInDR.whileTrue(new IntakeReturn(s_Intake));
-    
-    u_Controllers.intakeOutU.whileTrue(new IntakeExtend(s_Intake));
-    u_Controllers.intakeOutUL.whileTrue(new IntakeExtend(s_Intake));
-    u_Controllers.intakeOutUR.whileTrue(new IntakeExtend(s_Intake));
-        
     //Drive Bindings
-    u_Controllers.FO_toggle.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
-    u_Controllers.zeroHeading.toggleOnTrue(s_Swerve.fieldOrientedToggle());
+    u_Controllers.FO_toggle.toggleOnTrue(s_Swerve.fieldOrientedToggle());
+    u_Controllers.zeroHeading.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
     u_Controllers.resetWheels.onTrue(s_Swerve.resetWheels()); //window looking button
+    u_Controllers.climbUp.onTrue(new Climb(s_Climb));
+    u_Controllers.climbStop.onTrue(s_Climb.manualStop());
   }
 
   /**
@@ -112,7 +78,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    //return Commands.run(() -> s_Shooter.remoteShootFuel(), s_Shooter);
-    return new Shoot(s_Shooter);
+    return Commands.none();
   }
 }

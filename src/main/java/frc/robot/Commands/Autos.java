@@ -16,21 +16,20 @@ import com.pathplanner.lib.controllers.PathFollowingController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.Subsystems.ExampleSubsystem;
-import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.Shooter;
+import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Drive.Swerve;
-import frc.robot.Util.Constants.Constants_AprilTags;
 import frc.robot.Util.Constants.Constants_Auto;
 
-public final class Autos {
+public final class Autos extends Command {
   // Only the things we actually need to reference later
   private final Swerve s_Swerve;
+  private final Climber s_Climb;
   private RobotConfig config;
   private final PathFollowingController pathController;
 
-  public Autos(Swerve s_Swerve, Shooter s_Shooter, RobotConfig defaultConfig) {
+  public Autos(Swerve s_Swerve, Climber s_Climb, RobotConfig defaultConfig) {
     this.s_Swerve = s_Swerve;
+    this.s_Climb = s_Climb;
 
     // These stay local to the constructor
     PIDController translationPID = new PIDController(Constants_Auto.P_TRANSLATION, Constants_Auto.I_TRANSLATION, Constants_Auto.D_TRANSLATION);
@@ -38,7 +37,8 @@ public final class Autos {
 
     try {
       this.config = RobotConfig.fromGUISettings();
-    } catch (Exception e) {
+    } 
+    catch (Exception e) {
       this.config = defaultConfig;
       e.printStackTrace();
     }
@@ -60,7 +60,22 @@ public final class Autos {
 
     // NamedCommands "capture" the subsystems they need
     NamedCommands.registerCommand("Face Forward Wheels", Commands.runOnce(s_Swerve::faceAllForward));
-    NamedCommands.registerCommand("Shoot", Commands.runOnce(s_Shooter::remoteShootFuel));
   } 
+      @Override
+    public void initialize()
+    {
+
+    }
+    @Override
+    public void execute()
+    {
+
+    }
+    @Override
+    public void end(boolean interrupted)
+    {
+
+    }
+    
 }
 
