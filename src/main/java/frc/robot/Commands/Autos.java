@@ -61,21 +61,23 @@ public final class Autos extends Command {
     // NamedCommands "capture" the subsystems they need
     NamedCommands.registerCommand("Face Forward Wheels", Commands.runOnce(s_Swerve::faceAllForward));
   } 
-      @Override
+
+    @Override
     public void initialize()
     {
 
     }
+    
     @Override
     public void execute()
     {
 
     }
+
     @Override
     public void end(boolean interrupted)
     {
 
     }
-    
 }
 

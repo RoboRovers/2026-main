@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
@@ -18,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Commands.Climb;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a

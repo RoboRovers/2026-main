@@ -101,7 +101,7 @@ public final class Constants {
 
   public static final class Constants_Climber
   {
-    public static final int motorSmartCurrentLimit = 40;  
+    public static final int motorSmartCurrentLimit = 40;  //TODO: Get actual value
     public static final double climberFactor = 1.0; //TODO: Get actual value
     public static final double climbSpeed = 0.5; //TODO: Get actual value
 
