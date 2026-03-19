@@ -29,13 +29,11 @@ public final class Autos {
   private RobotConfig config;
   private final PathFollowingController pathController;
 
-  public Autos(Swerve s_Swerve, Shooter s_Shooter, RobotConfig defaultConfig) {
-    this.s_Swerve = s_Swerve;
+  public Autos(Swerve swerve, Shooter s_Shooter, RobotConfig defaultConfig) {
+    this.s_Swerve = swerve;
 
     // These stay local to the constructor
-    PIDController translationPID = new PIDController(Constants_Auto.P_TRANSLATION, Constants_Auto.I_TRANSLATION, Constants_Auto.D_TRANSLATION);
-    PIDController rotationPID = new PIDController(Constants_Auto.P_THETA, Constants_Auto.I_THETA, Constants_Auto.D_THETA);
-
+    // Use the constant values directly instead of constructing PIDController instances
     try {
       this.config = RobotConfig.fromGUISettings();
     } catch (Exception e) {
@@ -44,22 +42,22 @@ public final class Autos {
     }
 
     this.pathController = new PPHolonomicDriveController(
-        new PIDConstants(translationPID.getP(), translationPID.getI(), translationPID.getD()),
-        new PIDConstants(rotationPID.getP(), rotationPID.getI(), rotationPID.getD())
+        new PIDConstants(Constants_Auto.P_TRANSLATION, Constants_Auto.I_TRANSLATION, Constants_Auto.D_TRANSLATION),
+        new PIDConstants(Constants_Auto.P_THETA, Constants_Auto.I_THETA, Constants_Auto.D_THETA)
     );
 
     AutoBuilder.configure(
-      s_Swerve::getPose,
-      s_Swerve::resetOdometry,
-      s_Swerve::getRobotRelativeSpeeds,
-      s_Swerve::setModuleStates,
+      this.s_Swerve::getPose,
+      this.s_Swerve::resetOdometry,
+      this.s_Swerve::getRobotRelativeSpeeds,
+      this.s_Swerve::setModuleStates,
       pathController,
       this.config,
-      s_Swerve::allianceCheck,
-      s_Swerve);
+      this.s_Swerve::allianceCheck,
+      this.s_Swerve);
 
     // NamedCommands "capture" the subsystems they need
-    NamedCommands.registerCommand("Face Forward Wheels", Commands.runOnce(s_Swerve::faceAllForward));
+    NamedCommands.registerCommand("Face Forward Wheels", Commands.runOnce(this.s_Swerve::faceAllForward));
     NamedCommands.registerCommand("Shoot", Commands.runOnce(s_Shooter::remoteShootFuel));
   } 
 }

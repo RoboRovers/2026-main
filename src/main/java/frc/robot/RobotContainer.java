@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.IntakeDelayedSpin;
-import frc.robot.Commands.IntakeExtend;
 
 
 /**
@@ -91,14 +90,14 @@ public class RobotContainer {
     //u_Controllers.toggleAutoAgitator.toggleOnTrue(s_Shooter.reverseAgitator());
 
     //Intake Extend + Retract
-    u_Controllers.intakeInD.whileTrue(new IntakeReturn(s_Intake));
-    u_Controllers.intakeInDL.whileTrue(new IntakeReturn(s_Intake));
-    u_Controllers.intakeInDR.whileTrue(new IntakeReturn(s_Intake));
-    
-    u_Controllers.intakeOutU.whileTrue(new IntakeExtend(s_Intake));
-    u_Controllers.intakeOutUL.whileTrue(new IntakeExtend(s_Intake));
-    u_Controllers.intakeOutUR.whileTrue(new IntakeExtend(s_Intake));
+    //Intake Extend + Retract
+        u_Controllers.intakeInD.whileTrue(new IntakeReturn(s_Intake));
+        u_Controllers.intakeInDL.whileTrue(new IntakeReturn(s_Intake));
+        u_Controllers.intakeInDR.whileTrue(new IntakeReturn(s_Intake));
         
+        u_Controllers.intakeOutU.whileTrue(new IntakeReturn(s_Intake));
+        u_Controllers.intakeOutUL.whileTrue(new IntakeReturn(s_Intake));
+        u_Controllers.intakeOutUR.whileTrue(new IntakeReturn(s_Intake));
     //Drive Bindings
     u_Controllers.FO_toggle.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
     u_Controllers.zeroHeading.toggleOnTrue(s_Swerve.fieldOrientedToggle());
