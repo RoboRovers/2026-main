@@ -1,32 +1,35 @@
 package frc.robot.Commands;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+
 import frc.robot.Subsystems.Climber;
 
 public class Climb extends Command {
-    private Climber theClimb;
-
-    public Climb(Climber theClimb)
+    private Climber s_Climb;
+    private Timer delay = new Timer();
+    
+    public Climb(Climber s_Climb)
     {
-        this.theClimb = theClimb;
-        addRequirements(theClimb);
+        this.s_Climb = s_Climb;
+        addRequirements(s_Climb);
     }
-
+//This should only be made if time is given
     @Override
     public void initialize()
     {
-        theClimb.stop();
+        delay.start();
     }
 
     @Override
     public void execute()
-    {
-       Commands.run(() -> theClimb.climb());
+    {      
+       
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        theClimb.stop();
+        s_Climb.stop();
     }   
 }

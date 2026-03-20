@@ -9,7 +9,7 @@ public class Controllers {
     public CommandJoystick leftStick, rightStick;
     public CommandXboxController xbox;
     public Trigger zeroHeading, FO_toggle, resetWheels,
-                    climbUp, climbStop;
+                    climbUp, climbDown;
 
     public Controllers() 
     {
@@ -24,7 +24,7 @@ public class Controllers {
     public void initialize_Xbox_Controls()
     {
         climbUp = xbox.rightBumper();
-        climbStop = xbox.button(7);
+        climbDown = xbox.leftBumper();
     }   
 
     public void initialize_left_Joystick_Controls() {

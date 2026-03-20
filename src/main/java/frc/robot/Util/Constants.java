@@ -68,10 +68,10 @@ public final class Constants {
 
     
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
-    public static final double FL_OFFSET = -0.092285; //0.011230;
-    public static final double FR_OFFSET = 0.176514; //0.159424;
-    public static final double BL_OFFSET = 0.395020; //0.385986;
-    public static final double BR_OFFSET = -0.484375; // 0.415527;
+    public static final double FL_OFFSET = -0.255859; //0.011230;
+    public static final double FR_OFFSET = -0.333740; //0.159424;
+    public static final double BL_OFFSET = -0.118652; //0.385986;
+    public static final double BR_OFFSET = 0.339844; // 0.415527;
 
     //TODO Invert any motor to match controller output
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
@@ -79,10 +79,10 @@ public final class Constants {
     public static final boolean BL_STEER_ENCODER_REVERSED = true;
     public static final boolean BR_STEER_ENCODER_REVERSED = false;
 
-    public static final boolean FL_DRIVE_ENCODER_REVERSED = false;
-    public static final boolean FR_DRIVE_ENCODER_REVERSED = false;
-    public static final boolean BL_DRIVE_ENCODER_REVERSED = false;
-    public static final boolean BR_DRIVE_ENCODER_REVERSED = false;
+    public static final boolean FL_DRIVE_ENCODER_REVERSED = true;
+    public static final boolean FR_DRIVE_ENCODER_REVERSED = true;
+    public static final boolean BL_DRIVE_ENCODER_REVERSED = true;
+    public static final boolean BR_DRIVE_ENCODER_REVERSED = true;
 
     public static final boolean FL_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_DRIVE_ABSOLUTE_ENCODER_REVERSED = false;

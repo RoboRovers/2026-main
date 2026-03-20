@@ -14,50 +14,45 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
-    private SparkMax leftClimberMotor;
-    private SparkMax rightClimberMotor;
+    private SparkMax climbMotor;
     private RelativeEncoder leftClimberEncoder;
 
     public Climber()
     {
         //Left Motor Configuration
-        SparkMaxConfig leftConfig = new SparkMaxConfig();
-        leftConfig.idleMode(IdleMode.kBrake);
-        leftConfig.inverted(Constants_Climber.leftClimbInverted);
-        leftConfig.smartCurrentLimit(Constants_Climber.motorSmartCurrentLimit);
-        leftConfig.encoder.positionConversionFactor(Constants_Climber.climberFactor);
+        SparkMaxConfig climbConfig = new SparkMaxConfig();
+        climbConfig.idleMode(IdleMode.kBrake);
+        climbConfig.inverted(Constants_Climber.leftClimbInverted);
+        climbConfig.smartCurrentLimit(Constants_Climber.motorSmartCurrentLimit);
+        climbConfig.encoder.positionConversionFactor(Constants_Climber.climberFactor);
 
         //Left Motor
-        leftClimberMotor = new SparkMax(RobotMap.MAP_CLIMBER.leftClimberMotor, MotorType.kBrushless);
-        leftClimberMotor.configure(leftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        leftClimberEncoder = leftClimberMotor.getEncoder();
+        climbMotor = new SparkMax(RobotMap.MAP_CLIMBER.climbMotor, MotorType.kBrushless);
+        climbMotor.configure(climbConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        leftClimberEncoder = climbMotor.getEncoder();
 
-        //Right Motor Configuration
-        SparkMaxConfig rightConfig = new SparkMaxConfig();
-        rightConfig.idleMode(IdleMode.kBrake);
-        rightConfig.inverted(Constants_Climber.rightClimbInverted);
-        rightConfig.smartCurrentLimit(Constants_Climber.motorSmartCurrentLimit);
-        rightConfig.encoder.positionConversionFactor(Constants_Climber.climberFactor);
-
-        //Right Motor
-        rightClimberMotor = new SparkMax(RobotMap.MAP_CLIMBER.rightClimberMotor, MotorType.kBrushless);
-        rightClimberMotor.configure(rightConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+      
     }
 
-    public Command climb()
-    {
-        return Commands.none(); //TODO: Implement climb command
-    }
+   
+    
 
-    public Command manualStop()
-    {
-        return Commands.runOnce(() -> stop());
-    }
-
+   
     public void stop()
     {
-        leftClimberMotor.stopMotor();
-        rightClimberMotor.stopMotor();
+        climbMotor.stopMotor();
+        
+    }
+
+    public void climbUp(double speed)
+    {
+        climbMotor.set(speed);
+        
+    }
+
+    public void climbDown(double speed)
+    {
+        climbMotor.set(-speed);
     }
 
     public void periodic()

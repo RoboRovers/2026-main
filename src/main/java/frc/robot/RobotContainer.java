@@ -64,8 +64,9 @@ public class RobotContainer {
     u_Controllers.FO_toggle.toggleOnTrue(s_Swerve.fieldOrientedToggle());
     u_Controllers.zeroHeading.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
     u_Controllers.resetWheels.onTrue(s_Swerve.resetWheels()); //window looking button
-    u_Controllers.climbUp.onTrue(new Climb(s_Climb));
-    u_Controllers.climbStop.onTrue(s_Climb.manualStop());
+    u_Controllers.climbUp.onTrue(Commands.runOnce(() -> s_Climb.climbUp(0.5)));
+    u_Controllers.climbDown.onTrue(Commands.runOnce(() -> s_Climb.climbDown(-0.5)));
+   
   }
 
   /**

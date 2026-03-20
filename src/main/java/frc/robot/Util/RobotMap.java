@@ -11,8 +11,7 @@ public class RobotMap
 
     public static final class MAP_CLIMBER
     {
-        public static final int leftClimberMotor = 5;
-        public static final int rightClimberMotor = 6;
+        public static final int climbMotor = 5;
     }
 
     public static final class MAP_DRIVETRAIN
