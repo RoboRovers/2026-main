@@ -59,14 +59,15 @@ public class RobotContainer {
     // Make Drive the default command for the swerve subsystem so joystick
     // inputs are processed continuously while no other command requires s_Swerve.
   }
+
   private void configureBindings() {
     //Drive Bindings
     u_Controllers.FO_toggle.toggleOnTrue(s_Swerve.fieldOrientedToggle());
     u_Controllers.zeroHeading.toggleOnTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
     u_Controllers.resetWheels.onTrue(s_Swerve.resetWheels()); //window looking button
-    u_Controllers.climbUp.onTrue(Commands.runOnce(() -> s_Climb.climbUp(0.5)));
-    u_Controllers.climbDown.onTrue(Commands.runOnce(() -> s_Climb.climbDown(-0.5)));
-   
+    u_Controllers.climbUp.onTrue(Commands.runOnce(() -> s_Climb.climbUp()));
+    u_Controllers.climbDown.onTrue(Commands.runOnce(() -> s_Climb.climbDown()));
+    u_Controllers.climbStop.onTrue(Commands.runOnce(() -> s_Climb.stop())); 
   }
 
   /**

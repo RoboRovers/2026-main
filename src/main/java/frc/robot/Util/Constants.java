@@ -72,7 +72,7 @@ public final class Constants {
     public static final double FR_OFFSET = -0.333740; //0.159424;
     public static final double BL_OFFSET = -0.118652; //0.385986;
     public static final double BR_OFFSET = 0.339844; // 0.415527;
-
+    
     //TODO Invert any motor to match controller output
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_STEER_ENCODER_REVERSED = true;
@@ -104,10 +104,13 @@ public final class Constants {
     public static final int motorSmartCurrentLimit = 40;  //TODO: Get actual value
     public static final double climberFactor = 1.0; //TODO: Get actual value
     public static final double climbSpeed = 0.5; //TODO: Get actual value
-
     public static final boolean climbInverted = false;
-    public static final boolean leftClimbInverted = climbInverted;
-    public static final boolean rightClimbInverted = !climbInverted;
+    public static final double climbPause = 2.0;
+
+    //PID values
+    public static final double P_CLIMB = 1.0; //TODO: Get actual value
+    public static final double I_CLIMB = 0.00000000001; //TODO: Get actual value
+    public static final double D_CLIMB = 0.00000000001; //TODO: Get actual value
   }
 
   public static final class Constants_Auto 

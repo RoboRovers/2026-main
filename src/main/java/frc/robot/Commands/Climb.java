@@ -14,7 +14,8 @@ public class Climb extends Command {
         this.s_Climb = s_Climb;
         addRequirements(s_Climb);
     }
-//This should only be made if time is given
+    
+    //This should only be made if time is given
     @Override
     public void initialize()
     {
@@ -24,7 +25,7 @@ public class Climb extends Command {
     @Override
     public void execute()
     {      
-       
+       s_Climb.climbUp();
     }
 
     @Override

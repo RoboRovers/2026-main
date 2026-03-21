@@ -165,9 +165,7 @@ public class Swerve extends SubsystemBase{
     @Override
     public void periodic() {
         odometer.update(getRotation2d(), getModulePositions());
-
-        //multiple debugging values are listed here. Names are self explanitory
-        
+             
         //Odometer and other gyro values
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
         SmartDashboard.putNumber("Robot Heading", getHeading());
@@ -191,17 +189,10 @@ public class Swerve extends SubsystemBase{
         SmartDashboard.putNumber("Back Left Drive Position", backLeftModule.getDrivePosition());
         SmartDashboard.putNumber("Back Right Drive Position", backRightModule.getDrivePosition());
 
+        //Motor Temperatures
         SmartDashboard.putNumber("FL Drive Temp", frontLeftModule.driveMotor.getDeviceTemp().getValueAsDouble());
         SmartDashboard.putNumber("FR Drive Temp", frontRightModule.driveMotor.getDeviceTemp().getValueAsDouble());
         SmartDashboard.putNumber("BL Drive Temp", backLeftModule.driveMotor.getDeviceTemp().getValueAsDouble());
         SmartDashboard.putNumber("BR Drive Temp", backRightModule.driveMotor.getDeviceTemp().getValueAsDouble());
-        
-    
-
-    //  flModPos = new SwerveModulePosition(frontLeftModule.getDrivePosition(), frontLeftModule.getSteerState().angle);
-    //  frModPos = new SwerveModulePosition(frontRightModule.getDrivePosition(), frontRightModule.getSteerState().angle);
-    //  blModPos = new SwerveModulePosition(backLeftModule.getDrivePosition(), backLeftModule.getSteerState().angle);
-    //  brModPos = new SwerveModulePosition(backRightModule.getDrivePosition(), backRightModule.getSteerState().angle);
-
-        }
+    }
 }
