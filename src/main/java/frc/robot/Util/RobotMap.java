@@ -31,6 +31,6 @@ public class RobotMap
         //Back Left - Module 2
         public static final int backLeftDriveKraken = 4;
         public static final int backLeftSteerSparkMAX = 4;
-        public static final int backLeftAbsEncoder = 4;;
+        public static final int backLeftAbsEncoder = 4;
     }
 }   
