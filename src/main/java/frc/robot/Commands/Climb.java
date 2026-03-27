@@ -1,7 +1,6 @@
 package frc.robot.Commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 
 import frc.robot.Subsystems.Climber;
 
@@ -14,7 +13,8 @@ public class Climb extends Command {
         this.s_Climb = s_Climb;
         addRequirements(s_Climb);
     }
-//This should only be made if time is given
+    
+    //This should only be made if time is given
     @Override
     public void initialize()
     {
@@ -24,7 +24,7 @@ public class Climb extends Command {
     @Override
     public void execute()
     {      
-       
+       s_Climb.climbUp();
     }
 
     @Override

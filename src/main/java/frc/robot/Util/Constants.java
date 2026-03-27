@@ -70,6 +70,7 @@ public final class Constants {
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
     public static final double FL_OFFSET = -0.255859; //0.011230;
     public static final double FR_OFFSET = -0.333740; //0.159424;
+
     public static final double BL_OFFSET = -0.116943; //0.385986;
     public static final double BR_OFFSET = 0.340332; // 0.415527;
 
@@ -104,10 +105,13 @@ public final class Constants {
     public static final int motorSmartCurrentLimit = 40;  //TODO: Get actual value
     public static final double climberFactor = 1.0; //TODO: Get actual value
     public static final double climbSpeed = 0.5; //TODO: Get actual value
-
     public static final boolean climbInverted = false;
-    public static final boolean leftClimbInverted = climbInverted;
-    public static final boolean rightClimbInverted = !climbInverted;
+    public static final double climbPause = 2.0;
+
+    //PID values
+    public static final double P_CLIMB = 1.0; //TODO: Get actual value
+    public static final double I_CLIMB = 0.00000000001; //TODO: Get actual value
+    public static final double D_CLIMB = 0.00000000001; //TODO: Get actual value
   }
 
   public static final class Constants_Auto 

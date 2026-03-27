@@ -9,34 +9,26 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
     private SparkMax climbMotor;
-    private RelativeEncoder leftClimberEncoder;
+    private RelativeEncoder climberEncoder;
 
     public Climber()
     {
-        //Left Motor Configuration
+        //Motor Configuration
         SparkMaxConfig climbConfig = new SparkMaxConfig();
         climbConfig.idleMode(IdleMode.kBrake);
-        climbConfig.inverted(Constants_Climber.leftClimbInverted);
+        climbConfig.inverted(Constants_Climber.climbInverted);
         climbConfig.smartCurrentLimit(Constants_Climber.motorSmartCurrentLimit);
         climbConfig.encoder.positionConversionFactor(Constants_Climber.climberFactor);
 
-        //Left Motor
+        //Motor Instantiation
         climbMotor = new SparkMax(RobotMap.MAP_CLIMBER.climbMotor, MotorType.kBrushless);
         climbMotor.configure(climbConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        leftClimberEncoder = climbMotor.getEncoder();
-
-      
+        climberEncoder = climbMotor.getEncoder();
     }
-
-   
-    
-
    
     public void stop()
     {
@@ -44,20 +36,19 @@ public class Climber extends SubsystemBase {
         
     }
 
-    public void climbUp(double speed)
+    public void climbUp()
     {
-        climbMotor.set(speed);
-        
+        climbMotor.set(Constants_Climber.climbSpeed);
     }
 
-    public void climbDown(double speed)
+    public void climbDown()
     {
-        climbMotor.set(-speed);
+        climbMotor.set(-Constants_Climber.climbSpeed);
     }
 
     public void periodic()
     {
-        SmartDashboard.putNumber("Climber Position", leftClimberEncoder.getPosition());
+        SmartDashboard.putNumber("Climber Position", climberEncoder.getPosition());
     }
 }
     
