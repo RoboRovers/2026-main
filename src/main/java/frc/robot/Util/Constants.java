@@ -35,7 +35,7 @@ public final class Constants {
     public static final double STEER__RPM_2_DEG_PER_SEC = STEER_TO_DEGREES / 60;
 
     //TODO Tune our pid loop for the drives once you add in all the offsets, you can just rotate the wheels to 90 degrees using the flight sticks, then disable and enable the code to set them to 0 degreese and tune off of that vaule
-    public static final double P_TURNING = 0.0001;
+    public static final double P_TURNING = 0.1;
     public static final double I_TURNING = 0.000001;
     public static final double D_TURNING = 0;
     public static final double FF_TURNING = 0;
@@ -70,9 +70,10 @@ public final class Constants {
     //TODO Test and input all module offsets which range from -1 -> 1, Make sure to read the TODO in the "MODULE" file for more info on zeroing the motors
     public static final double FL_OFFSET = -0.255859; //0.011230;
     public static final double FR_OFFSET = -0.333740; //0.159424;
-    public static final double BL_OFFSET = -0.118652; //0.385986;
-    public static final double BR_OFFSET = 0.339844; // 0.415527;
-    
+
+    public static final double BL_OFFSET = -0.116943; //0.385986;
+    public static final double BR_OFFSET = 0.340332; // 0.415527;
+
     //TODO Invert any motor to match controller output
     public static final boolean FL_STEER_ENCODER_REVERSED = true;//TODO Make sure Counter-Clockwise rotation is considered positive rotation
     public static final boolean FR_STEER_ENCODER_REVERSED = true;

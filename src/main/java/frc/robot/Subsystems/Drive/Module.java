@@ -133,7 +133,7 @@ public class Module extends SubsystemBase
     steerGains.encoder.velocityConversionFactor(Constants.Constants_Module.STEER__RPM_2_DEG_PER_SEC);
     steerGains.inverted(invertSteer);
     steerGains.idleMode(IdleMode.kBrake);
-    steerGains.smartCurrentLimit(65);
+    steerGains.smartCurrentLimit(25);
     
     steerMotor = new SparkMax(steerNum, MotorType.kBrushless);
     steerEncoder = steerMotor.getEncoder();
