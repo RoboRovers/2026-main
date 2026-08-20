@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Drive.Swerve;
 import frc.robot.Commands.Drive;
